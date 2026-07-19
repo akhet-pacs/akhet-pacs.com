@@ -1,26 +1,25 @@
 ---
 import { Icon } from "astro-icon/components";
 import { site } from "../data/site";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale).clinics;
 ---
 
 <section class="section-tight cta">
   <div class="shell-narrow cta__inner">
-    <p class="eyebrow">Para clínicas</p>
-    <h2>Trabalha com imagem médica?</h2>
-    <p class="lede">
-      Se você é de uma clínica ou centro de diagnóstico, escreva contando quais modalidades usa.
-      Entramos em contato assim que houver uma build para o seu sistema — e o seu feedback vira
-      prioridade no roadmap.
-    </p>
+    <p class="eyebrow">{t.eyebrow}</p>
+    <h2>{t.title}</h2>
+    <p class="lede">{t.lede}</p>
     <div class="cluster">
       <a
         class="btn btn--solid"
-        href={`${site.whatsapp}?text=${encodeURIComponent("Olá, Jônatas! Sou de uma clínica e quero conhecer o Akhet PACS.")}`}
+        href={`${site.whatsapp}?text=${encodeURIComponent(t.whatsappMessage)}`}
         rel="noreferrer noopener"
         target="_blank"
       >
         <Icon name="simple-icons:whatsapp" />
-        Falar no WhatsApp
+        {t.btnWhatsapp}
       </a>
       <a class="btn btn--ghost" href={`mailto:${site.contact}`}>
         <Icon name="lucide:mail" />

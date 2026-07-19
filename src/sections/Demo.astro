@@ -1,54 +1,31 @@
 ---
 import { Image } from "astro:assets";
+import { useDict } from "../i18n";
 import cobb from "../assets/screenshots/cobb.png";
 import angle from "../assets/screenshots/angle.png";
 import ellipse from "../assets/screenshots/ellipse.png";
 import polygon from "../assets/screenshots/closed_polygon.png";
 import pencil from "../assets/screenshots/pencil.png";
 
-const shots = [
-  {
-    key: "cobb",
-    label: "Ângulo de Cobb",
-    image: cobb,
-    caption: "Ângulo de Cobb sobre coluna — a medição que ortopedistas usam para escoliose.",
-  },
-  {
-    key: "angle",
-    label: "Ângulo",
-    image: angle,
-    caption: "Ângulo livre entre dois segmentos, com o valor ancorado ao vértice.",
-  },
-  {
-    key: "ellipse",
-    label: "Elipse",
-    image: ellipse,
-    caption: "ROI elíptica para estatísticas de região sobre o corte.",
-  },
-  {
-    key: "polygon",
-    label: "Polígono",
-    image: polygon,
-    caption: "Polígono fechado para contornar estruturas de forma irregular.",
-  },
-  {
-    key: "pencil",
-    label: "Lápis",
-    image: pencil,
-    caption: "Traço livre para anotar direto sobre a imagem.",
-  },
-];
+const t = useDict(Astro.currentLocale).demo;
+
+const images: Record<string, ImageMetadata> = {
+  cobb,
+  angle,
+  ellipse,
+  polygon,
+  pencil,
+};
+
+const shots = t.shots.map((shot) => ({ ...shot, image: images[shot.key] }));
 ---
 
 <section class="section section-deep" id="visualizador">
   <div class="shell demo">
     <header class="demo__header">
-      <p class="eyebrow">Direto do viewer · sem mockup</p>
-      <h2>É assim que ele está hoje.</h2>
-      <p class="lede">
-        Capturas reais do Akhet abrindo uma amostra DICOM pública. Interface escura, informações
-        clínicas nos cantos e as ferramentas de medição a um atalho de distância.
-      </p>
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h2>{t.title}</h2>
+      <p class="lede">{t.lede}</p>
     </header>
 
     <div class="demo__stage" data-demo>
@@ -58,7 +35,7 @@ const shots = [
             <figure class="demo__shot" data-shot={shot.key} data-active={index === 0 ? "" : undefined}>
               <Image
                 src={shot.image}
-                alt={`Akhet PACS com a ferramenta ${shot.label} ativa sobre um corte de CT`}
+                alt={`${t.altPrefix} ${shot.label}`}
                 widths={[720, 1100, 1600]}
                 sizes="(max-width: 62rem) 100vw, 72rem"
                 loading={index === 0 ? "eager" : "lazy"}
@@ -69,7 +46,7 @@ const shots = [
         }
       </div>
 
-      <div class="demo__tabs" role="tablist" aria-label="Ferramentas de medição">
+      <div class="demo__tabs" role="tablist" aria-label={t.tablistLabel}>
         {
           shots.map((shot, index) => (
             <button

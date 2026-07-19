@@ -1,17 +1,39 @@
 ---
 import AkhetGlyph from "../assets/akhet-glyph.svg";
-import { navigation, site } from "../data/site";
+import { site } from "../data/site";
+import { localeNames, localePath, locales, resolveLocale, useDict } from "../i18n";
+
+const locale = resolveLocale(Astro.currentLocale);
+const t = useDict(locale);
+const base = localePath(locale);
+
+const navigation = [
+  { label: t.nav.agora, href: `${base}#agora` },
+  { label: t.nav.visualizador, href: `${base}#visualizador` },
+  { label: t.nav.roadmap, href: `${base}#roadmap` },
+  { label: t.nav.construir, href: `${base}#construir` },
+];
 ---
 
 <header class="header">
   <div class="shell header__inner">
-    <a class="header__brand" href="/">
+    <a class="header__brand" href={base}>
       <AkhetGlyph class="header__glyph" aria-hidden="true" />
       <span class="header__name">{site.name}</span>
     </a>
 
-    <nav class="header__nav" aria-label="Seções do site">
+    <nav class="header__nav" aria-label={t.footer.navLabel}>
       {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <nav class="header__locales" aria-label="Idiomas">
+      {
+        locales.map((code) => (
+          <a href={localePath(code)} aria-current={code === locale ? "page" : undefined}>
+            {localeNames[code]}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </header>
@@ -79,6 +101,32 @@ import { navigation, site } from "../data/site";
     border-bottom-color: var(--accent);
   }
 
+
+  .header__locales {
+    display: flex;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .header__locales a {
+    padding: 0.35rem 0.55rem;
+    text-decoration: none;
+    color: var(--ink-faint);
+    border: 1px solid transparent;
+    transition: color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .header__locales a:hover {
+    color: var(--ink);
+  }
+
+  .header__locales a[aria-current="page"] {
+    color: var(--accent-bright);
+    border-color: var(--rule-color);
+  }
 
   @media (max-width: 60rem) {
     .header__nav {

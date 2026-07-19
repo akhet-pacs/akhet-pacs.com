@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "./SiteHeader.astro";
+import SiteFooter from "./SiteFooter.astro";
+import Hero from "../sections/Hero.astro";
+import Status from "../sections/Status.astro";
+import Capabilities from "../sections/Capabilities.astro";
+import Demo from "../sections/Demo.astro";
+import Roadmap from "../sections/Roadmap.astro";
+import Principles from "../sections/Principles.astro";
+import Contribute from "../sections/Contribute.astro";
+import CallToAction from "../sections/CallToAction.astro";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale);
+---
+
+<Layout title={t.meta.title} description={t.meta.description}>
+  <a class="skip-link" href="#conteudo">{t.skipLink}</a>
+  <SiteHeader />
+  <main id="conteudo">
+    <Hero />
+    <Status />
+    <Capabilities />
+    <Demo />
+    <Roadmap />
+    <Principles />
+    <Contribute />
+    <CallToAction />
+  </main>
+  <SiteFooter />
+</Layout>

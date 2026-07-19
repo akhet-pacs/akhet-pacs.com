@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { localePath, locales, resolveLocale } from "../i18n";
 
 interface Props {
   title: string;
@@ -7,10 +8,13 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const locale = resolveLocale(Astro.currentLocale);
+const langTags = { pt: "pt-BR", en: "en", es: "es" } as const;
+const siteUrl = Astro.site ?? new URL("https://akhet-pacs.com");
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang={langTags[locale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +24,13 @@ const { title, description } = Astro.props;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#05090f" />
+    <link rel="canonical" href={new URL(localePath(locale), siteUrl)} />
+    {
+      locales.map((code) => (
+        <link rel="alternate" hreflang={langTags[code]} href={new URL(localePath(code), siteUrl)} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

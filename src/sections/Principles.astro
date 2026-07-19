@@ -1,21 +1,20 @@
 ---
-import { principles } from "../data/site";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale).principles;
 ---
 
 <section class="section" id="principios">
   <div class="shell principles">
     <header class="principles__header">
-      <p class="eyebrow">Engenharia</p>
-      <h2>Software médico<br />levado a sério.</h2>
-      <p class="lede">
-        Software de imagem médica é usado por anos e carrega dados de pacientes. Estas garantias não
-        são promessa de documento: são verificadas pelo compilador e pelo CI a cada commit.
-      </p>
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h2>{t.titleLines[0]}<br />{t.titleLines[1]}</h2>
+      <p class="lede">{t.lede}</p>
     </header>
 
     <dl class="principles__list">
       {
-        principles.map((principle) => (
+        t.items.map((principle) => (
           <div class="principle">
             <dt>{principle.title}</dt>
             <dd>{principle.body}</dd>

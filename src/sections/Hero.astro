@@ -1,6 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
-import { heroStats, site } from "../data/site";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale).hero;
 ---
 
 <section class="hero">
@@ -13,31 +15,26 @@ import { heroStats, site } from "../data/site";
   <div class="shell hero__inner">
     <p class="eyebrow hero__eyebrow">
       <span class="hero__pulse" aria-hidden="true"></span>
-      Em construção · fase 1 de 5
+      {t.badge}
     </p>
     <h1 class="hero__title">
-      <span class="hero__line">Revelando</span>
-      <span class="hero__line">o que realmente</span>
-      <span class="hero__line hero__line--accent">importa.</span>
+      <span class="hero__line">{t.lines[0]}</span>
+      <span class="hero__line">{t.lines[1]}</span>
+      <span class="hero__line hero__line--accent">{t.lines[2]}</span>
     </h1>
-    <p class="lede hero__lede">
-      Um visualizador DICOM nativo em Rust — rápido, preciso e auditável — sendo construído
-      commit a commit, rumo a um PACS completo.
-    </p>
+    <p class="lede hero__lede">{t.lede}</p>
     <div class="cluster">
       <a class="btn btn--solid" href="#construir">
-        Construir junto
+        {t.ctaPrimary}
         <Icon name="lucide:arrow-down-right" />
       </a>
-      <a class="btn btn--ghost" href="#visualizador">
-        Ver o visualizador
-      </a>
+      <a class="btn btn--ghost" href="#visualizador">{t.ctaSecondary}</a>
     </div>
   </div>
 
   <div class="shell hero__stats" role="list">
     {
-      heroStats.map((stat) => (
+      t.stats.map((stat) => (
         <div class="hero__stat" role="listitem">
           <span class="hero__stat-value tabular">{stat.value}</span>
           <span class="hero__stat-label">{stat.label}</span>
@@ -48,7 +45,6 @@ import { heroStats, site } from "../data/site";
 
   <hr class="rule-horizon" />
 </section>
-
 <style>
   .hero {
     position: relative;

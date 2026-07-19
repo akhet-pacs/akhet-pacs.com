@@ -5,6 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://akhet-pacs.com",
+  i18n: {
+    defaultLocale: "pt",
+    locales: ["pt", "en", "es"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [icon()],
   vite: {
     plugins: [tailwindcss()],

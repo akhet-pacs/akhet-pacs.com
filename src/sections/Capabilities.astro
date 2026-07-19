@@ -1,22 +1,21 @@
 ---
 import { Icon } from "astro-icon/components";
-import { capabilities } from "../data/site";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale).capabilities;
 ---
 
 <section class="section">
   <div class="shell">
     <header class="capabilities__header">
-      <p class="eyebrow">Fase 1 · funcionando hoje</p>
-      <h2>Isto não é mockup.<br />Já roda.</h2>
-      <p class="lede">
-        Cada item abaixo existe no código, coberto por testes que rodam contra exames DICOM reais a
-        cada commit. Tudo o que vem depois — mini PACS, servidor, integrações — nasce sobre esta base.
-      </p>
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h2>{t.titleLines[0]}<br />{t.titleLines[1]}</h2>
+      <p class="lede">{t.lede}</p>
     </header>
 
     <ul class="capabilities__grid">
       {
-        capabilities.map((capability) => (
+        t.items.map((capability) => (
           <li class="capability">
             <Icon class="capability__icon" name={capability.icon} />
             <h3>{capability.title}</h3>

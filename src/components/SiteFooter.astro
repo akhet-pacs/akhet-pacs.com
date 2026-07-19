@@ -2,7 +2,9 @@
 import { Icon } from "astro-icon/components";
 import AkhetGlyph from "../assets/akhet-glyph.svg";
 import { site } from "../data/site";
+import { useDict } from "../i18n";
 
+const t = useDict(Astro.currentLocale).footer;
 const year = new Date().getFullYear();
 ---
 
@@ -10,14 +12,14 @@ const year = new Date().getFullYear();
   <div class="shell footer__inner">
     <div class="footer__meaning">
       <p class="eyebrow"><AkhetGlyph class="eyebrow__glyph" aria-hidden="true" /> Akhet</p>
-      <p>
-        Akhet é a palavra egípcia para <strong>horizonte</strong>: o sol nascendo entre duas
-        montanhas. O nome foi escolhido pelo significado — o ponto em que a luz revela o que estava
-        escuro — e não tem finalidade religiosa ou mitológica.
-      </p>
+      <p>{t.meaning}</p>
     </div>
 
     <div class="footer__links">
+      <a href={site.whatsapp} rel="noreferrer noopener" target="_blank">
+        <Icon name="simple-icons:whatsapp" />
+        {site.whatsappLabel}
+      </a>
       <a href={`mailto:${site.contact}`}>
         <Icon name="lucide:mail" />
         {site.contact}

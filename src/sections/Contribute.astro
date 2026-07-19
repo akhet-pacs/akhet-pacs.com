@@ -1,23 +1,22 @@
 ---
 import { Icon } from "astro-icon/components";
-import { contributionAreas, site } from "../data/site";
+import { site } from "../data/site";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale).contribute;
 ---
 
 <section class="section section-raised" id="construir">
   <div class="shell contribute">
     <header class="contribute__header">
-      <p class="eyebrow">Construir junto</p>
-      <h2>Um PACS não se constrói sozinho.</h2>
-      <p class="lede">
-        Procuro gente que queira construir software médico de verdade — em Rust, com arquitetura
-        limpa e testes sobre exames reais. Em troca, você ajuda a moldar uma aplicação da qual vai
-        se orgulhar, desde a fundação.
-      </p>
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h2>{t.title}</h2>
+      <p class="lede">{t.lede}</p>
     </header>
 
     <ul class="contribute__grid">
       {
-        contributionAreas.map((area) => (
+        t.areas.map((area) => (
           <li class="contribute__card">
             <Icon class="contribute__icon" name={area.icon} />
             <h3>{area.title}</h3>
@@ -28,23 +27,20 @@ import { contributionAreas, site } from "../data/site";
     </ul>
 
     <div class="contribute__cta">
-      <p>
-        Interessou? Escreva contando o que você faz bem — Rust, DICOM ou rotina de clínica — e
-        por onde gostaria de começar. O acesso ao projeto é combinado nessa conversa.
-      </p>
+      <p>{t.ctaText}</p>
       <div class="cluster">
         <a
           class="btn btn--solid"
-          href={`${site.whatsapp}?text=${encodeURIComponent("Olá, Jônatas! Vi o site do Akhet PACS e quero construir junto.")}`}
+          href={`${site.whatsapp}?text=${encodeURIComponent(t.whatsappMessage)}`}
           rel="noreferrer noopener"
           target="_blank"
         >
           <Icon name="simple-icons:whatsapp" />
-          Chamar no WhatsApp
+          {t.btnWhatsapp}
         </a>
         <a class="btn btn--ghost" href={`mailto:${site.contact}`}>
           <Icon name="lucide:mail" />
-          Escrever por e-mail
+          {t.btnEmail}
         </a>
       </div>
     </div>

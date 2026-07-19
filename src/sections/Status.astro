@@ -1,25 +1,22 @@
 ---
 import { Icon } from "astro-icon/components";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale).status;
 ---
 
 <section class="section" id="agora">
   <div class="shell status">
     <header class="status__header">
-      <p class="eyebrow">Onde o projeto está</p>
-      <h2>Sem maquiagem:<br />o estado real.</h2>
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h2>{t.titleLines[0]}<br />{t.titleLines[1]}</h2>
     </header>
 
     <div class="status__body">
-      <p class="lede">
-        O Akhet nasceu como um visualizador DICOM e está no meio da fase 1: o núcleo clínico —
-        window/level, medições, multi-viewport, MPR — já funciona sobre exames reais de CT, MR, US,
-        mamografia e angiografia.
-      </p>
+      <p class="lede">{t.lede}</p>
       <p class="status__honest">
         <Icon name="lucide:construction" />
-        O que falta é o que menos aparece em screenshot: o study browser, para a sessão não começar
-        do zero, e os instaladores de Windows e macOS, para uma clínica conseguir simplesmente
-        baixar e abrir. É exatamente aí que o projeto precisa de gente.
+        {t.honest}
       </p>
     </div>
   </div>
