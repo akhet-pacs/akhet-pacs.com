@@ -1,0 +1,19 @@
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule-color);
+  margin: 0;
+}
+
+.rule-horizon {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--accent-bright) 40%, transparent) 18%,
+    var(--accent) 50%,
+    color-mix(in srgb, var(--accent-bright) 40%, transparent) 82%,
+    transparent
+  );
+}

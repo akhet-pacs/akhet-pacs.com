@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Hero from "../sections/Hero.astro";
+import Capabilities from "../sections/Capabilities.astro";
+import Roadmap from "../sections/Roadmap.astro";
+import Principles from "../sections/Principles.astro";
+import CallToAction from "../sections/CallToAction.astro";
+import { site } from "../data/site";
+---
+
+<Layout title={`${site.name} — ${site.tagline}`} description={site.description}>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <SiteHeader />
+  <main id="conteudo">
+    <Hero />
+    <Capabilities />
+    <Roadmap />
+    <Principles />
+    <CallToAction />
+  </main>
+  <SiteFooter />
+</Layout>

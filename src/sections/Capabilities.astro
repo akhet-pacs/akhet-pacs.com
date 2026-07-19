@@ -1,0 +1,99 @@
+---
+import { Icon } from "astro-icon/components";
+import { capabilities } from "../data/site";
+---
+
+<section class="section">
+  <div class="shell">
+    <header class="capabilities__header">
+      <p class="eyebrow">Fase 1 · disponível em desenvolvimento</p>
+      <h2>O que o visualizador já faz</h2>
+      <p class="lede">
+        A base do Akhet é um visualizador DICOM nativo. Tudo o que vem depois — mini PACS, servidor,
+        integrações — é construído sobre ele.
+      </p>
+    </header>
+
+    <ul class="capabilities__grid">
+      {
+        capabilities.map((capability) => (
+          <li class="capability">
+            <Icon class="capability__icon" name={capability.icon} />
+            <h3>{capability.title}</h3>
+            <p>{capability.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .capabilities__header {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    max-width: 52rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .capabilities__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .capability {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border-bottom: 1px solid var(--rule-color);
+    border-right: 1px solid var(--rule-color);
+  }
+
+  .capability:nth-child(3n) {
+    border-right: 0;
+  }
+
+  .capability__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--accent);
+    stroke-width: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .capability p {
+    color: var(--ink-soft);
+    font-size: 1rem;
+  }
+
+  @media (max-width: 62rem) {
+    .capabilities__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .capability:nth-child(3n) {
+      border-right: 1px solid var(--rule-color);
+    }
+
+    .capability:nth-child(2n) {
+      border-right: 0;
+    }
+  }
+
+  @media (max-width: 42rem) {
+    .capabilities__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .capability {
+      border-right: 0;
+    }
+
+    .capability:nth-child(3n) {
+      border-right: 0;
+    }
+  }
+</style>

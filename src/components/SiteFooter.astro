@@ -1,0 +1,108 @@
+---
+import { Icon } from "astro-icon/components";
+import AkhetGlyph from "../assets/akhet-glyph.svg";
+import { site } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="shell footer__inner">
+    <div class="footer__meaning">
+      <p class="eyebrow"><AkhetGlyph class="eyebrow__glyph" aria-hidden="true" /> Akhet</p>
+      <p>
+        Akhet é a palavra egípcia para <strong>horizonte</strong>: o sol nascendo entre duas
+        montanhas. O nome foi escolhido pelo significado — o ponto em que a luz revela o que estava
+        escuro — e não tem finalidade religiosa ou mitológica.
+      </p>
+    </div>
+
+    <div class="footer__links">
+      <a href={site.repository} rel="noreferrer noopener" target="_blank">
+        <Icon name="simple-icons:github" />
+        GitHub
+      </a>
+      <a href={`mailto:${site.contact}`}>
+        <Icon name="lucide:mail" />
+        {site.contact}
+      </a>
+    </div>
+  </div>
+
+  <div class="shell footer__baseline meta">
+    <span>© {year} {site.name}</span>
+    <span>{site.tagline}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--surface-deep);
+    color: var(--ink);
+    border-top: 1px solid var(--rule-color);
+    padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.4fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .footer__meaning {
+    display: grid;
+    gap: 1rem;
+    max-width: 52ch;
+    color: var(--ink-soft);
+  }
+
+  .footer__meaning .eyebrow {
+    color: var(--accent-bright);
+  }
+
+  .footer__links {
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+
+  .footer__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    width: fit-content;
+    border-bottom: 1px solid var(--rule-color);
+    padding-bottom: 0.15rem;
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .footer__links svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--accent);
+  }
+
+  .footer__links a:hover {
+    border-bottom-color: var(--accent-bright);
+  }
+
+  .footer__baseline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--rule-color);
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 48rem) {
+    .footer__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

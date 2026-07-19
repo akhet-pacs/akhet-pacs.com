@@ -1,0 +1,313 @@
+---
+import { Icon } from "astro-icon/components";
+import SyntheticSlice from "../assets/synthetic-slice.svg";
+
+const presets = [
+  { label: "Abdome", width: 400, level: 40 },
+  { label: "Tórax", width: 1500, level: -600 },
+  { label: "Osso", width: 2000, level: 400 },
+  { label: "Cérebro", width: 80, level: 40 },
+];
+---
+
+<figure class="viewer" data-viewer>
+  <div class="viewer__frame">
+    <div class="viewer__canvas" data-viewer-canvas tabindex="0" role="application" aria-label="Arraste para ajustar janela e nível">
+      <SyntheticSlice
+        class="viewer__image"
+        role="img"
+        aria-label="Corte axial sintético de tórax usado para demonstrar o ajuste de janela"
+      />
+      <div class="viewer__overlay viewer__overlay--tl">
+        <span>ANÔNIMO^DEMO</span>
+        <span>CT / AXIAL</span>
+      </div>
+      <div class="viewer__overlay viewer__overlay--tr">
+        <span data-readout-width>W 400</span>
+        <span data-readout-level>L 40</span>
+      </div>
+      <div class="viewer__overlay viewer__overlay--bl">
+        <span>512 × 512</span>
+      </div>
+      <p class="viewer__hint" data-viewer-hint>
+        <Icon name="lucide:move" />
+        Arraste sobre a imagem
+      </p>
+    </div>
+  </div>
+
+  <div class="viewer__controls">
+    <label class="viewer__field">
+      <span class="viewer__field-label">Largura da janela</span>
+      <input type="range" min="40" max="2400" step="10" value="400" data-input-width />
+    </label>
+    <label class="viewer__field">
+      <span class="viewer__field-label">Centro da janela</span>
+      <input type="range" min="-800" max="800" step="10" value="40" data-input-level />
+    </label>
+    <div class="viewer__presets">
+      {
+        presets.map((preset) => (
+          <button
+            type="button"
+            class="viewer__preset"
+            data-preset
+            data-width={preset.width}
+            data-level={preset.level}
+          >
+            {preset.label}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <figcaption class="viewer__caption">
+    Imagem sintética, gerada para demonstração. Nenhum dado de paciente é usado nesta página.
+  </figcaption>
+</figure>
+
+<style>
+  .viewer {
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .viewer__frame {
+    background: var(--surface-deep);
+    padding: 0.75rem;
+    border: 1px solid var(--rule-color);
+  }
+
+  .viewer__canvas {
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+    background: #0b0b0b;
+  }
+
+  .viewer__canvas:active {
+    cursor: grabbing;
+  }
+
+  .viewer__image {
+    filter: contrast(var(--wl-contrast, 1)) brightness(var(--wl-brightness, 1));
+  }
+
+  .viewer__overlay {
+    position: absolute;
+    display: grid;
+    gap: 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-bright);
+    pointer-events: none;
+    text-shadow: 0 0 6px rgb(0 0 0 / 0.8);
+  }
+
+  .viewer__overlay--tl {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .viewer__overlay--tr {
+    top: 0.75rem;
+    right: 0.75rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .viewer__overlay--bl {
+    bottom: 0.75rem;
+    left: 0.75rem;
+    color: color-mix(in srgb, var(--accent-bright) 60%, transparent);
+  }
+
+  .viewer__hint {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, #ffffff 55%, transparent);
+    pointer-events: none;
+    transition: opacity var(--duration-slow) var(--ease-out);
+  }
+
+  .viewer__hint[data-dismissed] {
+    opacity: 0;
+  }
+
+  .viewer__controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+  }
+
+  .viewer__field {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .viewer__field-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .viewer__field input {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .viewer__presets {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .viewer__preset {
+    padding: 0.4rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--rule-color);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .viewer__preset:hover,
+  .viewer__preset[aria-pressed="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--ink-inverse);
+  }
+
+  .viewer__caption {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 34rem) {
+    .viewer__controls {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const DEFAULT_WIDTH = 400;
+  const DEFAULT_LEVEL = 40;
+
+  document.querySelectorAll<HTMLElement>("[data-viewer]").forEach((viewer) => {
+    const canvas = viewer.querySelector<HTMLElement>("[data-viewer-canvas]");
+    const widthInput = viewer.querySelector<HTMLInputElement>("[data-input-width]");
+    const levelInput = viewer.querySelector<HTMLInputElement>("[data-input-level]");
+    const widthReadout = viewer.querySelector<HTMLElement>("[data-readout-width]");
+    const levelReadout = viewer.querySelector<HTMLElement>("[data-readout-level]");
+    const hint = viewer.querySelector<HTMLElement>("[data-viewer-hint]");
+    const presets = viewer.querySelectorAll<HTMLButtonElement>("[data-preset]");
+
+    if (!canvas || !widthInput || !levelInput || !widthReadout || !levelReadout) return;
+
+    let width = DEFAULT_WIDTH;
+    let level = DEFAULT_LEVEL;
+
+    const clamp = (value: number, min: number, max: number) =>
+      Math.min(max, Math.max(min, value));
+
+    const render = () => {
+      canvas.style.setProperty("--wl-contrast", String(clamp(1000 / width, 0.35, 6)));
+      canvas.style.setProperty("--wl-brightness", String(clamp(1 + (DEFAULT_LEVEL - level) / 700, 0.3, 1.9)));
+      widthReadout.textContent = `W ${Math.round(width)}`;
+      levelReadout.textContent = `L ${Math.round(level)}`;
+      widthInput.value = String(Math.round(width));
+      levelInput.value = String(Math.round(level));
+
+      presets.forEach((preset) => {
+        const matches =
+          Number(preset.dataset.width) === Math.round(width) &&
+          Number(preset.dataset.level) === Math.round(level);
+        preset.setAttribute("aria-pressed", String(matches));
+      });
+    };
+
+    const setValues = (nextWidth: number, nextLevel: number) => {
+      width = clamp(nextWidth, Number(widthInput.min), Number(widthInput.max));
+      level = clamp(nextLevel, Number(levelInput.min), Number(levelInput.max));
+      render();
+    };
+
+    widthInput.addEventListener("input", () => setValues(Number(widthInput.value), level));
+    levelInput.addEventListener("input", () => setValues(width, Number(levelInput.value)));
+
+    presets.forEach((preset) => {
+      preset.addEventListener("click", () =>
+        setValues(Number(preset.dataset.width), Number(preset.dataset.level)),
+      );
+    });
+
+    let dragging = false;
+    let originX = 0;
+    let originY = 0;
+    let originWidth = width;
+    let originLevel = level;
+
+    canvas.addEventListener("pointerdown", (event) => {
+      dragging = true;
+      originX = event.clientX;
+      originY = event.clientY;
+      originWidth = width;
+      originLevel = level;
+      canvas.setPointerCapture(event.pointerId);
+      hint?.setAttribute("data-dismissed", "");
+    });
+
+    canvas.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      setValues(originWidth + (event.clientX - originX) * 4, originLevel + (event.clientY - originY) * 2);
+    });
+
+    const stop = (event: PointerEvent) => {
+      dragging = false;
+      if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    };
+
+    canvas.addEventListener("pointerup", stop);
+    canvas.addEventListener("pointercancel", stop);
+
+    canvas.addEventListener("keydown", (event) => {
+      const step = event.shiftKey ? 100 : 20;
+      const moves: Record<string, () => void> = {
+        ArrowLeft: () => setValues(width - step, level),
+        ArrowRight: () => setValues(width + step, level),
+        ArrowUp: () => setValues(width, level - step),
+        ArrowDown: () => setValues(width, level + step),
+      };
+      const move = moves[event.key];
+      if (!move) return;
+      event.preventDefault();
+      move();
+    });
+
+    render();
+  });
+</script>

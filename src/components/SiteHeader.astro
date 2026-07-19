@@ -1,0 +1,88 @@
+---
+import AkhetGlyph from "../assets/akhet-glyph.svg";
+import { navigation, site } from "../data/site";
+---
+
+<header class="header">
+  <div class="shell header__inner">
+    <a class="header__brand" href="/">
+      <AkhetGlyph class="header__glyph" aria-hidden="true" />
+      <span class="header__name">{site.name}</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Seções do site">
+      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule-color);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 4.25rem;
+  }
+
+  .header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .header__glyph {
+    width: 1.25rem;
+    height: auto;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .header__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: 1.05rem;
+    white-space: nowrap;
+  }
+
+  .header__nav {
+    display: flex;
+    gap: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .header__nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding-block: 0.35rem;
+    border-bottom: 1px solid transparent;
+    transition: color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .header__nav a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+
+  @media (max-width: 60rem) {
+    .header__nav {
+      display: none;
+    }
+  }
+</style>

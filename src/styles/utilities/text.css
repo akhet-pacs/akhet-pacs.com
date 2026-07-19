@@ -1,0 +1,34 @@
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow__glyph {
+  width: 1.1rem;
+  height: auto;
+}
+
+.lede {
+  font-size: var(--text-lede);
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+
+.tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,37 @@
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 7vw, 5.75rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+strong {
+  font-weight: 600;
+}

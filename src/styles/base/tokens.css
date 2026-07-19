@@ -1,0 +1,47 @@
+@theme {
+  --color-abyss: #05090f;
+  --color-night: #0b141f;
+  --color-slate: #142130;
+  --color-lapis: #1d3a5f;
+  --color-limestone: #ece7dd;
+  --color-sand: #b9b2a5;
+  --color-gold: #d79a3c;
+  --color-horizon: #f0c069;
+
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Source Serif 4", ui-serif, Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-eyebrow: 0.75rem;
+  --text-meta: 0.8125rem;
+  --text-body: 1.0625rem;
+  --text-lede: 1.15rem;
+
+  --spacing-section: 7.5rem;
+  --spacing-shell: 74rem;
+}
+
+:root {
+  color-scheme: dark;
+
+  --surface: var(--color-abyss);
+  --surface-raised: var(--color-night);
+  --surface-deep: #02050a;
+
+  --ink: var(--color-limestone);
+  --ink-soft: color-mix(in srgb, var(--color-limestone) 72%, var(--surface));
+  --ink-faint: color-mix(in srgb, var(--color-limestone) 44%, var(--surface));
+  --ink-inverse: var(--color-abyss);
+
+  --rule-color: color-mix(in srgb, var(--color-limestone) 14%, transparent);
+  --rule-strong: color-mix(in srgb, var(--color-limestone) 26%, transparent);
+
+  --accent: var(--color-gold);
+  --accent-bright: var(--color-horizon);
+
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --duration-fast: 160ms;
+  --duration-slow: 640ms;
+
+  --header-height: 4.25rem;
+}

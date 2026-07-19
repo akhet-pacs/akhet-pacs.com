@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon/components";
+import { site } from "../data/site";
+---
+
+<section class="section-tight cta">
+  <div class="shell-narrow cta__inner">
+    <p class="eyebrow">Primeiras instalações</p>
+    <h2>Quer testar o Akhet na sua clínica?</h2>
+    <p class="lede">
+      O visualizador está em desenvolvimento aberto. Escreva contando quais modalidades você usa e
+      entramos em contato quando houver uma build para o seu sistema.
+    </p>
+    <div class="cluster">
+      <a class="btn btn--solid" href={`mailto:${site.contact}`}>
+        <Icon name="lucide:mail" />
+        Falar com o time
+      </a>
+      <a class="btn btn--ghost" href={site.repository} rel="noreferrer noopener" target="_blank">
+        <Icon name="simple-icons:github" />
+        Ver o repositório
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--surface);
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .cta__inner {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+</style>

@@ -1,0 +1,45 @@
+.shell {
+  width: min(100% - 2.5rem, var(--spacing-shell));
+  margin-inline: auto;
+}
+
+.shell-narrow {
+  width: min(100% - 2.5rem, 52rem);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--spacing-section);
+}
+
+.section-tight {
+  padding-block: calc(var(--spacing-section) * 0.6);
+}
+
+.section-raised {
+  background: var(--surface-raised);
+}
+
+.section-deep {
+  background: var(--surface-deep);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  align-items: center;
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --spacing-section: 4.5rem;
+  }
+}
