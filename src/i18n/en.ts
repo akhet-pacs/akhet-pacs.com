@@ -262,4 +262,9 @@ export const en: Dict = {
       "Akhet is the Egyptian word for horizon: the sun rising between two mountains. The name was chosen for its meaning — the point where light reveals what was dark — and has no religious or mythological purpose.",
     navLabel: "Site sections",
   },
+  menu: {
+    open: "Open menu",
+    close: "Close menu",
+    language: "Language",
+  },
 };

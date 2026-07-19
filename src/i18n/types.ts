@@ -78,4 +78,9 @@ export type Dict = {
     meaning: string;
     navLabel: string;
   };
+  menu: {
+    open: string;
+    close: string;
+    language: string;
+  };
 };

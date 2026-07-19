@@ -262,4 +262,9 @@ export const es: Dict = {
       "Akhet es la palabra egipcia para horizonte: el sol naciendo entre dos montañas. El nombre fue elegido por su significado — el punto donde la luz revela lo que estaba oscuro — y no tiene finalidad religiosa ni mitológica.",
     navLabel: "Secciones del sitio",
   },
+  menu: {
+    open: "Abrir menú",
+    close: "Cerrar menú",
+    language: "Idioma",
+  },
 };
