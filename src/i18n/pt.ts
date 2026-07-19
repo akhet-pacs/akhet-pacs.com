@@ -91,6 +91,7 @@ export const pt: Dict = {
     lede: "Capturas reais do Akhet abrindo uma amostra DICOM pública. Interface escura, informações clínicas nos cantos e as ferramentas de medição a um atalho de distância.",
     tablistLabel: "Ferramentas de medição",
     altPrefix: "Akhet PACS com a ferramenta",
+    panHint: "Arraste a imagem para o lado para ver a interface inteira.",
     shots: [
       {
         key: "cobb",

@@ -41,6 +41,7 @@ export type Dict = {
     lede: string;
     tablistLabel: string;
     altPrefix: string;
+    panHint: string;
     shots: Shot[];
   };
   roadmap: {

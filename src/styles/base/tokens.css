@@ -45,3 +45,12 @@
 
   --header-height: 4.25rem;
 }
+
+@media (max-width: 48rem) {
+  :root {
+    --text-body: 1rem;
+    --text-lede: 1.0625rem;
+    --spacing-section: 4rem;
+    --header-height: 3.75rem;
+  }
+}

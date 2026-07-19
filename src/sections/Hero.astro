@@ -239,4 +239,57 @@ const t = useDict(Astro.currentLocale).hero;
       border-right: 0;
     }
   }
+
+  @media (max-width: 48rem) {
+    .hero {
+      min-height: 0;
+      padding-bottom: 0;
+    }
+
+    .hero__inner {
+      padding-top: clamp(2.5rem, 8vh, 4rem);
+      gap: 1.5rem;
+    }
+
+    .hero__title {
+      font-size: clamp(2.6rem, 11vw, 3.6rem);
+    }
+
+    .hero__stats {
+      margin-top: 2.5rem;
+    }
+
+    .hero__stat {
+      padding: 1.1rem 0 1.4rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule-color);
+    }
+
+    .hero__stat + .hero__stat {
+      padding-left: 0;
+    }
+
+    .hero__stat:nth-child(odd) {
+      padding-right: 1rem;
+      border-right: 1px solid var(--rule-color);
+    }
+
+    .hero__stat:nth-child(even) {
+      padding-left: 1rem;
+    }
+
+    .hero__stat:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
+
+    .hero__mountain {
+      height: 16vh;
+    }
+
+    .hero__sun {
+      width: 78vw;
+      height: 78vw;
+      bottom: -24vw;
+    }
+  }
 </style>

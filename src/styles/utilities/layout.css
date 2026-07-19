@@ -38,8 +38,19 @@
   align-items: center;
 }
 
-@media (max-width: 48rem) {
-  :root {
-    --spacing-section: 4.5rem;
+@media (max-width: 30rem) {
+  .shell,
+  .shell-narrow {
+    width: min(100% - 2rem, var(--spacing-shell));
+  }
+
+  .cluster {
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .cluster > .btn {
+    flex: 1 1 100%;
+    justify-content: center;
   }
 }

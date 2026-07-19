@@ -78,4 +78,18 @@ const t = useDict(Astro.currentLocale).principles;
       position: static;
     }
   }
+
+  @media (max-width: 48rem) {
+    .principles {
+      gap: 1.75rem;
+    }
+
+    .principle {
+      padding-block: 1.35rem;
+    }
+
+    .principle dt {
+      font-size: 1.1rem;
+    }
+  }
 </style>

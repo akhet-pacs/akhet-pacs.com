@@ -35,3 +35,16 @@ a {
 strong {
   font-weight: 600;
 }
+
+@media (max-width: 48rem) {
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.03em;
+  }
+
+  body {
+    line-height: 1.55;
+  }
+}

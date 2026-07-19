@@ -33,18 +33,22 @@ const shots = t.shots.map((shot) => ({ ...shot, image: images[shot.key] }));
         {
           shots.map((shot, index) => (
             <figure class="demo__shot" data-shot={shot.key} data-active={index === 0 ? "" : undefined}>
-              <Image
-                src={shot.image}
-                alt={`${t.altPrefix} ${shot.label}`}
-                widths={[720, 1100, 1600]}
-                sizes="(max-width: 62rem) 100vw, 72rem"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
+              <div class="demo__pan">
+                <Image
+                  src={shot.image}
+                  alt={`${t.altPrefix} ${shot.label}`}
+                  widths={[720, 1100, 1600]}
+                  sizes="(max-width: 62rem) 46rem, 72rem"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              </div>
               <figcaption class="demo__caption meta">{shot.caption}</figcaption>
             </figure>
           ))
         }
       </div>
+
+      <p class="demo__hint meta">{t.panHint}</p>
 
       <div class="demo__tabs" role="tablist" aria-label={t.tablistLabel}>
         {
@@ -98,6 +102,12 @@ const shots = t.shots.map((shot) => ({ ...shot, image: images[shot.key] }));
     gap: 0;
   }
 
+  .demo__pan {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
   .demo__shot img {
     width: 100%;
     height: auto;
@@ -107,6 +117,10 @@ const shots = t.shots.map((shot) => ({ ...shot, image: images[shot.key] }));
   .demo__caption {
     padding: 0.9rem 1.1rem;
     border-top: 1px solid var(--rule-color);
+  }
+
+  .demo__hint {
+    display: none;
   }
 
   .demo__tabs {
@@ -140,6 +154,43 @@ const shots = t.shots.map((shot) => ({ ...shot, image: images[shot.key] }));
     background: var(--accent-bright);
     border-color: var(--accent-bright);
     color: var(--surface-deep);
+  }
+
+  @media (max-width: 48rem) {
+    .demo {
+      gap: 1.5rem;
+    }
+
+    .demo__shot img {
+      width: 46rem;
+      max-width: none;
+    }
+
+    .demo__hint {
+      display: block;
+    }
+
+    .demo__tabs {
+      gap: 0.4rem;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: none;
+      padding-bottom: 0.25rem;
+    }
+
+    .demo__tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .demo__tab {
+      flex: 0 0 auto;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.7rem;
+    }
+
+    .demo__caption {
+      padding: 0.75rem 0.9rem;
+    }
   }
 </style>
 

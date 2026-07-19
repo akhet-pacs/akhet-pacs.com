@@ -110,4 +110,18 @@ const t = useDict(Astro.currentLocale).contribute;
       grid-template-columns: minmax(0, 1fr);
     }
   }
+
+  @media (max-width: 52rem) {
+    .contribute {
+      gap: 2rem;
+    }
+
+    .contribute__card {
+      padding: 1.35rem;
+    }
+
+    .contribute__cta {
+      gap: 1.25rem;
+    }
+  }
 </style>

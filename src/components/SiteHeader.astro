@@ -53,7 +53,7 @@ const navigation = [
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    min-height: 4.25rem;
+    min-height: var(--header-height);
   }
 
   .header__brand {
@@ -129,8 +129,46 @@ const navigation = [
   }
 
   @media (max-width: 60rem) {
+    .header__inner {
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      padding-block: 0.6rem;
+    }
+
     .header__nav {
+      order: 3;
+      width: calc(100% + 2.5rem);
+      margin-inline: -1.25rem;
+      padding-inline: 1.25rem;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .header__nav::-webkit-scrollbar {
       display: none;
+    }
+
+    .header__nav a {
+      white-space: nowrap;
+      font-size: 0.7rem;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .header__inner {
+      gap: 0.5rem 0.75rem;
+    }
+
+    .header__name {
+      font-size: 0.95rem;
+    }
+
+    .header__nav {
+      width: calc(100% + 2rem);
+      margin-inline: -1rem;
+      padding-inline: 1rem;
     }
   }
 </style>

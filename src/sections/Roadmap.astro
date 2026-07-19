@@ -126,4 +126,22 @@ const t = useDict(Astro.currentLocale).roadmap;
       gap: 1rem;
     }
   }
+
+  @media (max-width: 48rem) {
+    .roadmap__header {
+      margin-bottom: 2rem;
+    }
+
+    .phase {
+      padding-block: 1.75rem;
+    }
+
+    .phase__index {
+      font-size: 1.5rem;
+    }
+
+    .phase__items {
+      gap: 0.4rem;
+    }
+  }
 </style>

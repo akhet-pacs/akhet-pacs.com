@@ -95,4 +95,14 @@ const t = useDict(Astro.currentLocale).capabilities;
       border-right: 0;
     }
   }
+
+  @media (max-width: 42rem) {
+    .capabilities__header {
+      margin-bottom: 2rem;
+    }
+
+    .capability {
+      padding: 1.35rem 0;
+    }
+  }
 </style>

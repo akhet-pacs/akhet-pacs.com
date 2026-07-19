@@ -63,4 +63,24 @@ const t = useDict(Astro.currentLocale).status;
       grid-template-columns: minmax(0, 1fr);
     }
   }
+
+  @media (max-width: 48rem) {
+    .status {
+      gap: 1.75rem;
+    }
+
+    .status__body {
+      gap: 1.25rem;
+    }
+
+    .status__honest {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+      padding: 1.25rem;
+    }
+
+    .status__honest svg {
+      margin-top: 0;
+    }
+  }
 </style>
