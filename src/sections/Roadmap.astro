@@ -10,10 +10,11 @@ const statusLabel = {
 <section class="section" id="roadmap">
   <div class="shell">
     <header class="roadmap__header">
-      <p class="eyebrow">Roadmap</p>
+      <p class="eyebrow">Roadmap · onde isto vai chegar</p>
       <h2>Do visualizador ao PACS completo</h2>
       <p class="lede">
-        Cinco fases, em ordem. Cada uma só começa quando a anterior está em uso de verdade.
+        Cinco fases, em ordem, documentadas no repositório com estudo de seis concorrentes. Cada
+        fase só começa quando a anterior está em uso de verdade.
       </p>
     </header>
 
@@ -27,6 +28,7 @@ const statusLabel = {
             </div>
             <div class="phase__body">
               <h3>{phase.name}</h3>
+              <p class="phase__summary">{phase.summary}</p>
               <ul class="phase__items">
                 {phase.items.map((item) => (
                   <li>{item}</li>
@@ -97,6 +99,11 @@ const statusLabel = {
   .phase__body {
     display: grid;
     gap: 1rem;
+  }
+
+  .phase__summary {
+    color: var(--ink-soft);
+    max-width: 52ch;
   }
 
   .phase__items {

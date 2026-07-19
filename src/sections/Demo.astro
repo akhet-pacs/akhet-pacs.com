@@ -1,0 +1,47 @@
+---
+import WindowLevelViewer from "../components/WindowLevelViewer.astro";
+---
+
+<section class="section section-deep" id="visualizador">
+  <div class="shell demo">
+    <div class="demo__viewer">
+      <WindowLevelViewer />
+    </div>
+    <div class="demo__notes">
+      <p class="eyebrow">Ajuste de janela</p>
+      <h2>O mesmo corte<br />conta coisas diferentes.</h2>
+      <p class="lede">
+        Largura e centro da janela decidem quais densidades aparecem. Arraste na horizontal para
+        abrir a janela, na vertical para deslocar o centro — ou escolha um preset.
+      </p>
+      <p class="meta">
+        No viewer real são seis presets clínicos, aplicados por atalho, com a LUT calculada na GPU.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+
+  .demo__notes {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+
+  @media (max-width: 62rem) {
+    .demo {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .demo__notes {
+      order: -1;
+    }
+  }
+</style>

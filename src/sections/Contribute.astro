@@ -1,0 +1,112 @@
+---
+import { Icon } from "astro-icon/components";
+import { contributionAreas, site } from "../data/site";
+---
+
+<section class="section section-raised" id="construir">
+  <div class="shell contribute">
+    <header class="contribute__header">
+      <p class="eyebrow">Construir junto</p>
+      <h2>Um PACS não se constrói sozinho.</h2>
+      <p class="lede">
+        Procuro gente que queira construir software médico de verdade — em Rust, com arquitetura
+        limpa e testes sobre exames reais. Em troca, você ajuda a moldar uma aplicação da qual vai
+        se orgulhar, desde a fundação.
+      </p>
+    </header>
+
+    <ul class="contribute__grid">
+      {
+        contributionAreas.map((area) => (
+          <li class="contribute__card">
+            <Icon class="contribute__icon" name={area.icon} />
+            <h3>{area.title}</h3>
+            <p>{area.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="contribute__cta">
+      <p>
+        Interessou? Escreva contando o que você faz bem — código, DICOM ou rotina de clínica — e
+        por onde gostaria de começar.
+      </p>
+      <div class="cluster">
+        <a class="btn btn--solid" href={`mailto:${site.contact}`}>
+          <Icon name="lucide:mail" />
+          Quero construir
+        </a>
+        <a class="btn btn--ghost" href={site.repository} rel="noreferrer noopener" target="_blank">
+          <Icon name="simple-icons:github" />
+          Explorar o código
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contribute {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .contribute__header {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+    max-width: 56rem;
+  }
+
+  .contribute__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .contribute__card {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid var(--rule-color);
+    background: var(--surface);
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .contribute__card:hover {
+    border-color: var(--accent);
+  }
+
+  .contribute__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+
+  .contribute__card p {
+    color: var(--ink-soft);
+    font-size: 1rem;
+  }
+
+  .contribute__cta {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .contribute__cta > p {
+    max-width: 56ch;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 52rem) {
+    .contribute__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -3,6 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import Hero from "../sections/Hero.astro";
+import Status from "../sections/Status.astro";
+import Demo from "../sections/Demo.astro";
+import Contribute from "../sections/Contribute.astro";
 import Capabilities from "../sections/Capabilities.astro";
 import Roadmap from "../sections/Roadmap.astro";
 import Principles from "../sections/Principles.astro";
@@ -15,9 +18,12 @@ import { site } from "../data/site";
   <SiteHeader />
   <main id="conteudo">
     <Hero />
+    <Status />
     <Capabilities />
+    <Demo />
     <Roadmap />
     <Principles />
+    <Contribute />
     <CallToAction />
   </main>
   <SiteFooter />

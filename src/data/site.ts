@@ -2,15 +2,23 @@ export const site = {
   name: "Akhet PACS",
   tagline: "Revealing What Matters.",
   description:
-    "Visualizador DICOM moderno para clínicas, hospitais e centros de diagnóstico, em evolução para um PACS completo.",
+    "Visualizador DICOM nativo em Rust, construído em aberto, evoluindo para um PACS completo para clínicas, hospitais e centros de diagnóstico.",
   repository: "https://github.com/akhet-pacs/Akhet-PACS",
   contact: "contato@akhet-pacs.com",
 } as const;
 
 export const navigation = [
+  { label: "Agora", href: "#agora" },
   { label: "Visualizador", href: "#visualizador" },
   { label: "Roadmap", href: "#roadmap" },
-  { label: "Princípios", href: "#principios" },
+  { label: "Construir junto", href: "#construir" },
+] as const;
+
+export const heroStats = [
+  { value: "507", label: "commits" },
+  { value: "204", label: "testes" },
+  { value: "8", label: "crates Rust" },
+  { value: "1/5", label: "fase do roadmap" },
 ] as const;
 
 export type Capability = {
@@ -22,33 +30,48 @@ export type Capability = {
 export const capabilities: Capability[] = [
   {
     icon: "lucide:contrast",
-    title: "Window/Level em tempo real",
-    body: "Ajuste largura e centro da janela sem recarregar a série. Presets para tórax, abdome, osso e cérebro.",
-  },
-  {
-    icon: "lucide:zoom-in",
-    title: "Zoom e pan sem perda",
-    body: "Navegue pela imagem em resolução total. O pixel exibido continua sendo o pixel do exame.",
+    title: "Window/Level clínico",
+    body: "Presets de partes moles, osso, pulmão, cérebro, fígado e mediastino. Pixels mono em 32 bits — US de 16 bits em faixa alta não estoura.",
   },
   {
     icon: "lucide:ruler",
-    title: "Medições e anotações",
-    body: "Distância, ângulo, ROI e texto livre sobre a imagem, com valores em milímetros a partir do próprio DICOM.",
+    title: "Medições completas",
+    body: "Régua, ângulo, ângulo de Cobb, desvio, elipse, seta, polígono e lápis — com valores em milímetros vindos da geometria do próprio exame.",
   },
   {
-    icon: "lucide:layers",
-    title: "Múltiplas séries",
-    body: "Abra estudos com várias séries lado a lado e alterne entre elas sem perder o estado de cada viewport.",
+    icon: "lucide:layout-grid",
+    title: "Multi-viewport até 5×4",
+    body: "Séries agrupadas por geometria, arrastar e soltar pastas inteiras, cine multiframe por viewport e linhas de referência entre séries.",
   },
   {
-    icon: "lucide:gauge",
-    title: "Desempenho em Rust",
-    body: "Decodificação e renderização escritas em Rust, para abrir estudos grandes sem travar a estação.",
+    icon: "lucide:axis-3d",
+    title: "MPR triplanar",
+    body: "Reconstrução multiplanar no espaço do paciente com crosshair sincronizado: clicar num plano leva os outros dois ao mesmo ponto.",
   },
   {
-    icon: "lucide:monitor-down",
-    title: "Multiplataforma",
-    body: "Aplicativo nativo com artefatos para Windows, macOS e Linux, baixáveis a cada versão.",
+    icon: "lucide:palette",
+    title: "14 mapas de cor",
+    body: "LUTs por viewport renderizadas na GPU, com testes de paridade CPU–GPU rodando no CI a cada commit.",
+  },
+  {
+    icon: "lucide:keyboard",
+    title: "~48 atalhos de teclado",
+    body: "Modelo de atalhos inspirado no RadiAnt. Quem já lauda em outro viewer não recomeça do zero.",
+  },
+  {
+    icon: "lucide:cpu",
+    title: "Rust + GPU de ponta a ponta",
+    body: "Decodificação via dicom-rs e renderização wgpu com shader e LUT na GPU. Estudos grandes abrem sem travar a estação.",
+  },
+  {
+    icon: "lucide:shield-check",
+    title: "PHI protegido por construção",
+    body: "Nenhum nome, UID ou caminho de paciente chega a log ou sessão gravada. Os próprios tipos redigem dados sensíveis no Debug.",
+  },
+  {
+    icon: "lucide:test-tube-2",
+    title: "Testado contra DICOM real",
+    body: "204 testes sobre amostras reais de CT, MR, US, XA, mamografia, cintilografia e endoscopia — inclusive séries volumétricas.",
   },
 ];
 
@@ -56,6 +79,7 @@ export type Phase = {
   index: string;
   name: string;
   status: "em-desenvolvimento" | "planejado";
+  summary: string;
   items: string[];
 };
 
@@ -64,18 +88,21 @@ export const roadmap: Phase[] = [
     index: "01",
     name: "Visualizador DICOM",
     status: "em-desenvolvimento",
+    summary: "O núcleo clínico já funciona. Faltam o study browser e os instaladores.",
     items: [
-      "Leitura de arquivos DICOM",
-      "Zoom, pan e window/level",
-      "Medições e anotações",
-      "Suporte a múltiplas séries",
-      "Builds para Windows, macOS e Linux",
+      "Zoom, pan e window/level — pronto",
+      "Medições e anotações — pronto",
+      "Multi-série e multi-viewport — pronto",
+      "MPR triplanar — em construção",
+      "Study browser — próximo",
+      "Instaladores Windows e macOS — próximo",
     ],
   },
   {
     index: "02",
     name: "Mini PACS",
     status: "planejado",
+    summary: "O exame deixa de ser um arquivo e vira um acervo pesquisável.",
     items: [
       "Importação de exames",
       "Organização por paciente",
@@ -88,6 +115,7 @@ export const roadmap: Phase[] = [
     index: "03",
     name: "PACS completo",
     status: "planejado",
+    summary: "O Akhet vira servidor: as modalidades enviam direto para ele.",
     items: [
       "Servidor DICOM",
       "Query/Retrieve e C-STORE",
@@ -100,6 +128,7 @@ export const roadmap: Phase[] = [
     index: "04",
     name: "Plataforma clínica",
     status: "planejado",
+    summary: "Integração com o resto do hospital, do RIS ao navegador.",
     items: [
       "Integração com RIS e HIS",
       "HL7 e FHIR",
@@ -111,12 +140,42 @@ export const roadmap: Phase[] = [
     index: "05",
     name: "Inteligência artificial",
     status: "planejado",
+    summary: "Apoio ao radiologista sobre a base que as fases anteriores construíram.",
     items: [
       "Apoio ao diagnóstico",
       "Segmentação de órgãos",
       "Detecção de alterações",
       "Ferramentas para pesquisa clínica",
     ],
+  },
+];
+
+export type ContributionArea = {
+  icon: string;
+  title: string;
+  body: string;
+};
+
+export const contributionAreas: ContributionArea[] = [
+  {
+    icon: "lucide:package",
+    title: "Distribuição e instaladores",
+    body: "O CI já compila em Windows e macOS. Falta transformar isso em instaladores que uma clínica baixa e usa — hoje é o maior bloqueio do projeto.",
+  },
+  {
+    icon: "lucide:database",
+    title: "Study browser e índice local",
+    body: "O índice SQLite existe e compila. Falta ligá-lo à interface para que cada sessão não comece do zero.",
+  },
+  {
+    icon: "lucide:file-code-2",
+    title: "Domínio DICOM",
+    body: "Transfer syntaxes comprimidas, novas modalidades, SUV/PET, anonimização. Se você conhece o padrão, tem chão fértil aqui.",
+  },
+  {
+    icon: "lucide:stethoscope",
+    title: "Olhar clínico",
+    body: "Radiologistas e técnicos que testem o viewer com exames reais e digam onde a ferramenta atrapalha em vez de ajudar.",
   },
 ];
 
@@ -127,19 +186,19 @@ export type Principle = {
 
 export const principles: Principle[] = [
   {
-    title: "Desempenho",
-    body: "Estudos grandes abrem rápido. A interface responde durante a leitura, não depois dela.",
+    title: "Arquitetura imposta pelo compilador",
+    body: "Camadas hexagonais em que a regra de dependência é verificada em build: o domínio não conhece banco, a apresentação não conhece GPU.",
   },
   {
-    title: "Simplicidade",
-    body: "Cada ferramenta faz uma coisa. Quem opera o exame não precisa aprender o software antes.",
+    title: "Disciplina que dá para auditar",
+    body: "Máximo de 200 linhas por arquivo, testes separados do código, zero unwrap em produção — tudo verificado por gates próprios no CI.",
   },
   {
-    title: "Segurança",
-    body: "Dados de paciente permanecem sob controle da instituição, com trilha de auditoria desde a fase 3.",
+    title: "Dados de paciente são sagrados",
+    body: "PHI nunca toca log, telemetria ou gravação de sessão. Não é política escrita num documento: é o sistema de tipos que impede.",
   },
   {
-    title: "Escalabilidade",
-    body: "A mesma base atende uma clínica com uma modalidade e um hospital com dezenas.",
+    title: "Reprodutível por padrão",
+    body: "Cada sessão pode ser gravada e reexecutada evento a evento contra o build atual. Bug reportado é bug reproduzível.",
   },
 ];
