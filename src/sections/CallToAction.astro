@@ -5,16 +5,26 @@ import { site } from "../data/site";
 
 <section class="section-tight cta">
   <div class="shell-narrow cta__inner">
-    <p class="eyebrow">Primeiras instalações</p>
-    <h2>Quer testar o Akhet na sua clínica?</h2>
+    <p class="eyebrow">Para clínicas</p>
+    <h2>Trabalha com imagem médica?</h2>
     <p class="lede">
-      O visualizador está em desenvolvimento aberto. Escreva contando quais modalidades você usa e
-      entramos em contato quando houver uma build para o seu sistema.
+      Se você é de uma clínica ou centro de diagnóstico, escreva contando quais modalidades usa.
+      Entramos em contato assim que houver uma build para o seu sistema — e o seu feedback vira
+      prioridade no roadmap.
     </p>
     <div class="cluster">
-      <a class="btn btn--solid" href={`mailto:${site.contact}`}>
+      <a
+        class="btn btn--solid"
+        href={`${site.whatsapp}?text=${encodeURIComponent("Olá, Jônatas! Sou de uma clínica e quero conhecer o Akhet PACS.")}`}
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        <Icon name="simple-icons:whatsapp" />
+        Falar no WhatsApp
+      </a>
+      <a class="btn btn--ghost" href={`mailto:${site.contact}`}>
         <Icon name="lucide:mail" />
-        Falar com o time
+        {site.contact}
       </a>
     </div>
   </div>

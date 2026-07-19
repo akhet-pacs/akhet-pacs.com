@@ -3,7 +3,9 @@ export const site = {
   tagline: "Revealing What Matters.",
   description:
     "Visualizador DICOM nativo em Rust, evoluindo para um PACS completo para clínicas, hospitais e centros de diagnóstico.",
-  contact: "contato@akhet-pacs.com",
+  contact: "me@theosarkhe.com",
+  whatsapp: "https://wa.me/556196650556",
+  whatsappLabel: "+55 61 9665-0556",
 } as const;
 
 export const navigation = [

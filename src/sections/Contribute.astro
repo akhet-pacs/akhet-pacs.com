@@ -33,9 +33,18 @@ import { contributionAreas, site } from "../data/site";
         por onde gostaria de começar. O acesso ao projeto é combinado nessa conversa.
       </p>
       <div class="cluster">
-        <a class="btn btn--solid" href={`mailto:${site.contact}`}>
+        <a
+          class="btn btn--solid"
+          href={`${site.whatsapp}?text=${encodeURIComponent("Olá, Jônatas! Vi o site do Akhet PACS e quero construir junto.")}`}
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          <Icon name="simple-icons:whatsapp" />
+          Chamar no WhatsApp
+        </a>
+        <a class="btn btn--ghost" href={`mailto:${site.contact}`}>
           <Icon name="lucide:mail" />
-          Quero construir
+          Escrever por e-mail
         </a>
       </div>
     </div>
