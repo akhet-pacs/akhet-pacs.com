@@ -1,16 +1,14 @@
 ---
 import { Icon } from "astro-icon/components";
+import HorizonBackdrop from "../components/HorizonBackdrop.astro";
+import StatRow from "../components/StatRow.astro";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).hero;
 ---
 
 <section class="hero">
-  <div class="hero__sky" aria-hidden="true">
-    <div class="hero__sun"></div>
-    <div class="hero__mountain hero__mountain--left"></div>
-    <div class="hero__mountain hero__mountain--right"></div>
-  </div>
+  <HorizonBackdrop />
 
   <div class="shell hero__inner">
     <p class="eyebrow hero__eyebrow">
@@ -32,19 +30,13 @@ const t = useDict(Astro.currentLocale).hero;
     </div>
   </div>
 
-  <div class="shell hero__stats" role="list">
-    {
-      t.stats.map((stat) => (
-        <div class="hero__stat" role="listitem">
-          <span class="hero__stat-value tabular">{stat.value}</span>
-          <span class="hero__stat-label">{stat.label}</span>
-        </div>
-      ))
-    }
+  <div class="shell hero__stats">
+    <StatRow stats={t.stats} />
   </div>
 
   <hr class="rule-horizon" />
 </section>
+
 <style>
   .hero {
     position: relative;
@@ -53,53 +45,6 @@ const t = useDict(Astro.currentLocale).hero;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
-  }
-
-  .hero__sky {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .hero__sun {
-    position: absolute;
-    left: 50%;
-    bottom: -14vw;
-    width: 46vw;
-    height: 46vw;
-    max-width: 680px;
-    max-height: 680px;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      color-mix(in srgb, var(--accent-bright) 40%, transparent) 0%,
-      color-mix(in srgb, var(--accent) 20%, transparent) 42%,
-      transparent 70%
-    );
-    animation: sun-rise 2.4s var(--ease-out) both;
-  }
-
-  .hero__mountain {
-    position: absolute;
-    bottom: -1px;
-    width: 46%;
-    height: 24vh;
-    background: linear-gradient(
-      to top,
-      var(--surface-deep),
-      color-mix(in srgb, var(--surface-deep) 50%, transparent)
-    );
-  }
-
-  .hero__mountain--left {
-    left: 0;
-    clip-path: polygon(0 100%, 0 28%, 55% 62%, 100% 100%);
-  }
-
-  .hero__mountain--right {
-    right: 0;
-    clip-path: polygon(100% 100%, 100% 28%, 45% 62%, 0 100%);
   }
 
   .hero__inner {
@@ -157,87 +102,7 @@ const t = useDict(Astro.currentLocale).hero;
 
   .hero__stats {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     margin-top: clamp(3rem, 7vh, 5.5rem);
-    border-top: 1px solid var(--rule-color);
-  }
-
-  .hero__stat {
-    display: grid;
-    gap: 0.35rem;
-    padding: 1.5rem 1.5rem 2rem 0;
-    border-right: 1px solid var(--rule-color);
-  }
-
-  .hero__stat + .hero__stat {
-    padding-left: 1.5rem;
-  }
-
-  .hero__stat:last-child {
-    border-right: 0;
-  }
-
-  .hero__stat-value {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-
-  .hero__stat-label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  @keyframes sun-rise {
-    from {
-      transform: translateX(-50%) translateY(16%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes line-up {
-    from {
-      transform: translateY(0.6em);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-bright) 55%, transparent);
-    }
-    70% {
-      box-shadow: 0 0 0 0.65rem transparent;
-    }
-    100% {
-      box-shadow: 0 0 0 0 transparent;
-    }
-  }
-
-  @media (max-width: 48rem) {
-    .hero__stats {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .hero__stat,
-    .hero__stat + .hero__stat {
-      padding-inline: 0;
-      border-right: 0;
-    }
   }
 
   @media (max-width: 48rem) {
@@ -257,39 +122,6 @@ const t = useDict(Astro.currentLocale).hero;
 
     .hero__stats {
       margin-top: 2.5rem;
-    }
-
-    .hero__stat {
-      padding: 1.1rem 0 1.4rem;
-      border-right: 0;
-      border-bottom: 1px solid var(--rule-color);
-    }
-
-    .hero__stat + .hero__stat {
-      padding-left: 0;
-    }
-
-    .hero__stat:nth-child(odd) {
-      padding-right: 1rem;
-      border-right: 1px solid var(--rule-color);
-    }
-
-    .hero__stat:nth-child(even) {
-      padding-left: 1rem;
-    }
-
-    .hero__stat:nth-last-child(-n + 2) {
-      border-bottom: 0;
-    }
-
-    .hero__mountain {
-      height: 16vh;
-    }
-
-    .hero__sun {
-      width: 78vw;
-      height: 78vw;
-      bottom: -24vw;
     }
   }
 </style>

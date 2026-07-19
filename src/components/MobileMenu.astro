@@ -1,0 +1,150 @@
+---
+import { Icon } from "astro-icon/components";
+import LocaleSwitcher from "./LocaleSwitcher.astro";
+import { buildNavigation } from "../data/navigation";
+import { site } from "../data/site";
+import { useDict, type Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useDict(locale);
+const navigation = buildNavigation(locale);
+---
+
+<div class="menu" id="menu-mobile" data-menu hidden>
+  <nav class="menu__nav" aria-label={t.footer.navLabel}>
+    {
+      navigation.map((item, index) => (
+        <a href={item.href} data-menu-link>
+          <span class="menu__index tabular">{String(index + 1).padStart(2, "0")}</span>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class="menu__footer">
+    <p class="menu__label">{t.menu.language}</p>
+    <LocaleSwitcher current={locale} label={t.menu.language} class="menu__locales" />
+
+    <a
+      class="btn btn--solid menu__cta"
+      href={`${site.whatsapp}?text=${encodeURIComponent(t.contribute.whatsappMessage)}`}
+      rel="noreferrer noopener"
+      target="_blank"
+    >
+      <Icon name="simple-icons:whatsapp" />
+      {t.contribute.btnWhatsapp}
+    </a>
+  </div>
+</div>
+
+<style>
+  .menu {
+    display: none;
+  }
+
+  @media (max-width: 60rem) {
+    .menu {
+      display: grid;
+      position: fixed;
+      inset: var(--header-height) 0 0 0;
+      z-index: 25;
+      grid-template-rows: 1fr auto;
+      background: var(--surface);
+      overflow-y: auto;
+      animation: menu-in var(--duration-fast) var(--ease-out);
+    }
+
+    .menu[hidden] {
+      display: none;
+    }
+
+    .menu__nav {
+      display: grid;
+      align-content: start;
+      padding: 1rem 1.25rem;
+    }
+
+    .menu__nav a {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1.15rem 0;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule-color);
+    }
+
+    .menu__index {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .menu__footer {
+      display: grid;
+      gap: 0.85rem;
+      padding: 1.5rem 1.25rem 2rem;
+      border-top: 1px solid var(--rule-color);
+      background: var(--surface-raised);
+    }
+
+    .menu__label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .menu__cta {
+      justify-content: center;
+      margin-top: 0.35rem;
+    }
+  }
+</style>
+
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute(
+        "aria-label",
+        (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? "",
+      );
+      menu.hidden = !open;
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    menu.querySelectorAll("[data-menu-link]").forEach((link) => {
+      link.addEventListener("click", () => setOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !menu.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.matchMedia("(min-width: 60.0625rem)").addEventListener("change", (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>

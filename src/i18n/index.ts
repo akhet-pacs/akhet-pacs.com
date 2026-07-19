@@ -1,7 +1,7 @@
 import type { Dict } from "./types";
-import { pt } from "./pt";
-import { en } from "./en";
-import { es } from "./es";
+import { pt } from "./pt/index";
+import { en } from "./en/index";
+import { es } from "./es/index";
 
 export const locales = ["pt", "en", "es"] as const;
 export type Locale = (typeof locales)[number];

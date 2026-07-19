@@ -3,10 +3,13 @@
 @import "./base/tokens.css";
 @import "./base/reset.css";
 @import "./base/typography.css";
+@import "./base/motion.css";
 @import "./base/a11y.css";
 
 @import "./utilities/layout.css";
 @import "./utilities/text.css";
 
 @import "./components/button.css";
+@import "./components/section-header.css";
+@import "./components/locale-switcher.css";
 @import "./components/rule.css";

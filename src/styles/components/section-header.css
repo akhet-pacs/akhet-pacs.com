@@ -1,0 +1,20 @@
+.section-header {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+  max-width: 52rem;
+}
+
+.section-header--spaced {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section-header--wide {
+  max-width: 56rem;
+}
+
+@media (max-width: 48rem) {
+  .section-header--spaced {
+    margin-bottom: 2rem;
+  }
+}

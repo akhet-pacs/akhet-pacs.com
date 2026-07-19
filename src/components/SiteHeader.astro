@@ -1,24 +1,19 @@
 ---
-import { Icon } from "astro-icon/components";
 import AkhetGlyph from "../assets/akhet-glyph.svg";
+import LocaleSwitcher from "./LocaleSwitcher.astro";
+import MobileMenu from "./MobileMenu.astro";
+import { buildNavigation } from "../data/navigation";
 import { site } from "../data/site";
-import { localeNames, localePath, locales, resolveLocale, useDict } from "../i18n";
+import { localePath, resolveLocale, useDict } from "../i18n";
 
 const locale = resolveLocale(Astro.currentLocale);
 const t = useDict(locale);
-const base = localePath(locale);
-
-const navigation = [
-  { label: t.nav.agora, href: `${base}#agora` },
-  { label: t.nav.visualizador, href: `${base}#visualizador` },
-  { label: t.nav.roadmap, href: `${base}#roadmap` },
-  { label: t.nav.construir, href: `${base}#construir` },
-];
+const navigation = buildNavigation(locale);
 ---
 
-<header class="header" data-header>
+<header class="header">
   <div class="shell header__inner">
-    <a class="header__brand" href={base}>
+    <a class="header__brand" href={localePath(locale)}>
       <AkhetGlyph class="header__glyph" aria-hidden="true" />
       <span class="header__name">{site.name}</span>
     </a>
@@ -27,15 +22,7 @@ const navigation = [
       {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
 
-    <nav class="header__locales" aria-label={t.menu.language}>
-      {
-        locales.map((code) => (
-          <a href={localePath(code)} aria-current={code === locale ? "page" : undefined}>
-            {localeNames[code]}
-          </a>
-        ))
-      }
-    </nav>
+    <LocaleSwitcher current={locale} label={t.menu.language} class="header__locales" />
 
     <button
       class="header__toggle"
@@ -52,41 +39,7 @@ const navigation = [
   </div>
 </header>
 
-<div class="menu" id="menu-mobile" data-menu hidden>
-  <nav class="menu__nav" aria-label={t.footer.navLabel}>
-    {
-      navigation.map((item, index) => (
-        <a href={item.href} data-menu-link>
-          <span class="menu__index tabular">{String(index + 1).padStart(2, "0")}</span>
-          {item.label}
-        </a>
-      ))
-    }
-  </nav>
-
-  <div class="menu__footer">
-    <p class="menu__label">{t.menu.language}</p>
-    <nav class="menu__locales" aria-label={t.menu.language}>
-      {
-        locales.map((code) => (
-          <a href={localePath(code)} aria-current={code === locale ? "page" : undefined}>
-            {localeNames[code]}
-          </a>
-        ))
-      }
-    </nav>
-
-    <a
-      class="btn btn--solid menu__cta"
-      href={`${site.whatsapp}?text=${encodeURIComponent(t.contribute.whatsappMessage)}`}
-      rel="noreferrer noopener"
-      target="_blank"
-    >
-      <Icon name="simple-icons:whatsapp" />
-      {t.contribute.btnWhatsapp}
-    </a>
-  </div>
-</div>
+<MobileMenu locale={locale} />
 
 <style>
   .header {
@@ -152,33 +105,6 @@ const navigation = [
     border-bottom-color: var(--accent);
   }
 
-  .header__locales {
-    display: flex;
-    gap: 0.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-  }
-
-  .header__locales a {
-    padding: 0.35rem 0.55rem;
-    text-decoration: none;
-    color: var(--ink-faint);
-    border: 1px solid transparent;
-    transition:
-      color var(--duration-fast) var(--ease-out),
-      border-color var(--duration-fast) var(--ease-out);
-  }
-
-  .header__locales a:hover {
-    color: var(--ink);
-  }
-
-  .header__locales a[aria-current="page"] {
-    color: var(--accent-bright);
-    border-color: var(--rule-color);
-  }
-
   .header__toggle {
     display: none;
     width: 2.75rem;
@@ -231,149 +157,14 @@ const navigation = [
     background: var(--accent-bright);
   }
 
-  .menu {
-    display: none;
-  }
-
   @media (max-width: 60rem) {
-    .header__nav,
-    .header__locales {
+    .header__nav {
       display: none;
     }
 
     .header__toggle {
       display: inline-flex;
     }
-
-    .menu {
-      display: grid;
-      position: fixed;
-      inset: var(--header-height) 0 0 0;
-      z-index: 25;
-      grid-template-rows: 1fr auto;
-      background: var(--surface);
-      overflow-y: auto;
-      animation: menu-in var(--duration-fast) var(--ease-out);
-    }
-
-    .menu[hidden] {
-      display: none;
-    }
-
-    .menu__nav {
-      display: grid;
-      align-content: start;
-      padding: 1rem 1.25rem;
-    }
-
-    .menu__nav a {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      padding: 1.15rem 0;
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      text-decoration: none;
-      border-bottom: 1px solid var(--rule-color);
-    }
-
-    .menu__index {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: var(--accent);
-    }
-
-    .menu__footer {
-      display: grid;
-      gap: 0.85rem;
-      padding: 1.5rem 1.25rem 2rem;
-      border-top: 1px solid var(--rule-color);
-      background: var(--surface-raised);
-    }
-
-    .menu__label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-    }
-
-    .menu__locales {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .menu__locales a {
-      flex: 1;
-      padding: 0.7rem;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      text-decoration: none;
-      color: var(--ink-soft);
-      border: 1px solid var(--rule-color);
-    }
-
-    .menu__locales a[aria-current="page"] {
-      color: var(--surface-deep);
-      background: var(--accent-bright);
-      border-color: var(--accent-bright);
-    }
-
-    .menu__cta {
-      justify-content: center;
-      margin-top: 0.35rem;
-    }
-  }
-
-  @keyframes menu-in {
-    from {
-      opacity: 0;
-      transform: translateY(-0.5rem);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 </style>
 
-<script>
-  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
-  const menu = document.querySelector<HTMLElement>("[data-menu]");
-
-  if (toggle && menu) {
-    const setOpen = (open: boolean) => {
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute(
-        "aria-label",
-        (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? "",
-      );
-      menu.hidden = !open;
-      document.body.style.overflow = open ? "hidden" : "";
-    };
-
-    toggle.addEventListener("click", () => {
-      setOpen(toggle.getAttribute("aria-expanded") !== "true");
-    });
-
-    menu.querySelectorAll("[data-menu-link]").forEach((link) => {
-      link.addEventListener("click", () => setOpen(false));
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !menu.hidden) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-
-    window.matchMedia("(min-width: 60.0625rem)").addEventListener("change", (event) => {
-      if (event.matches) setOpen(false);
-    });
-  }
-</script>

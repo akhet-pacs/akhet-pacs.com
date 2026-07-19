@@ -7,7 +7,7 @@ const t = useDict(Astro.currentLocale).capabilities;
 
 <section class="section">
   <div class="shell">
-    <header class="capabilities__header">
+    <header class="section-header section-header--spaced">
       <p class="eyebrow">{t.eyebrow}</p>
       <h2>{t.titleLines[0]}<br />{t.titleLines[1]}</h2>
       <p class="lede">{t.lede}</p>
@@ -28,14 +28,6 @@ const t = useDict(Astro.currentLocale).capabilities;
 </section>
 
 <style>
-  .capabilities__header {
-    display: grid;
-    gap: 1.25rem;
-    justify-items: start;
-    max-width: 52rem;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  }
-
   .capabilities__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -97,9 +89,6 @@ const t = useDict(Astro.currentLocale).capabilities;
   }
 
   @media (max-width: 42rem) {
-    .capabilities__header {
-      margin-bottom: 2rem;
-    }
 
     .capability {
       padding: 1.35rem 0;

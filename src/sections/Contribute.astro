@@ -8,7 +8,7 @@ const t = useDict(Astro.currentLocale).contribute;
 
 <section class="section section-raised" id="construir">
   <div class="shell contribute">
-    <header class="contribute__header">
+    <header class="section-header section-header--wide">
       <p class="eyebrow">{t.eyebrow}</p>
       <h2>{t.title}</h2>
       <p class="lede">{t.lede}</p>
@@ -51,13 +51,6 @@ const t = useDict(Astro.currentLocale).contribute;
   .contribute {
     display: grid;
     gap: clamp(2.5rem, 5vw, 4rem);
-  }
-
-  .contribute__header {
-    display: grid;
-    gap: 1.25rem;
-    justify-items: start;
-    max-width: 56rem;
   }
 
   .contribute__grid {

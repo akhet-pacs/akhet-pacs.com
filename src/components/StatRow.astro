@@ -1,0 +1,84 @@
+---
+interface Props {
+  stats: readonly { value: string; label: string }[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="stats" role="list">
+  {
+    stats.map((stat) => (
+      <div class="stats__item" role="listitem">
+        <span class="stats__value tabular">{stat.value}</span>
+        <span class="stats__label">{stat.label}</span>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .stats {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .stats__item {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.5rem 1.5rem 2rem 0;
+    border-right: 1px solid var(--rule-color);
+  }
+
+  .stats__item + .stats__item {
+    padding-left: 1.5rem;
+  }
+
+  .stats__item:last-child {
+    border-right: 0;
+  }
+
+  .stats__value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .stats__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 48rem) {
+    .stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stats__item,
+    .stats__item + .stats__item {
+      padding: 1.1rem 0 1.4rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule-color);
+    }
+
+    .stats__item:nth-child(odd) {
+      padding-right: 1rem;
+      border-right: 1px solid var(--rule-color);
+    }
+
+    .stats__item:nth-child(even) {
+      padding-left: 1rem;
+    }
+
+    .stats__item:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
+  }
+</style>

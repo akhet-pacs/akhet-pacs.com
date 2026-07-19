@@ -6,7 +6,7 @@ const t = useDict(Astro.currentLocale).principles;
 
 <section class="section" id="principios">
   <div class="shell principles">
-    <header class="principles__header">
+    <header class="section-header principles__header">
       <p class="eyebrow">{t.eyebrow}</p>
       <h2>{t.titleLines[0]}<br />{t.titleLines[1]}</h2>
       <p class="lede">{t.lede}</p>
@@ -31,14 +31,6 @@ const t = useDict(Astro.currentLocale).principles;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: clamp(2rem, 6vw, 5rem);
     align-items: start;
-  }
-
-  .principles__header {
-    display: grid;
-    gap: 1.25rem;
-    justify-items: start;
-    position: sticky;
-    top: 6rem;
   }
 
   .principles__list {
