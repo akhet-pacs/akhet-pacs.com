@@ -2,8 +2,7 @@ export const site = {
   name: "Akhet PACS",
   tagline: "Revealing What Matters.",
   description:
-    "Visualizador DICOM nativo em Rust, construído em aberto, evoluindo para um PACS completo para clínicas, hospitais e centros de diagnóstico.",
-  repository: "https://github.com/akhet-pacs/Akhet-PACS",
+    "Visualizador DICOM nativo em Rust, evoluindo para um PACS completo para clínicas, hospitais e centros de diagnóstico.",
   contact: "contato@akhet-pacs.com",
 } as const;
 

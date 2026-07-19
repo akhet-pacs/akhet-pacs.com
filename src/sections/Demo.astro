@@ -1,22 +1,89 @@
 ---
-import WindowLevelViewer from "../components/WindowLevelViewer.astro";
+import { Image } from "astro:assets";
+import cobb from "../assets/screenshots/cobb.png";
+import angle from "../assets/screenshots/angle.png";
+import ellipse from "../assets/screenshots/ellipse.png";
+import polygon from "../assets/screenshots/closed_polygon.png";
+import pencil from "../assets/screenshots/pencil.png";
+
+const shots = [
+  {
+    key: "cobb",
+    label: "Ângulo de Cobb",
+    image: cobb,
+    caption: "Ângulo de Cobb sobre coluna — a medição que ortopedistas usam para escoliose.",
+  },
+  {
+    key: "angle",
+    label: "Ângulo",
+    image: angle,
+    caption: "Ângulo livre entre dois segmentos, com o valor ancorado ao vértice.",
+  },
+  {
+    key: "ellipse",
+    label: "Elipse",
+    image: ellipse,
+    caption: "ROI elíptica para estatísticas de região sobre o corte.",
+  },
+  {
+    key: "polygon",
+    label: "Polígono",
+    image: polygon,
+    caption: "Polígono fechado para contornar estruturas de forma irregular.",
+  },
+  {
+    key: "pencil",
+    label: "Lápis",
+    image: pencil,
+    caption: "Traço livre para anotar direto sobre a imagem.",
+  },
+];
 ---
 
 <section class="section section-deep" id="visualizador">
   <div class="shell demo">
-    <div class="demo__viewer">
-      <WindowLevelViewer />
-    </div>
-    <div class="demo__notes">
-      <p class="eyebrow">Ajuste de janela</p>
-      <h2>O mesmo corte<br />conta coisas diferentes.</h2>
+    <header class="demo__header">
+      <p class="eyebrow">Direto do viewer · sem mockup</p>
+      <h2>É assim que ele está hoje.</h2>
       <p class="lede">
-        Largura e centro da janela decidem quais densidades aparecem. Arraste na horizontal para
-        abrir a janela, na vertical para deslocar o centro — ou escolha um preset.
+        Capturas reais do Akhet abrindo uma amostra DICOM pública. Interface escura, informações
+        clínicas nos cantos e as ferramentas de medição a um atalho de distância.
       </p>
-      <p class="meta">
-        No viewer real são seis presets clínicos, aplicados por atalho, com a LUT calculada na GPU.
-      </p>
+    </header>
+
+    <div class="demo__stage" data-demo>
+      <div class="demo__frame">
+        {
+          shots.map((shot, index) => (
+            <figure class="demo__shot" data-shot={shot.key} data-active={index === 0 ? "" : undefined}>
+              <Image
+                src={shot.image}
+                alt={`Akhet PACS com a ferramenta ${shot.label} ativa sobre um corte de CT`}
+                widths={[720, 1100, 1600]}
+                sizes="(max-width: 62rem) 100vw, 72rem"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+              <figcaption class="demo__caption meta">{shot.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <div class="demo__tabs" role="tablist" aria-label="Ferramentas de medição">
+        {
+          shots.map((shot, index) => (
+            <button
+              type="button"
+              class="demo__tab"
+              role="tab"
+              aria-selected={index === 0 ? "true" : "false"}
+              data-tab={shot.key}
+            >
+              {shot.label}
+            </button>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
@@ -24,24 +91,97 @@ import WindowLevelViewer from "../components/WindowLevelViewer.astro";
 <style>
   .demo {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
   }
 
-  .demo__notes {
+  .demo__header {
     display: grid;
     gap: 1.25rem;
     justify-items: start;
+    max-width: 52rem;
   }
 
-  @media (max-width: 62rem) {
-    .demo {
-      grid-template-columns: minmax(0, 1fr);
-    }
+  .demo__stage {
+    display: grid;
+    gap: 1.25rem;
+  }
 
-    .demo__notes {
-      order: -1;
-    }
+  .demo__frame {
+    border: 1px solid var(--rule-color);
+    background: #000;
+  }
+
+  .demo__shot {
+    display: none;
+    margin: 0;
+  }
+
+  .demo__shot[data-active] {
+    display: grid;
+    gap: 0;
+  }
+
+  .demo__shot img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .demo__caption {
+    padding: 0.9rem 1.1rem;
+    border-top: 1px solid var(--rule-color);
+  }
+
+  .demo__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .demo__tab {
+    padding: 0.5rem 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--rule-color);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+
+  .demo__tab:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+
+  .demo__tab[aria-selected="true"] {
+    background: var(--accent-bright);
+    border-color: var(--accent-bright);
+    color: var(--surface-deep);
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-demo]").forEach((demo) => {
+    const tabs = demo.querySelectorAll<HTMLButtonElement>("[data-tab]");
+    const shots = demo.querySelectorAll<HTMLElement>("[data-shot]");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.setAttribute("aria-selected", String(t === tab)));
+        shots.forEach((shot) => {
+          if (shot.dataset.shot === tab.dataset.tab) {
+            shot.setAttribute("data-active", "");
+          } else {
+            shot.removeAttribute("data-active");
+          }
+        });
+      });
+    });
+  });
+</script>
