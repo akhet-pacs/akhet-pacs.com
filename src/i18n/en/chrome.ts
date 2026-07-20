@@ -9,6 +9,7 @@ export const chrome = {
     agora: "Now",
     visualizador: "Viewer",
     roadmap: "Roadmap",
+    planos: "Pricing",
     construir: "Build with us",
   },
   menu: {

@@ -3,5 +3,6 @@ import { chrome } from "./chrome";
 import { sections } from "./sections";
 import { features } from "./features";
 import { roadmap } from "./roadmap";
+import { plans } from "./plans";
 
-export const pt: Dict = { ...chrome, ...sections, ...features, ...roadmap };
+export const pt: Dict = { ...chrome, ...sections, ...features, ...roadmap, plans };

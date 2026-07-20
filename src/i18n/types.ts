@@ -8,32 +8,32 @@ export type Phase = {
   name: string;
   status: "em-desenvolvimento" | "planejado";
   summary: string;
-  items: string[];
+  items: readonly string[];
 };
 
 export type Dict = {
   meta: { title: string; description: string };
   skipLink: string;
-  nav: { agora: string; visualizador: string; roadmap: string; construir: string };
+  nav: { agora: string; visualizador: string; roadmap: string; planos: string; construir: string };
   hero: {
     badge: string;
-    lines: [string, string, string];
+    lines: readonly [string, string, string];
     lede: string;
     ctaPrimary: string;
     ctaSecondary: string;
-    stats: Stat[];
+    stats: readonly Stat[];
   };
   status: {
     eyebrow: string;
-    titleLines: [string, string];
+    titleLines: readonly [string, string];
     lede: string;
     honest: string;
   };
   capabilities: {
     eyebrow: string;
-    titleLines: [string, string];
+    titleLines: readonly [string, string];
     lede: string;
-    items: IconItem[];
+    items: readonly IconItem[];
   };
   demo: {
     eyebrow: string;
@@ -42,26 +42,44 @@ export type Dict = {
     tablistLabel: string;
     altPrefix: string;
     panHint: string;
-    shots: Shot[];
+    shots: readonly Shot[];
   };
   roadmap: {
     eyebrow: string;
     title: string;
     lede: string;
     statusLabels: Record<Phase["status"], string>;
-    phases: Phase[];
+    phases: readonly Phase[];
+  };
+  plans: {
+    eyebrow: string;
+    titleLines: readonly [string, string];
+    lede: string;
+    rulerStart: string;
+    rulerEnd: string;
+    rulerAria: string;
+    tierCurrentLabel: string;
+    freeLabel: string;
+    freeSub: string;
+    slotsRemaining: string;
+    cursorLabel: string;
+    ctaText: string;
+    nextTierNote: string;
+    ceilingNote: string;
+    fineprint: string;
+    updatedAtLabel: string;
   };
   principles: {
     eyebrow: string;
-    titleLines: [string, string];
+    titleLines: readonly [string, string];
     lede: string;
-    items: TitledItem[];
+    items: readonly TitledItem[];
   };
   contribute: {
     eyebrow: string;
     title: string;
     lede: string;
-    areas: IconItem[];
+    areas: readonly IconItem[];
     ctaText: string;
     whatsappMessage: string;
     btnWhatsapp: string;
