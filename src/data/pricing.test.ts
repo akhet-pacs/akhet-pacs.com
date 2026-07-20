@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { deriveTiers, formatPrice, priceOf, type PricingConfig } from "./pricing";
+import {
+  buildTicks,
+  cursorPercent,
+  deriveTiers,
+  formatPrice,
+  priceOf,
+  type PricingConfig,
+} from "./pricing";
 
 const base: PricingConfig = {
   tierSize: 10,
@@ -76,6 +83,43 @@ describe("deriveTiers", () => {
 
   it("expõe o teto para a UI mostrar onde a escada para", () => {
     expect(deriveTiers(base).ceilingPrice).toBe(12);
+  });
+});
+
+describe("buildTicks", () => {
+  it("cria um tick por vaga de toda a janela", () => {
+    expect(buildTicks(deriveTiers(base))).toHaveLength(50);
+  });
+
+  it("marca as vagas vendidas, as livres da faixa atual e as futuras", () => {
+    const ticks = buildTicks(deriveTiers(base));
+    expect(ticks.filter((t) => t.state === "taken")).toHaveLength(7);
+    expect(ticks.filter((t) => t.state === "open")).toHaveLength(3);
+    expect(ticks.filter((t) => t.state === "future")).toHaveLength(40);
+  });
+
+  it("põe divisor no início de cada faixa, menos na primeira", () => {
+    const ticks = buildTicks(deriveTiers(base));
+    expect(ticks[0].isBoundary).toBe(false);
+    expect(ticks[10].isBoundary).toBe(true);
+    expect(ticks[20].isBoundary).toBe(true);
+    expect(ticks.filter((t) => t.isBoundary)).toHaveLength(4);
+  });
+
+  it("com a faixa recém-aberta, nenhuma vaga aparece como vendida", () => {
+    const ticks = buildTicks(deriveTiers({ ...base, clientsSold: 10 }));
+    expect(ticks.filter((t) => t.state === "taken")).toHaveLength(0);
+    expect(ticks.filter((t) => t.state === "open")).toHaveLength(10);
+  });
+});
+
+describe("cursorPercent", () => {
+  it("aponta para a primeira vaga livre", () => {
+    expect(cursorPercent(deriveTiers(base))).toBeCloseTo(15);
+  });
+
+  it("fica na borda esquerda quando não há vaga vendida", () => {
+    expect(cursorPercent(deriveTiers({ ...base, clientsSold: 0 }))).toBeCloseTo(1);
   });
 });
 

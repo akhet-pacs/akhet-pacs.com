@@ -74,6 +74,29 @@ export function deriveTiers(config: PricingConfig): PricingView {
   };
 }
 
+export type TickState = "taken" | "open" | "future";
+
+export type Tick = {
+  isBoundary: boolean;
+  state: TickState;
+};
+
+/** Um tick por vaga, cobrindo toda a janela de faixas visível na régua. */
+export function buildTicks(view: PricingView): Tick[] {
+  const total = view.tiers.length * view.tierSize;
+
+  return Array.from({ length: total }, (_, i) => ({
+    isBoundary: i > 0 && i % view.tierSize === 0,
+    state: i < view.takenInTier ? "taken" : i < view.tierSize ? "open" : "future",
+  }));
+}
+
+/** Posição horizontal do cursor, em %, centrada na primeira vaga livre. */
+export function cursorPercent(view: PricingView): number {
+  const total = view.tiers.length * view.tierSize;
+  return ((view.takenInTier + 0.5) / total) * 100;
+}
+
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
