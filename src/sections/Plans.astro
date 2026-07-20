@@ -37,6 +37,11 @@ const whatsappHref = `${site.whatsapp}?text=${encodeURIComponent(t.ctaText)}`;
           {isFree ? t.freeLabel : formatPrice(currentTier.price)}
           <small>{t.freeSub}</small>
         </p>
+        <p class="plans__perks-label meta">{t.perksLabel}</p>
+        <ul class="plans__perks">
+          {t.perks.map((perk) => <li>{perk}</li>)}
+        </ul>
+        <p class="plans__return">{t.inReturn}</p>
         <a class="btn btn--solid" href={whatsappHref} rel="noopener noreferrer" target="_blank">
           {t.ctaText}
         </a>
@@ -95,6 +100,41 @@ const whatsappHref = `${site.whatsapp}?text=${encodeURIComponent(t.ctaText)}`;
     font-weight: 400;
     letter-spacing: 0.08em;
     color: var(--ink-soft);
+  }
+
+  .plans__perks-label {
+    margin-bottom: 0.875rem;
+    color: var(--accent);
+  }
+
+  .plans__perks {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .plans__perks li {
+    position: relative;
+    padding-left: 1.75rem;
+    color: var(--ink-soft);
+  }
+
+  .plans__perks li::before {
+    content: "";
+    position: absolute;
+    top: 0.7em;
+    left: 0;
+    width: 0.75rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .plans__return {
+    margin: 0 0 2rem;
+    color: var(--ink-faint);
+    font-style: italic;
   }
 
   .plans__remaining {
