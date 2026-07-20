@@ -1,10 +1,11 @@
 export const sections = {
   hero: {
-    badge: "Em construção · fase 1 de 5",
-    lines: ["Revelando", "o que realmente", "importa."],
-    lede: "Um visualizador DICOM nativo em Rust — rápido, preciso e auditável — sendo construído commit a commit, rumo a um PACS completo.",
-    ctaPrimary: "Construir junto",
+    badge: "Fundadores · 10 vagas abertas",
+    lines: ["As 10 primeiras", "clínicas", "nunca pagam."],
+    lede: "Um visualizador DICOM nativo em Rust virando um PACS completo. Quem chega no primeiro raio de luz usa de graça — para sempre.",
+    ctaPrimary: "Quero ser uma das 10",
     ctaSecondary: "Ver o visualizador",
+    seatsNote: "10 de 10 vagas · grátis vitalício",
     stats: [
       { value: "727", label: "commits" },
       { value: "1312", label: "testes" },

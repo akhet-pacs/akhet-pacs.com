@@ -2,9 +2,29 @@
 ---
 
 <div class="sky" aria-hidden="true">
+  <div class="sky__bloom"></div>
   <div class="sky__sun"></div>
-  <div class="sky__mountain sky__mountain--left"></div>
-  <div class="sky__mountain sky__mountain--right"></div>
+  <div class="sky__line"></div>
+  <div class="sky__peaks">
+    <svg viewBox="0 0 1100 200" fill="none">
+      <path
+        class="sky__fill"
+        d="M0 200 L360 96 L470 132 L560 40 L650 132 L760 84 L1100 200 Z"
+      ></path>
+      <path
+        class="sky__rim"
+        d="M0 200 L360 96 L470 132 L560 40 L650 132 L760 84 L1100 200"
+      ></path>
+      <defs>
+        <linearGradient id="akhet-rim" x1="0" y1="0" x2="1100" y2="0" gradientUnits="userSpaceOnUse">
+          <stop class="sky__rim-edge" offset="0"></stop>
+          <stop class="sky__rim-mid" offset="0.5"></stop>
+          <stop class="sky__rim-edge" offset="1"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="sky__vignette"></div>
 </div>
 
 <style>
@@ -12,58 +32,147 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
+    overflow: hidden;
   }
 
+  /* brilho amplo subindo do horizonte */
+  .sky__bloom {
+    position: absolute;
+    left: 50%;
+    bottom: 26%;
+    width: 150vw;
+    height: 90vh;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      60% 100% at 50% 100%,
+      color-mix(in srgb, var(--accent-bright) 55%, transparent) 0%,
+      color-mix(in srgb, var(--accent) 30%, transparent) 26%,
+      color-mix(in srgb, var(--ember) 12%, transparent) 46%,
+      transparent 72%
+    );
+    filter: blur(8px);
+    animation: bloom-rise 1.8s var(--ease-out) both;
+  }
+
+  /* núcleo brilhante — o sol nascendo */
   .sky__sun {
     position: absolute;
     left: 50%;
-    bottom: -14vw;
-    width: 46vw;
-    height: 46vw;
-    max-width: 680px;
-    max-height: 680px;
+    bottom: 24%;
+    width: 44vw;
+    height: 44vw;
+    max-width: 640px;
+    max-height: 640px;
     transform: translateX(-50%);
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, var(--accent-bright) 40%, transparent) 0%,
-      color-mix(in srgb, var(--accent) 20%, transparent) 42%,
-      transparent 70%
+      var(--accent-bright) 0%,
+      color-mix(in srgb, var(--accent-bright) 70%, transparent) 22%,
+      color-mix(in srgb, var(--accent) 34%, transparent) 42%,
+      transparent 66%
     );
-    animation: sun-rise 2.4s var(--ease-out) both;
+    filter: blur(6px);
+    animation: bloom-rise 1.8s var(--ease-out) both;
   }
 
-  .sky__mountain {
+  /* linha do horizonte */
+  .sky__line {
     position: absolute;
-    bottom: -1px;
-    width: 46%;
-    height: 24vh;
-    background: linear-gradient(
-      to top,
-      var(--surface-deep),
-      color-mix(in srgb, var(--surface-deep) 50%, transparent)
-    );
-  }
-
-  .sky__mountain--left {
     left: 0;
-    clip-path: polygon(0 100%, 0 28%, 55% 62%, 100% 100%);
+    right: 0;
+    bottom: 26%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent-bright) 85%, transparent) 50%,
+      transparent
+    );
+    box-shadow: 0 0 24px 2px color-mix(in srgb, var(--accent-bright) 45%, transparent);
+    animation: sky-fade 1.4s var(--ease-out) 0.4s both;
   }
 
-  .sky__mountain--right {
+  /* montanhas com o sol entre elas — o glifo Akhet */
+  .sky__peaks {
+    position: absolute;
     right: 0;
-    clip-path: polygon(100% 100%, 100% 28%, 45% 62%, 0 100%);
+    bottom: 26%;
+    width: min(1100px, 82vw);
+    animation: sky-fade 1.4s var(--ease-out) 0.25s both;
+  }
+
+  .sky__peaks svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .sky__fill {
+    fill: var(--surface-deep);
+  }
+
+  .sky__rim {
+    fill: none;
+    stroke: url(#akhet-rim);
+    stroke-width: 1.5;
+  }
+
+  .sky__rim-mid {
+    stop-color: var(--accent-bright);
+    stop-opacity: 0.9;
+  }
+
+  .sky__rim-edge {
+    stop-color: var(--accent);
+    stop-opacity: 0;
+  }
+
+  /* vinheta — escurece as bordas e concentra o halo */
+  .sky__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      120% 80% at 50% 40%,
+      transparent 55%,
+      color-mix(in srgb, var(--surface) 82%, transparent) 100%
+    );
   }
 
   @media (max-width: 48rem) {
-    .sky__mountain {
-      height: 16vh;
-    }
-
     .sky__sun {
-      width: 78vw;
-      height: 78vw;
-      bottom: -24vw;
+      width: 82vw;
+      height: 82vw;
+      bottom: 30%;
+    }
+  }
+
+  @keyframes bloom-rise {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(36px) scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+  }
+
+  @keyframes sky-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sky__bloom,
+    .sky__sun,
+    .sky__line,
+    .sky__peaks {
+      animation: none;
     }
   }
 </style>
