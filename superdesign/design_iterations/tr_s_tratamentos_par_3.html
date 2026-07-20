@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Entrada 3 — Faixa + hero de fundador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" />
+<style>
+  :root{
+    color-scheme:dark;
+    --abyss:#05090f;--night:#0b141f;--slate:#142130;
+    --limestone:#ece7dd;--gold:#d79a3c;--horizon:#f0c069;
+    --surface:var(--abyss);--surface-raised:var(--night);--surface-deep:#02050a;
+    --ink:var(--limestone);
+    --ink-soft:color-mix(in srgb,var(--limestone) 72%,var(--surface));
+    --ink-faint:color-mix(in srgb,var(--limestone) 44%,var(--surface));
+    --rule:color-mix(in srgb,var(--limestone) 14%,transparent);
+    --rule-strong:color-mix(in srgb,var(--limestone) 26%,transparent);
+    --accent:var(--gold);--accent-bright:var(--horizon);
+    --fd:"Archivo",system-ui,sans-serif;--fb:"Source Serif 4",Georgia,serif;--fm:"IBM Plex Mono",monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--ink);font-family:var(--fb);min-height:100vh}
+
+  .promo{background:var(--accent);color:var(--abyss)}
+  .promo a{display:flex;align-items:center;justify-content:center;gap:.75rem;
+    max-width:74rem;margin-inline:auto;padding:.7rem 1.5rem;text-decoration:none;color:inherit;
+    font-family:var(--fm);font-size:.8125rem;letter-spacing:.02em;text-align:center}
+  .promo b{font-weight:500}
+  .promo .arrow{font-weight:700;transition:transform .16s}
+  .promo a:hover .arrow{transform:translateX(4px)}
+  .promo .dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--abyss);flex:none}
+
+  header{display:flex;align-items:center;justify-content:space-between;
+    max-width:74rem;margin-inline:auto;padding:1.25rem 1.5rem;border-bottom:1px solid var(--rule)}
+  .logo{display:flex;align-items:center;gap:.6rem;font-family:var(--fd);font-weight:700;font-size:1.05rem}
+  .logo .glyph{width:1.4rem;height:1.4rem;display:grid;place-items:center;color:var(--accent)}
+  nav{display:flex;gap:1.75rem;font-family:var(--fm);font-size:.8125rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+  nav a{color:inherit;text-decoration:none}
+  nav a:hover{color:var(--ink)}
+  .lang{font-family:var(--fm);font-size:.75rem;color:var(--ink-faint)}
+  .lang b{color:var(--ink)}
+
+  .hero{max-width:74rem;margin-inline:auto;padding:clamp(3rem,8vw,6rem) 1.5rem}
+  .badge{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--fm);font-size:.8125rem;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--accent-bright);text-decoration:none;
+    border:1px solid var(--accent);padding:.5rem 1rem;margin-bottom:2rem;
+    background:color-mix(in srgb,var(--gold) 10%,transparent)}
+  .badge .d{width:.45rem;height:.45rem;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 25%,transparent)}
+  h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.5rem,7vw,4.75rem);line-height:1.02;
+    letter-spacing:-.03em;margin:0;max-width:16ch}
+  h1 .soft{color:var(--ink-faint)}
+  .lede{font-size:1.15rem;color:var(--ink-soft);max-width:50ch;margin:1.75rem 0 0;line-height:1.6}
+  .lede b{color:var(--ink);font-weight:600}
+  .cta{display:flex;gap:.875rem;margin-top:2.5rem;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.6rem;font-family:var(--fm);
+    font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+    border:1px solid currentColor;background:transparent;color:var(--ink);cursor:pointer}
+  .btn--solid{background:var(--accent-bright);border-color:var(--accent-bright);color:var(--surface-deep)}
+  .btn--ghost{color:var(--ink-soft);border-color:var(--rule-strong)}
+  .subcta{font-family:var(--fm);font-size:.75rem;color:var(--ink-faint);margin-top:1rem}
+  .stats{display:flex;gap:2.5rem;margin-top:3.5rem;flex-wrap:wrap}
+  .stat b{display:block;font-family:var(--fm);font-size:1.75rem;font-weight:500;color:var(--ink)}
+  .stat span{font-family:var(--fm);font-size:.75rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em}
+  .tag{position:fixed;left:12px;bottom:12px;font-family:var(--fm);font-size:.7rem;color:var(--ink-faint);
+    border:1px solid var(--rule);padding:.3rem .6rem;background:var(--surface-deep)}
+</style>
+</head>
+<body>
+  <div class="promo">
+    <a href="#">
+      <span class="dot"></span>
+      <span><b>10 vagas de fundador</b> — grátis vitalício para as primeiras clínicas.</span>
+      <span class="arrow">Garanta a sua →</span>
+    </a>
+  </div>
+
+  <header>
+    <div class="logo"><span class="glyph">◭</span> Akhet PACS</div>
+    <nav><a>Agora</a><a>Visualizador</a><a>Roadmap</a><a>Planos</a><a>Construir junto</a></nav>
+    <span class="lang"><b>PT</b> · EN · ES</span>
+  </header>
+
+  <section class="hero">
+    <a class="badge" href="#"><span class="d"></span> Fundadores · 10 vagas abertas</a>
+    <h1>Revelando <span class="soft">o que realmente</span> importa.</h1>
+    <p class="lede">Um visualizador DICOM nativo em Rust, rumo a um PACS completo. <b>As 10 primeiras clínicas usam de graça, para sempre.</b></p>
+    <div class="cta">
+      <a class="btn btn--solid" href="#">Quero ser uma das 10</a>
+      <a class="btn btn--ghost" href="#">Ver o visualizador</a>
+    </div>
+    <p class="subcta">Prefere ajudar a construir? Fale comigo sobre Rust, DICOM ou rotina de clínica.</p>
+    <div class="stats">
+      <span class="stat"><b>727</b><span>commits</span></span>
+      <span class="stat"><b>1312</b><span>testes</span></span>
+      <span class="stat"><b>8</b><span>crates Rust</span></span>
+      <span class="stat"><b>1/5</b><span>fase do roadmap</span></span>
+    </div>
+  </section>
+
+  <div class="tag">Variação 3 · Faixa + hero de fundador</div>
+</body>
+</html>

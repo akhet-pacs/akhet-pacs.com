@@ -7,6 +7,7 @@
   --color-sand: #b9b2a5;
   --color-gold: #d79a3c;
   --color-horizon: #f0c069;
+  --color-ember: #ff9d5c;
 
   --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Source Serif 4", ui-serif, Georgia, serif;
@@ -38,6 +39,7 @@
 
   --accent: var(--color-gold);
   --accent-bright: var(--color-horizon);
+  --ember: var(--color-ember);
 
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   --duration-fast: 160ms;

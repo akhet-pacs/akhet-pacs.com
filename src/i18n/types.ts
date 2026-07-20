@@ -21,6 +21,7 @@ export type Dict = {
     lede: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    seatsNote: string;
     stats: readonly Stat[];
   };
   status: {
@@ -61,6 +62,9 @@ export type Dict = {
     tierCurrentLabel: string;
     freeLabel: string;
     freeSub: string;
+    perksLabel: string;
+    perks: readonly string[];
+    inReturn: string;
     slotsRemaining: string;
     cursorLabel: string;
     ctaText: string;

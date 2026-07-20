@@ -1,37 +1,39 @@
 ---
 import { Icon } from "astro-icon/components";
 import HorizonBackdrop from "../components/HorizonBackdrop.astro";
-import StatRow from "../components/StatRow.astro";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).hero;
+const seats = Array.from({ length: 10 });
 ---
 
 <section class="hero">
   <HorizonBackdrop />
 
   <div class="shell hero__inner">
-    <p class="eyebrow hero__eyebrow">
+    <a class="hero__pill" href="#planos">
       <span class="hero__pulse" aria-hidden="true"></span>
       {t.badge}
-    </p>
+    </a>
     <h1 class="hero__title">
       <span class="hero__line">{t.lines[0]}</span>
       <span class="hero__line">{t.lines[1]}</span>
       <span class="hero__line hero__line--accent">{t.lines[2]}</span>
     </h1>
     <p class="lede hero__lede">{t.lede}</p>
-    <div class="cluster">
-      <a class="btn btn--solid" href="#construir">
+    <div class="cluster hero__cta">
+      <a class="btn btn--solid" href="#planos">
         {t.ctaPrimary}
         <Icon name="lucide:arrow-down-right" />
       </a>
       <a class="btn btn--ghost" href="#visualizador">{t.ctaSecondary}</a>
     </div>
-  </div>
-
-  <div class="shell hero__stats">
-    <StatRow stats={t.stats} />
+    <p class="hero__seats">
+      <span class="hero__dots" aria-hidden="true">
+        {seats.map(() => <i></i>)}
+      </span>
+      {t.seatsNote}
+    </p>
   </div>
 
   <hr class="rule-horizon" />
@@ -43,20 +45,47 @@ const t = useDict(Astro.currentLocale).hero;
     min-height: calc(100svh - var(--header-height));
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
+    padding-bottom: clamp(3.5rem, 10vh, 7rem);
     overflow: hidden;
   }
 
   .hero__inner {
     position: relative;
     display: grid;
-    gap: 2rem;
-    justify-items: start;
-    padding-top: clamp(4rem, 10vh, 8rem);
+    gap: 1.75rem;
+    justify-items: center;
+    text-align: center;
+    padding-top: clamp(3rem, 8vh, 6rem);
   }
 
-  .hero__eyebrow {
-    color: var(--ink-soft);
+  .hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-eyebrow);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--accent-bright);
+    padding: 0.5rem 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    box-shadow:
+      0 0 30px color-mix(in srgb, var(--accent) 22%, transparent),
+      inset 0 0 20px color-mix(in srgb, var(--accent) 8%, transparent);
+    transition:
+      border-color var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out);
+    animation: line-up 0.9s var(--ease-out) 0.6s both;
+  }
+
+  .hero__pill:hover {
+    border-color: var(--accent-bright);
+    box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 34%, transparent);
   }
 
   .hero__pulse {
@@ -64,14 +93,18 @@ const t = useDict(Astro.currentLocale).hero;
     height: 0.5rem;
     border-radius: 50%;
     background: var(--accent-bright);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent);
     animation: pulse 2.4s ease-out infinite;
   }
 
   .hero__title {
-    font-size: clamp(2.9rem, 9.5vw, 8rem);
-    text-transform: uppercase;
-    letter-spacing: -0.045em;
+    font-size: clamp(2.9rem, 9.5vw, 7.5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+    text-wrap: balance;
     display: grid;
+    max-width: 15ch;
   }
 
   .hero__line {
@@ -89,26 +122,63 @@ const t = useDict(Astro.currentLocale).hero;
 
   .hero__line--accent {
     color: var(--accent-bright);
+    text-shadow:
+      0 0 34px color-mix(in srgb, var(--accent-bright) 55%, transparent),
+      0 0 8px color-mix(in srgb, var(--accent-bright) 40%, transparent);
   }
 
   .hero__lede {
     max-width: 52ch;
+    color: var(--ink);
+    /* contorno sutil atrás do preenchimento — separa o texto do brilho */
+    -webkit-text-stroke: 0.5px color-mix(in srgb, var(--surface) 55%, transparent);
+    paint-order: stroke fill;
+    text-shadow:
+      0 1px 2px color-mix(in srgb, var(--surface) 92%, transparent),
+      0 0 16px color-mix(in srgb, var(--surface) 78%, transparent),
+      0 0 32px color-mix(in srgb, var(--surface) 60%, transparent);
     animation: line-up 0.9s var(--ease-out) 0.36s both;
   }
 
-  .hero__inner .cluster {
+  .hero__cta {
+    justify-content: center;
     animation: line-up 0.9s var(--ease-out) 0.48s both;
   }
 
-  .hero__stats {
-    position: relative;
-    margin-top: clamp(3rem, 7vh, 5.5rem);
+  .hero .rule-horizon {
+    margin-top: clamp(3rem, 8vh, 5.5rem);
+  }
+
+  .hero__seats {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    animation: line-up 0.9s var(--ease-out) 0.6s both;
+  }
+
+  .hero__dots {
+    display: inline-flex;
+    gap: 0.32rem;
+  }
+
+  .hero__dots i {
+    width: 0.7rem;
+    height: 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    background: color-mix(in srgb, var(--accent-bright) 16%, transparent);
   }
 
   @media (max-width: 48rem) {
     .hero {
       min-height: 0;
-      padding-bottom: 0;
+      justify-content: flex-start;
+      padding-bottom: clamp(2.5rem, 8vh, 4rem);
     }
 
     .hero__inner {
@@ -120,8 +190,9 @@ const t = useDict(Astro.currentLocale).hero;
       font-size: clamp(2.6rem, 11vw, 3.6rem);
     }
 
-    .hero__stats {
-      margin-top: 2.5rem;
+    .hero__seats {
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 </style>

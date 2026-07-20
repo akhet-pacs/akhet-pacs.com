@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Entrada — Primeira Luz (aurora)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" />
+<style>
+  :root{
+    color-scheme:dark;
+    --abyss:#05090f;--night:#0b141f;
+    --limestone:#ece7dd;--gold:#d79a3c;--horizon:#f0c069;--ember:#ff9d5c;
+    --ink:var(--limestone);
+    --ink-soft:color-mix(in srgb,var(--limestone) 72%,var(--abyss));
+    --ink-faint:color-mix(in srgb,var(--limestone) 44%,var(--abyss));
+    --rule:color-mix(in srgb,var(--limestone) 14%,transparent);
+    --rule-strong:color-mix(in srgb,var(--limestone) 26%,transparent);
+    --fd:"Archivo",system-ui,sans-serif;--fb:"Source Serif 4",Georgia,serif;--fm:"IBM Plex Mono",monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--abyss);color:var(--ink);font-family:var(--fb);overflow-x:hidden}
+
+  .stage{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+
+  /* ---------- AURORA / AMANHECER ---------- */
+  .dawn{position:absolute;inset:0;z-index:-3;pointer-events:none}
+  /* brilho amplo subindo do horizonte */
+  .dawn::before{content:"";position:absolute;left:50%;bottom:26%;width:150vw;height:90vh;
+    transform:translateX(-50%);
+    background:radial-gradient(60% 100% at 50% 100%,
+      color-mix(in srgb,var(--horizon) 55%,transparent) 0%,
+      color-mix(in srgb,var(--gold) 30%,transparent) 26%,
+      color-mix(in srgb,var(--ember) 12%,transparent) 46%,
+      transparent 72%);
+    filter:blur(8px);opacity:.9;
+    animation:rise 1600ms cubic-bezier(.22,.61,.36,1) both, breathe 7s ease-in-out 1600ms infinite}
+  /* núcleo brilhante — o sol nascendo */
+  .dawn::after{content:"";position:absolute;left:50%;bottom:24%;width:44vw;height:44vw;max-width:640px;max-height:640px;
+    transform:translateX(-50%);border-radius:50%;
+    background:radial-gradient(circle,
+      color-mix(in srgb,var(--horizon) 92%,#fff 8%) 0%,
+      color-mix(in srgb,var(--horizon) 70%,transparent) 22%,
+      color-mix(in srgb,var(--gold) 34%,transparent) 42%,
+      transparent 66%);
+    filter:blur(6px);
+    animation:rise 1600ms cubic-bezier(.22,.61,.36,1) both, breathe 7s ease-in-out 1600ms infinite}
+
+  /* linha do horizonte */
+  .horizon-line{position:absolute;left:0;right:0;bottom:26%;height:1px;z-index:-2;
+    background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--horizon) 85%,transparent) 50%,transparent);
+    box-shadow:0 0 24px 2px color-mix(in srgb,var(--horizon) 45%,transparent);
+    animation:fade 1400ms ease 500ms both}
+
+  /* montanhas + sol (o glifo Akhet) recortando a luz */
+  .peaks{position:absolute;left:50%;bottom:26%;transform:translateX(-50%);width:min(1100px,120vw);z-index:-1;
+    animation:fade 1400ms ease 300ms both}
+  .peaks svg{display:block;width:100%;height:auto}
+
+  /* vinheta para dar profundidade nas bordas */
+  .stage::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(120% 80% at 50% 40%,transparent 55%,color-mix(in srgb,var(--abyss) 82%,transparent) 100%)}
+
+  /* ---------- HEADER ---------- */
+  header{display:flex;align-items:center;justify-content:space-between;
+    width:min(100% - 3rem,74rem);margin:0 auto;padding-block:1.4rem;position:relative;z-index:2}
+  .logo{display:flex;align-items:center;gap:.6rem;font-family:var(--fd);font-weight:800;font-size:1.05rem;letter-spacing:-.01em}
+  .logo .g{color:var(--horizon);font-size:1.2rem;filter:drop-shadow(0 0 10px color-mix(in srgb,var(--horizon) 60%,transparent))}
+  nav{display:flex;gap:1.6rem;font-family:var(--fm);font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+  nav a{color:inherit;text-decoration:none}nav a:hover{color:var(--ink)}
+  .lang{font-family:var(--fm);font-size:.72rem;color:var(--ink-faint)}.lang b{color:var(--ink)}
+
+  /* ---------- HERO ---------- */
+  .hero{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    width:min(100% - 3rem,60rem);margin:0 auto;padding-block:clamp(3rem,7vw,5rem);position:relative;z-index:1}
+
+  .pill{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--fm);font-size:.8rem;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--horizon);text-decoration:none;
+    padding:.55rem 1.1rem;border:1px solid color-mix(in srgb,var(--gold) 60%,transparent);border-radius:999px;
+    background:color-mix(in srgb,var(--gold) 12%,transparent);
+    box-shadow:0 0 30px color-mix(in srgb,var(--gold) 22%,transparent), inset 0 0 20px color-mix(in srgb,var(--gold) 8%,transparent);
+    animation:fade 900ms ease 700ms both}
+  .pill .d{width:.5rem;height:.5rem;border-radius:50%;background:var(--horizon);
+    box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 30%,transparent);animation:pulse 2.4s ease-in-out infinite}
+
+  h1{font-family:var(--fd);font-weight:900;font-size:clamp(2.7rem,8.5vw,6rem);line-height:.98;
+    letter-spacing:-.035em;margin:1.75rem 0 0;max-width:15ch;text-wrap:balance;
+    animation:fade 900ms ease 850ms both}
+  h1 .glow{color:var(--horizon);
+    text-shadow:0 0 34px color-mix(in srgb,var(--horizon) 55%,transparent),0 0 8px color-mix(in srgb,var(--horizon) 40%,transparent)}
+
+  .sub{font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--ink-soft);max-width:52ch;
+    margin:1.6rem auto 0;line-height:1.55;animation:fade 900ms ease 1000ms both}
+  .sub b{color:var(--ink);font-weight:600}
+
+  .cta{display:flex;gap:.9rem;margin-top:2.4rem;flex-wrap:wrap;justify-content:center;animation:fade 900ms ease 1150ms both}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.9rem;font-family:var(--fm);
+    font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;
+    border:1px solid currentColor;cursor:pointer;transition:transform .16s,box-shadow .16s,background-color .16s}
+  .btn--solid{background:var(--horizon);border-color:var(--horizon);color:#1a1205;
+    box-shadow:0 0 34px color-mix(in srgb,var(--horizon) 45%,transparent)}
+  .btn--solid:hover{transform:translateY(-2px);box-shadow:0 0 48px color-mix(in srgb,var(--horizon) 65%,transparent)}
+  .btn--ghost{color:var(--ink-soft);border-color:var(--rule-strong);background:transparent}
+  .btn--ghost:hover{color:var(--ink);border-color:var(--ink)}
+
+  /* contador de vagas — 10 pontos que ecoam a régua */
+  .seats{display:flex;align-items:center;gap:.8rem;margin-top:2.6rem;font-family:var(--fm);
+    font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+    animation:fade 900ms ease 1300ms both}
+  .dots{display:flex;gap:.32rem}
+  .dots i{width:.7rem;height:.7rem;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);
+    display:inline-block;background:color-mix(in srgb,var(--horizon) 16%,transparent)}
+  .seats b{color:var(--horizon);font-weight:500}
+
+  .tag{position:fixed;left:12px;bottom:12px;font-family:var(--fm);font-size:.7rem;color:var(--ink-faint);
+    border:1px solid var(--rule);padding:.3rem .6rem;background:var(--night);z-index:5}
+
+  @keyframes rise{from{opacity:0;transform:translateX(-50%) translateY(40px) scale(.92)}to{opacity:.9;transform:translateX(-50%) translateY(0) scale(1)}}
+  @keyframes breathe{0%,100%{opacity:.86}50%{opacity:1}}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 30%,transparent)}50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--gold) 12%,transparent)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="dawn"></div>
+    <div class="horizon-line"></div>
+    <div class="peaks">
+      <svg viewBox="0 0 1100 200" fill="none" aria-hidden="true">
+        <path d="M0 200 L360 96 L470 132 L560 40 L650 132 L760 84 L1100 200 Z" fill="#05090f"/>
+        <path d="M0 200 L360 96 L470 132 L560 40 L650 132 L760 84 L1100 200 Z" stroke="url(#rim)" stroke-width="1.5"/>
+        <defs>
+          <linearGradient id="rim" x1="0" y1="0" x2="1100" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#d79a3c" stop-opacity="0"/>
+            <stop offset="0.5" stop-color="#f0c069" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="#d79a3c" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <header>
+      <div class="logo"><span class="g">◭</span> Akhet PACS</div>
+      <nav><a>Agora</a><a>Visualizador</a><a>Roadmap</a><a>Planos</a><a>Construir</a></nav>
+      <span class="lang"><b>PT</b> · EN · ES</span>
+    </header>
+
+    <section class="hero">
+      <a class="pill" href="#"><span class="d"></span> Fundadores · 10 vagas abertas</a>
+      <h1>As 10 primeiras clínicas <span class="glow">nunca pagam.</span></h1>
+      <p class="sub">Um visualizador DICOM nativo em Rust virando um PACS completo. <b>Quem chega no primeiro raio de luz usa de graça — para sempre.</b></p>
+      <div class="cta">
+        <a class="btn btn--solid" href="#">Quero ser uma das 10</a>
+        <a class="btn btn--ghost" href="#">Ver o visualizador</a>
+      </div>
+      <div class="seats">
+        <span class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span><b>10</b> de 10 vagas · grátis vitalício</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="tag">Aurora · Primeira Luz</div>
+</body>
+</html>
