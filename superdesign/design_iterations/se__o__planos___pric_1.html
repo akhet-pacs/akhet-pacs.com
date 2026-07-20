@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Planos — Variação 1: A Escada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" />
+<style>
+  :root {
+    color-scheme: dark;
+    --abyss:#05090f; --night:#0b141f; --slate:#142130; --lapis:#1d3a5f;
+    --limestone:#ece7dd; --sand:#b9b2a5; --gold:#d79a3c; --horizon:#f0c069;
+    --surface:var(--abyss); --surface-raised:var(--night);
+    --ink:var(--limestone);
+    --ink-soft:color-mix(in srgb, var(--limestone) 72%, var(--surface));
+    --ink-faint:color-mix(in srgb, var(--limestone) 44%, var(--surface));
+    --rule:color-mix(in srgb, var(--limestone) 14%, transparent);
+    --rule-strong:color-mix(in srgb, var(--limestone) 26%, transparent);
+    --accent:var(--gold); --accent-bright:var(--horizon);
+    --font-display:"Archivo",system-ui,sans-serif;
+    --font-body:"Source Serif 4",Georgia,serif;
+    --font-mono:"IBM Plex Mono",monospace;
+    --shell:74rem;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--ink);font-family:var(--font-body);
+       font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .section{padding-block:7.5rem}
+  .shell{max-width:var(--shell);margin-inline:auto;padding-inline:clamp(1.25rem,5vw,2.5rem)}
+  .eyebrow{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;
+           text-transform:uppercase;color:var(--accent);margin:0 0 1rem}
+  h2{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,5vw,3.25rem);
+     line-height:1.05;letter-spacing:-.02em;margin:0}
+  h2 span{display:block}
+  h2 .muted{color:var(--ink-faint)}
+  .lede{color:var(--ink-soft);font-size:1.15rem;max-width:46ch;margin:1.25rem 0 0}
+  .tabular{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+  /* ---- Painel da faixa atual ---- */
+  .tier-panel{margin-top:4rem;border:1px solid var(--rule-strong);background:var(--surface-raised);
+              padding:clamp(1.5rem,4vw,2.75rem)}
+  .tier-panel__top{display:flex;flex-wrap:wrap;gap:1.5rem 2rem;
+                   align-items:baseline;justify-content:space-between}
+  .tier-panel__label{font-family:var(--font-mono);font-size:.8125rem;letter-spacing:.14em;
+                     text-transform:uppercase;color:var(--ink-faint);margin:0}
+  .tier-panel__price{font-family:var(--font-display);font-weight:800;
+                     font-size:clamp(2.25rem,6vw,3.5rem);line-height:1;letter-spacing:-.03em;
+                     color:var(--accent-bright);margin:.5rem 0 0}
+  .tier-panel__price small{font-family:var(--font-mono);font-weight:400;font-size:.8125rem;
+                           letter-spacing:.1em;color:var(--ink-faint);display:block;
+                           margin-top:.75rem;text-transform:uppercase}
+  .tier-panel__count{text-align:right;font-family:var(--font-mono)}
+  .tier-panel__count b{display:block;font-size:2.5rem;font-weight:500;line-height:1;color:var(--ink)}
+  .tier-panel__count span{font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;
+                          color:var(--ink-faint)}
+
+  /* ---- Barra segmentada ---- */
+  .slots{display:grid;grid-template-columns:repeat(10,1fr);gap:.5rem;margin-top:2.5rem}
+  .slot{height:4.5rem;border:1px solid var(--rule);background:transparent;position:relative;
+        display:grid;place-items:end center;padding-bottom:.5rem}
+  .slot__n{font-family:var(--font-mono);font-size:.6875rem;color:var(--ink-faint)}
+  .slot[data-state="taken"]{background:var(--accent);border-color:var(--accent)}
+  .slot[data-state="taken"] .slot__n{color:var(--abyss);font-weight:500}
+  .slot[data-state="taken"]::before{content:"";position:absolute;inset:.5rem .5rem auto;
+        height:1px;background:color-mix(in srgb, var(--abyss) 35%, transparent)}
+  .slot[data-state="open"]{background:repeating-linear-gradient(135deg,
+        transparent 0 5px, color-mix(in srgb,var(--limestone) 7%,transparent) 5px 10px)}
+  .slots__legend{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem;
+        font-family:var(--font-mono);font-size:.75rem;color:var(--ink-faint)}
+  .slots__legend i{display:inline-block;width:.75rem;height:.75rem;margin-right:.5rem;
+        vertical-align:-1px;border:1px solid var(--rule-strong)}
+  .slots__legend i.taken{background:var(--accent);border-color:var(--accent)}
+
+  /* ---- Escada de faixas ---- */
+  .ladder{margin-top:5rem;border-top:1px solid var(--rule)}
+  .rung{display:grid;grid-template-columns:minmax(0,7rem) minmax(0,1fr) minmax(0,10rem);
+        gap:clamp(1rem,4vw,3rem);padding-block:1.75rem;border-bottom:1px solid var(--rule);
+        align-items:baseline}
+  .rung__range{font-family:var(--font-mono);font-size:1.125rem;color:var(--ink-faint)}
+  .rung__name{font-family:var(--font-display);font-weight:700;font-size:1.0625rem;margin:0}
+  .rung__note{color:var(--ink-soft);font-size:.9375rem;margin:.35rem 0 0}
+  .rung__price{font-family:var(--font-mono);font-size:1.375rem;text-align:right;color:var(--ink-faint)}
+  .rung[data-state="gone"]{opacity:.5}
+  .rung[data-state="gone"] .rung__price{text-decoration:line-through}
+  .rung[data-state="current"]{background:color-mix(in srgb,var(--gold) 7%,transparent);
+        margin-inline:calc(-1 * clamp(.75rem,2vw,1.5rem));
+        padding-inline:clamp(.75rem,2vw,1.5rem);border-left:2px solid var(--accent)}
+  .rung[data-state="current"] .rung__range,
+  .rung[data-state="current"] .rung__price{color:var(--accent-bright)}
+  .rung__flag{font-family:var(--font-mono);font-size:.6875rem;letter-spacing:.12em;
+        text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.35rem}
+
+  .fineprint{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+        color:var(--ink-faint);font-size:.9375rem;max-width:60ch}
+  .cta{display:inline-flex;align-items:center;gap:.75rem;margin-top:2.5rem;
+       font-family:var(--font-display);font-weight:700;font-size:1rem;
+       background:var(--accent);color:var(--abyss);border:0;
+       padding:1rem 1.75rem;text-decoration:none;min-height:48px}
+  .cta:hover{background:var(--accent-bright)}
+
+  @media (max-width:56rem){
+    .slots{grid-template-columns:repeat(5,1fr)}
+    .rung{grid-template-columns:minmax(0,1fr);gap:.5rem}
+    .rung__price{text-align:left}
+  }
+  @media (max-width:48rem){ .section{padding-block:4rem} }
+</style>
+</head>
+<body>
+<section class="section">
+  <div class="shell">
+    <p class="eyebrow">Planos</p>
+    <h2><span>O preço sobe.</span><span class="muted">O seu, não.</span></h2>
+    <p class="lede">Quem entra cedo trava o valor para sempre. Cada faixa preenchida
+      acrescenta R$&nbsp;0,50 por licença — para quem vier depois.</p>
+
+    <div class="tier-panel">
+      <div class="tier-panel__top">
+        <div>
+          <p class="tier-panel__label">Faixa atual · Fundadores</p>
+          <p class="tier-panel__price">Grátis<small>Acesso vitalício · sem cartão</small></p>
+        </div>
+        <div class="tier-panel__count">
+          <b class="tabular">3</b>
+          <span>vagas restantes</span>
+        </div>
+      </div>
+
+      <div class="slots" role="img" aria-label="7 de 10 vagas ocupadas na faixa Fundadores">
+        <div class="slot" data-state="taken"><span class="slot__n">01</span></div>
+        <div class="slot" data-state="taken"><span class="slot__n">02</span></div>
+        <div class="slot" data-state="taken"><span class="slot__n">03</span></div>
+        <div class="slot" data-state="taken"><span class="slot__n">04</span></div>
+        <div class="slot" data-state="taken"><span class="slot__n">05</span></div>
+        <div class="slot" data-state="taken"><span class="slot__n">06</span></div>
+        <div class="slot" data-state="taken"><span class="slot__n">07</span></div>
+        <div class="slot" data-state="open"><span class="slot__n">08</span></div>
+        <div class="slot" data-state="open"><span class="slot__n">09</span></div>
+        <div class="slot" data-state="open"><span class="slot__n">10</span></div>
+      </div>
+      <p class="slots__legend">
+        <span><i class="taken"></i>Ocupada</span>
+        <span><i></i>Disponível</span>
+      </p>
+    </div>
+
+    <ol class="ladder">
+      <li class="rung" data-state="current">
+        <span class="rung__range">01 — 10</span>
+        <div>
+          <span class="rung__flag">Você está aqui</span>
+          <h3 class="rung__name">Fundadores</h3>
+          <p class="rung__note">Acesso vitalício sem custo. Em troca, quero seu retorno de uso real.</p>
+        </div>
+        <span class="rung__price">R$ 0,00</span>
+      </li>
+      <li class="rung">
+        <span class="rung__range">11 — 20</span>
+        <div>
+          <h3 class="rung__name">Segunda faixa</h3>
+          <p class="rung__note">Preço travado no momento da assinatura.</p>
+        </div>
+        <span class="rung__price">R$ 5,00</span>
+      </li>
+      <li class="rung">
+        <span class="rung__range">21 — 30</span>
+        <div><h3 class="rung__name">Terceira faixa</h3></div>
+        <span class="rung__price">R$ 5,50</span>
+      </li>
+      <li class="rung">
+        <span class="rung__range">31 — 40</span>
+        <div><h3 class="rung__name">Quarta faixa</h3></div>
+        <span class="rung__price">R$ 6,00</span>
+      </li>
+      <li class="rung">
+        <span class="rung__range">41 +</span>
+        <div><h3 class="rung__name">Faixas seguintes</h3>
+          <p class="rung__note">+R$ 0,50 por licença a cada 10 clientes.</p></div>
+        <span class="rung__price">…</span>
+      </li>
+    </ol>
+
+    <p class="fineprint">Preço por licença de usuário, por mês. O valor da faixa em que você
+      entrou permanece o mesmo enquanto a assinatura estiver ativa — reajustes futuros valem
+      só para novos clientes.</p>
+
+    <a class="cta" href="#">Garantir uma das 3 vagas</a>
+  </div>
+</section>
+</body>
+</html>
