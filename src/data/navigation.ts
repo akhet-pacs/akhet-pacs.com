@@ -10,6 +10,7 @@ export function buildNavigation(locale: Locale): NavItem[] {
     { label: t.nav.agora, href: `${base}#agora` },
     { label: t.nav.visualizador, href: `${base}#visualizador` },
     { label: t.nav.roadmap, href: `${base}#roadmap` },
+    { label: t.nav.planos, href: `${base}#planos` },
     { label: t.nav.construir, href: `${base}#construir` },
   ];
 }
