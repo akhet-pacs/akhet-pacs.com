@@ -1,6 +1,6 @@
 ---
 import PriceMarks from "./PriceMarks.astro";
-import { buildTicks, cursorPercent, type PricingView } from "../data/pricing";
+import { buildTicks, cursorAlign, cursorPercent, type PricingView } from "../data/pricing";
 import type { Dict } from "../i18n/types";
 
 interface Props {
@@ -12,6 +12,7 @@ const { view, t } = Astro.props;
 
 const ticks = buildTicks(view);
 const pinLeft = cursorPercent(view);
+const pinAlign = cursorAlign(view);
 const ariaLabel = t.rulerAria
   .replace("{taken}", String(view.takenInTier))
   .replace("{size}", String(view.tierSize));
@@ -39,7 +40,7 @@ const cursorLabel = t.cursorLabel.replace("{count}", String(view.slotsRemaining)
   </div>
 
   <div class="ruler__cursor">
-    <div class="ruler__pin" style={`left: ${pinLeft}%`}>
+    <div class="ruler__pin" data-align={pinAlign} style={`left: ${pinLeft}%`}>
       <span class="ruler__arrow" aria-hidden="true"></span>
       <span class="ruler__label">{cursorLabel}</span>
     </div>
@@ -99,6 +100,23 @@ const cursorLabel = t.cursorLabel.replace("{count}", String(view.slotsRemaining)
     position: absolute;
     transform: translateX(-50%);
     text-align: center;
+  }
+
+  /* Colado na ponta, o rótulo centrado vazaria para fora da régua. */
+  .ruler__pin[data-align="start"] {
+    transform: none;
+  }
+
+  .ruler__pin[data-align="end"] {
+    transform: translateX(-100%);
+  }
+
+  .ruler__pin[data-align="start"] .ruler__arrow {
+    margin-inline: 0 auto;
+  }
+
+  .ruler__pin[data-align="end"] .ruler__arrow {
+    margin-inline: auto 0;
   }
 
   .ruler__arrow {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   buildTicks,
+  cursorAlign,
   cursorPercent,
   deriveTiers,
   formatPrice,
@@ -120,6 +121,27 @@ describe("cursorPercent", () => {
 
   it("fica na borda esquerda quando não há vaga vendida", () => {
     expect(cursorPercent(deriveTiers({ ...base, clientsSold: 0 }))).toBeCloseTo(1);
+  });
+});
+
+describe("cursorAlign", () => {
+  it("ancora à esquerda quando ainda não há nenhuma venda", () => {
+    expect(cursorAlign(deriveTiers({ ...base, clientsSold: 0 }))).toBe("start");
+  });
+
+  it("ainda ancora à esquerda com poucas vagas vendidas", () => {
+    // 5 vendidas → 11% da régua, perto o bastante da ponta para vazar
+    expect(cursorAlign(deriveTiers({ ...base, clientsSold: 5 }))).toBe("start");
+  });
+
+  it("centraliza assim que o cursor sai da ponta", () => {
+    // 7 vendidas → 15%, já longe da borda
+    expect(cursorAlign(deriveTiers(base))).toBe("center");
+  });
+
+  it("ancora à direita perto do fim da janela", () => {
+    const view = deriveTiers(base);
+    expect(cursorAlign({ ...view, takenInTier: 45 })).toBe("end");
   });
 });
 

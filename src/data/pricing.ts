@@ -38,7 +38,7 @@ export const pricing: PricingConfig = {
   firstPaidPrice: 5,
   increment: 0.5,
   ceiling: 12,
-  clientsSold: 7,
+  clientsSold: 0,
   updatedAt: "2026-07-20",
 };
 
@@ -95,6 +95,20 @@ export function buildTicks(view: PricingView): Tick[] {
 export function cursorPercent(view: PricingView): number {
   const total = view.tiers.length * view.tierSize;
   return ((view.takenInTier + 0.5) / total) * 100;
+}
+
+export type CursorAlign = "start" | "center" | "end";
+
+/**
+ * Como ancorar o rótulo do cursor. Centrado ele vazaria para fora da régua
+ * quando a posição está colada numa das pontas — o que acontece justamente
+ * no caso mais comum: nenhuma vaga vendida ainda.
+ */
+export function cursorAlign(view: PricingView): CursorAlign {
+  const percent = cursorPercent(view);
+  if (percent < 12) return "start";
+  if (percent > 88) return "end";
+  return "center";
 }
 
 const brl = new Intl.NumberFormat("pt-BR", {
