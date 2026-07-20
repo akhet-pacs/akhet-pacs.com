@@ -1,0 +1,96 @@
+---
+import { formatPrice, type PricingView } from "../data/pricing";
+import type { Dict } from "../i18n/types";
+
+interface Props {
+  tiers: PricingView["tiers"];
+  freeLabel: Dict["plans"]["freeLabel"];
+}
+
+const { tiers, freeLabel } = Astro.props;
+---
+
+<ol class="marks">
+  {
+    tiers.map((tier) => (
+      <li class="mark" data-state={tier.state}>
+        <span class="mark__price tabular">
+          {tier.price === 0 ? freeLabel : formatPrice(tier.price)}
+        </span>
+        <span class="mark__range tabular">
+          {tier.from}—{tier.to}
+        </span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .marks {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: end;
+    gap: 1px;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mark {
+    position: relative;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  .mark::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    height: 0.625rem;
+    background: var(--rule-strong);
+  }
+
+  .mark__price,
+  .mark__range {
+    display: block;
+    color: var(--ink-faint);
+  }
+
+  .mark__price {
+    font-size: 1rem;
+  }
+
+  .mark__range {
+    margin-top: 0.25rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  .mark[data-state="current"] .mark__price {
+    font-size: 1.375rem;
+    color: var(--accent-bright);
+  }
+
+  .mark[data-state="current"] .mark__range {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .mark[data-state="current"]::after {
+    height: 1rem;
+    background: var(--accent);
+  }
+
+  @media (max-width: 48rem) {
+    .marks {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mark:nth-child(n + 4) {
+      display: none;
+    }
+  }
+</style>

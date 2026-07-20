@@ -1,0 +1,152 @@
+---
+import PriceRuler from "../components/PriceRuler.astro";
+import { deriveTiers, formatPrice, pricing } from "../data/pricing";
+import { site } from "../data/site";
+import { useDict } from "../i18n";
+
+const t = useDict(Astro.currentLocale).plans;
+const view = deriveTiers(pricing);
+
+const currentTier = view.tiers[0];
+const nextTier = view.tiers[1];
+const isFree = currentTier.price === 0;
+
+const nextTierNote = t.nextTierNote.replace("{price}", formatPrice(nextTier.price));
+const ceilingNote = t.ceilingNote.replace("{price}", formatPrice(view.ceilingPrice));
+const updatedAt = t.updatedAtLabel.replace(
+  "{date}",
+  new Date(`${view.updatedAt}T00:00:00`).toLocaleDateString("pt-BR"),
+);
+const whatsappHref = `${site.whatsapp}?text=${encodeURIComponent(t.ctaText)}`;
+---
+
+<section class="section" id="planos">
+  <div class="shell">
+    <header class="section-header section-header--spaced">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h2>{t.titleLines[0]}<span class="plans__muted">{t.titleLines[1]}</span></h2>
+      <p class="lede">{t.lede}</p>
+    </header>
+
+    <PriceRuler view={view} t={t} />
+
+    <div class="plans__offer">
+      <div>
+        <p class="plans__tag meta">{t.tierCurrentLabel}</p>
+        <p class="plans__price">
+          {isFree ? t.freeLabel : formatPrice(currentTier.price)}
+          <small>{t.freeSub}</small>
+        </p>
+        <a class="btn btn--solid" href={whatsappHref} rel="noopener noreferrer" target="_blank">
+          {t.ctaText}
+        </a>
+      </div>
+      <div class="plans__remaining">
+        <b class="tabular">{String(view.slotsRemaining).padStart(2, "0")}</b>
+        <span class="meta">{t.slotsRemaining}</span>
+        <p>{nextTierNote}</p>
+        <p class="plans__ceiling meta">{ceilingNote}</p>
+      </div>
+    </div>
+
+    <p class="plans__fineprint">
+      {t.fineprint}
+      <span class="plans__updated meta">{updatedAt}</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .plans__muted {
+    color: var(--ink-faint);
+  }
+
+  .plans__offer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+    margin-top: 4.5rem;
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border: 1px solid var(--rule-strong);
+    background: var(--surface-raised);
+  }
+
+  .plans__tag {
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .plans__price {
+    margin: 0 0 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--accent-bright);
+  }
+
+  .plans__price small {
+    display: block;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+  }
+
+  .plans__remaining {
+    padding-left: clamp(1.25rem, 3vw, 2.5rem);
+    border-left: 1px solid var(--rule-color);
+  }
+
+  .plans__remaining b {
+    display: block;
+    font-size: clamp(3rem, 9vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .plans__remaining span {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .plans__remaining p {
+    margin: 1.25rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  .plans__ceiling {
+    color: var(--ink-faint);
+  }
+
+  .plans__fineprint {
+    max-width: 64ch;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-color);
+    color: var(--ink-faint);
+  }
+
+  .plans__updated {
+    display: block;
+    margin-top: 0.75rem;
+  }
+
+  @media (max-width: 60rem) {
+    .plans__offer {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .plans__remaining {
+      padding-top: 1.75rem;
+      padding-left: 0;
+      border-top: 1px solid var(--rule-color);
+      border-left: 0;
+    }
+  }
+</style>
