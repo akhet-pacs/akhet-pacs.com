@@ -6,8 +6,8 @@ export const sections = {
     ctaPrimary: "Construir juntos",
     ctaSecondary: "Ver el visor",
     stats: [
-      { value: "507", label: "commits" },
-      { value: "204", label: "tests" },
+      { value: "727", label: "commits" },
+      { value: "1312", label: "tests" },
       { value: "8", label: "crates Rust" },
       { value: "1/5", label: "fase del roadmap" },
     ],
