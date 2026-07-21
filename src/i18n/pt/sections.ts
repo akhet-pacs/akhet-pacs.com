@@ -2,14 +2,14 @@ export const sections = {
   hero: {
     badge: "Fundadores · 10 vagas abertas",
     lines: ["As 10 primeiras", "clínicas", "nunca pagam."],
-    lede: "Um visualizador DICOM nativo em Rust virando um PACS completo. Quem chega no primeiro raio de luz usa de graça — para sempre.",
+    lede: "Um visualizador DICOM nativo virando um PACS completo. Quem chega no primeiro raio de luz usa de graça — para sempre.",
     ctaPrimary: "Quero ser uma das 10",
     ctaSecondary: "Ver o visualizador",
     seatsNote: "10 de 10 vagas · grátis vitalício",
     stats: [
       { value: "727", label: "commits" },
       { value: "1312", label: "testes" },
-      { value: "8", label: "crates Rust" },
+      { value: "8", label: "módulos" },
       { value: "1/5", label: "fase do roadmap" },
     ],
   },

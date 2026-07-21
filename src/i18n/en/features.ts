@@ -36,7 +36,7 @@ export const features = {
       },
       {
         icon: "lucide:cpu",
-        title: "Rust + GPU end to end",
+        title: "Native + GPU end to end",
         body: "Decoding via dicom-rs and wgpu rendering with shader and LUT on the GPU. Large studies open without freezing the workstation.",
       },
       {

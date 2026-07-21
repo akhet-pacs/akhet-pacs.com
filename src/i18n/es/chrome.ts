@@ -2,7 +2,7 @@ export const chrome = {
   meta: {
     title: "Akhet PACS — Revealing What Matters.",
     description:
-      "Visor DICOM nativo escrito en Rust, evolucionando hacia un PACS completo para clínicas, hospitales y centros de diagnóstico por imágenes.",
+      "Visor DICOM nativo, evolucionando hacia un PACS completo para clínicas, hospitales y centros de diagnóstico por imágenes.",
   },
   skipLink: "Ir al contenido",
   nav: {

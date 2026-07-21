@@ -36,7 +36,7 @@ export const features = {
       },
       {
         icon: "lucide:cpu",
-        title: "Rust + GPU de punta a punta",
+        title: "Nativo + GPU de punta a punta",
         body: "Decodificación vía dicom-rs y renderizado wgpu con shader y LUT en la GPU. Estudios grandes abren sin congelar la estación.",
       },
       {

@@ -2,14 +2,14 @@ export const sections = {
   hero: {
     badge: "Fundadores · 10 plazas abiertas",
     lines: ["Las 10 primeras", "clínicas", "nunca pagan."],
-    lede: "Un visor DICOM nativo en Rust, en camino a un PACS completo. Quien llega con la primera luz lo usa gratis — para siempre.",
+    lede: "Un visor DICOM nativo, en camino a un PACS completo. Quien llega con la primera luz lo usa gratis — para siempre.",
     ctaPrimary: "Quiero una de las 10",
     ctaSecondary: "Ver el visor",
     seatsNote: "10 de 10 plazas · gratis de por vida",
     stats: [
       { value: "727", label: "commits" },
       { value: "1312", label: "tests" },
-      { value: "8", label: "crates Rust" },
+      { value: "8", label: "módulos" },
       { value: "1/5", label: "fase del roadmap" },
     ],
   },
