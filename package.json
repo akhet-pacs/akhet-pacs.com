@@ -13,6 +13,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/lucide": "^1.2.118",
     "@iconify-json/simple-icons": "^1.2.90",
     "@tailwindcss/vite": "^4.3.3",

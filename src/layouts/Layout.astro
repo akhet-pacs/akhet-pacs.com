@@ -10,7 +10,38 @@ interface Props {
 const { title, description } = Astro.props;
 const locale = resolveLocale(Astro.currentLocale);
 const langTags = { pt: "pt-BR", en: "en", es: "es" } as const;
+const ogLocales = { pt: "pt_BR", en: "en_US", es: "es_ES" } as const;
 const siteUrl = Astro.site ?? new URL("https://akhetpacs.com");
+const canonical = new URL(localePath(locale), siteUrl);
+const ogImage = new URL("/og.png", siteUrl);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl.origin}/#organization`,
+      name: "Akhet PACS",
+      url: siteUrl.origin,
+      logo: new URL("/favicon.svg", siteUrl).href,
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "Akhet PACS",
+      applicationCategory: "MedicalApplication",
+      operatingSystem: "Windows, macOS, Linux",
+      description,
+      url: canonical.href,
+      image: ogImage.href,
+      publisher: { "@id": `${siteUrl.origin}/#organization` },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "BRL",
+      },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -20,17 +51,45 @@ const siteUrl = Astro.site ?? new URL("https://akhetpacs.com");
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <meta property="og:site_name" content="Akhet PACS" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content={ogLocales[locale]} />
+    {
+      locales
+        .filter((code) => code !== locale)
+        .map((code) => <meta property="og:locale:alternate" content={ogLocales[code]} />)
+    }
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <meta name="theme-color" content="#05090f" />
-    <link rel="canonical" href={new URL(localePath(locale), siteUrl)} />
+    <link rel="canonical" href={canonical} />
     {
       locales.map((code) => (
         <link rel="alternate" hreflang={langTags[code]} href={new URL(localePath(code), siteUrl)} />
       ))
     }
     <link rel="alternate" hreflang="x-default" href={siteUrl} />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

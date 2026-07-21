@@ -3,6 +3,8 @@ import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
 
+import sitemap from "@astrojs/sitemap";
+
 export default defineConfig({
   site: "https://akhetpacs.com",
   i18n: {
@@ -12,7 +14,19 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [icon()],
+  integrations: [
+    icon(),
+    sitemap({
+      i18n: {
+        defaultLocale: "pt",
+        locales: {
+          pt: "pt-BR",
+          en: "en",
+          es: "es",
+        },
+      },
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
