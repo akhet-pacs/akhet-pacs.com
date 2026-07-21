@@ -49,6 +49,46 @@ const structuredData = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline define:vars={{ current: locale, defaultLocale: "pt" }}>
+      // Redireciona o visitante para o idioma dele apenas a partir da raiz "/"
+      // (nunca de /en/ ou /es/, que já são escolhas explícitas de URL).
+      // A escolha manual no seletor tem prioridade e é guardada em localStorage.
+      (function () {
+        var KEY = "akhet-locale";
+        var PATHS = { pt: "/", en: "/en/", es: "/es/" };
+        if (current !== defaultLocale) return;
+
+        var stored = null;
+        try {
+          stored = localStorage.getItem(KEY);
+        } catch (e) {}
+
+        var target = stored;
+        if (!target) {
+          var langs = navigator.languages || [navigator.language || "pt"];
+          for (var i = 0; i < langs.length && !target; i++) {
+            var l = (langs[i] || "").toLowerCase();
+            if (l.indexOf("es") === 0) target = "es";
+            else if (l.indexOf("en") === 0) target = "en";
+            else if (l.indexOf("pt") === 0) target = "pt";
+          }
+        }
+
+        if (target && target !== current && PATHS[target]) {
+          location.replace(PATHS[target] + location.search + location.hash);
+        }
+      })();
+
+      // Grava a escolha manual de idioma feita no seletor.
+      document.addEventListener("click", function (e) {
+        var el = e.target;
+        var link = el && el.closest ? el.closest("[data-locale]") : null;
+        if (!link) return;
+        try {
+          localStorage.setItem("akhet-locale", link.getAttribute("data-locale"));
+        } catch (err) {}
+      });
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />

@@ -13,7 +13,11 @@ const { current, label, class: className } = Astro.props;
 <nav class:list={["locales", className]} aria-label={label}>
   {
     locales.map((code) => (
-      <a href={localePath(code)} aria-current={code === current ? "page" : undefined}>
+      <a
+        href={localePath(code)}
+        data-locale={code}
+        aria-current={code === current ? "page" : undefined}
+      >
         {localeNames[code]}
       </a>
     ))
