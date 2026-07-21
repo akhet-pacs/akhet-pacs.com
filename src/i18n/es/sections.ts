@@ -23,11 +23,21 @@ export const sections = {
   demo: {
     eyebrow: "Directo del visor · sin mockup",
     title: "Así está hoy.",
-    lede: "Capturas reales de Akhet abriendo una muestra DICOM pública. Interfaz oscura, información clínica en las esquinas y las herramientas de medición a un atajo de distancia.",
-    tablistLabel: "Herramientas de medición",
-    altPrefix: "Akhet PACS con la herramienta",
+    lede: "Capturas reales de Akhet abriendo muestras DICOM públicas. Reconstrucción multiplanar (MPR), renderizado 3D del volumen y las herramientas de medición — todo en la misma interfaz oscura, con la información clínica en las esquinas.",
+    tablistLabel: "Funciones del visor",
+    altPrefix: "Akhet PACS con",
     panHint: "Arrastrá la imagen hacia el costado para ver toda la interfaz.",
     shots: [
+      {
+        key: "mpr",
+        label: "MPR",
+        caption: "Reconstrucción multiplanar: los tres planos ligados por la cruz — movés uno y los demás acompañan.",
+      },
+      {
+        key: "volume3d",
+        label: "3D",
+        caption: "Renderizado de volumen del estudio — hueso y piel en profundidad, rotable en tiempo real.",
+      },
       {
         key: "cobb",
         label: "Ángulo de Cobb",

@@ -23,11 +23,21 @@ export const sections = {
   demo: {
     eyebrow: "Straight from the viewer · no mockup",
     title: "This is how it looks today.",
-    lede: "Real captures of Akhet opening a public DICOM sample. Dark interface, clinical information in the corners and the measurement tools one shortcut away.",
-    tablistLabel: "Measurement tools",
-    altPrefix: "Akhet PACS with the tool",
+    lede: "Real captures of Akhet opening public DICOM samples. Multiplanar reconstruction (MPR), 3D volume rendering and the measurement tools — all in the same dark interface, with clinical information in the corners.",
+    tablistLabel: "Viewer features",
+    altPrefix: "Akhet PACS with",
     panHint: "Drag the image sideways to see the whole interface.",
     shots: [
+      {
+        key: "mpr",
+        label: "MPR",
+        caption: "Multiplanar reconstruction: the three planes linked by the crosshair — move one and the others follow.",
+      },
+      {
+        key: "volume3d",
+        label: "3D",
+        caption: "Volume rendering of the study — bone and skin in depth, rotatable in real time.",
+      },
       {
         key: "cobb",
         label: "Cobb angle",
