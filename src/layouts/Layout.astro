@@ -68,6 +68,17 @@ const structuredData = {
         var PATHS = { pt: "/", en: "/en/", es: "/es/" };
         if (current !== defaultLocale) return;
 
+        // Nunca redireciona crawlers: cada bot indexa a URL que buscou (/, /en/,
+        // /es/) como ela é, preservando a home pt canônica. Só usuários reais
+        // recebem o redirecionamento por idioma.
+        var ua = navigator.userAgent || "";
+        if (
+          /bot|crawl|spider|slurp|mediapartners|googlebot|bingbot|bingpreview|duckduckbot|baiduspider|yandex|sogou|exabot|facebot|facebookexternalhit|ia_archiver|gptbot|oai-searchbot|chatgpt|claudebot|claude-web|anthropic|perplexity|ccbot|google-extended|applebot/i.test(
+            ua,
+          )
+        )
+          return;
+
         var stored = null;
         try {
           stored = localStorage.getItem(KEY);
