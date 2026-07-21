@@ -4,5 +4,6 @@ import { sections } from "./sections";
 import { features } from "./features";
 import { roadmap } from "./roadmap";
 import { plans } from "./plans";
+import { faq } from "./faq";
 
-export const pt: Dict = { ...chrome, ...sections, ...features, ...roadmap, plans };
+export const pt: Dict = { ...chrome, ...faq, ...sections, ...features, ...roadmap, plans };

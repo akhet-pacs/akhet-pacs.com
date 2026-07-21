@@ -11,8 +11,11 @@ export type Phase = {
   items: readonly string[];
 };
 
+export type Faq = { q: string; a: string };
+
 export type Dict = {
   meta: { title: string; description: string };
+  faq: readonly Faq[];
   skipLink: string;
   nav: { agora: string; visualizador: string; roadmap: string; planos: string; construir: string };
   hero: {

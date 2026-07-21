@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { localePath, locales, resolveLocale } from "../i18n";
+import { localePath, locales, resolveLocale, useDict } from "../i18n";
 
 interface Props {
   title: string;
@@ -14,10 +14,20 @@ const ogLocales = { pt: "pt_BR", en: "en_US", es: "es_ES" } as const;
 const siteUrl = Astro.site ?? new URL("https://akhetpacs.com");
 const canonical = new URL(localePath(locale), siteUrl);
 const ogImage = new URL("/og.png", siteUrl);
+const t = useDict(Astro.currentLocale);
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": `${canonical.href}#faq`,
+      mainEntity: t.faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
     {
       "@type": "Organization",
       "@id": `${siteUrl.origin}/#organization`,

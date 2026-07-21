@@ -1,0 +1,34 @@
+# Akhet PACS
+
+> Akhet PACS is a native, high-performance DICOM viewer, built in Rust, that is
+> evolving into a complete PACS for clinics, hospitals and diagnostic imaging
+> centers. The first 10 founding clinics use it free, forever. The project is
+> open to contributors and currently in phase 1 of 5 of its roadmap.
+
+Akhet started as a native DICOM viewer and is in the middle of phase 1: the
+clinical core — window/level, measurements, multi-viewport, MPR and 3D volume
+rendering — already works on real CT, MR, ultrasound, mammography and
+angiography studies. What is still missing is the study browser and the Windows
+and macOS installers. Site is available in Portuguese (default), English and
+Spanish.
+
+## Key facts
+
+- Product: native desktop DICOM viewer for Windows, macOS and Linux, evolving into a full PACS.
+- Founders offer: the first 10 clinics use Akhet free, forever — the whole clinic, every workstation. Pricing then climbs in steps to a ceiling below an imported viewer.
+- Modalities supported today: CT, MR, ultrasound (US), mammography, angiography.
+- Working features: window/level, multi-viewport, multiplanar reconstruction (MPR), 3D volume rendering, measurements (Cobb angle, free angle, elliptical ROI, polygon, freehand).
+- Status: phase 1 of 5; clinical core functional; study browser and Windows/macOS installers in development.
+- Technology: written in Rust; GPU rendering via wgpu; DICOM decoding via dicom-rs.
+- Privacy: patient identifiers (PHI) are redacted by construction — never reach logs or recorded sessions.
+
+## Pages
+
+- [Home (Português)](https://akhetpacs.com/): overview, viewer screenshots, roadmap, pricing and how to join.
+- [Home (English)](https://akhetpacs.com/en/): same content in English.
+- [Home (Español)](https://akhetpacs.com/es/): same content in Spanish.
+
+## Contact
+
+- Clinics: reach out via WhatsApp to try Akhet and shape the roadmap.
+- Contributors: the project looks for people to build medical software in Rust, with clean architecture and tests over real studies.
