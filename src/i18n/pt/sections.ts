@@ -15,13 +15,13 @@ export const sections = {
   },
   status: {
     eyebrow: "Onde o projeto está",
-    titleLines: ["Sem maquiagem:", "o estado real."],
+    titleLines: ["O que já roda,", "e o que vem agora."],
     lede: "O Akhet nasceu como um visualizador DICOM e está no meio da fase 1: o núcleo clínico — window/level, medições, multi-viewport, MPR — já funciona sobre exames reais de CT, MR, US, mamografia e angiografia.",
     honest:
       "O que falta é o que menos aparece em screenshot: o study browser, para a sessão não começar do zero, e os instaladores de Windows e macOS, para uma clínica conseguir simplesmente baixar e abrir. É a fase em que as primeiras clínicas entram — e é a rotina delas que define a ordem do que vem depois.",
   },
   demo: {
-    eyebrow: "Direto do visualizador · sem mockup",
+    eyebrow: "Direto do visualizador · capturas reais",
     title: "É assim que ele está hoje.",
     lede: "Capturas reais do Akhet abrindo amostras DICOM públicas. Reconstrução multiplanar (MPR), renderização 3D do volume e as ferramentas de medição — tudo na mesma interface escura, com as informações clínicas nos cantos.",
     tablistLabel: "Recursos do visualizador",
