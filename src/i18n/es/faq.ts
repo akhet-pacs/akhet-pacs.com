@@ -25,8 +25,8 @@ export const faq = {
       a: "Es una aplicación de escritorio nativa para Windows, macOS y Linux. Los instaladores de Windows y macOS todavía están en desarrollo.",
     },
     {
-      q: "Tengo una clínica. ¿Cómo puedo participar?",
-      a: "Escríbenos por WhatsApp contando qué modalidades usas. Te contactamos en cuanto haya una build para tu sistema, y tu feedback se vuelve prioridad en el roadmap.",
+      q: "Tengo una clínica. ¿Cómo entro?",
+      a: "Escríbenos por WhatsApp contando qué modalidades usas. Te contactamos en cuanto haya una build para tu sistema, y tu rutina entra en la fila de lo que se construye a continuación.",
     },
     {
       q: "¿Cómo puedo contribuir con el proyecto?",
