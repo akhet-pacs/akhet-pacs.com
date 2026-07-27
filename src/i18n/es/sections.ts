@@ -15,13 +15,13 @@ export const sections = {
   },
   status: {
     eyebrow: "Dónde está el proyecto",
-    titleLines: ["Sin maquillaje:", "el estado real."],
+    titleLines: ["Lo que ya funciona,", "y lo que viene ahora."],
     lede: "Akhet nació como un visor DICOM y está a mitad de la fase 1: el núcleo clínico — window/level, mediciones, multi-viewport, MPR — ya funciona sobre estudios reales de CT, MR, US, mamografía y angiografía.",
     honest:
       "Lo que falta es lo que menos aparece en capturas: el study browser, para que la sesión no empiece de cero, y los instaladores de Windows y macOS, para que una clínica pueda simplemente descargar y abrir. Es la fase en la que entran las primeras clínicas — y es su rutina la que define el orden de lo que viene después.",
   },
   demo: {
-    eyebrow: "Directo del visor · sin mockup",
+    eyebrow: "Directo del visor · capturas reales",
     title: "Así está hoy.",
     lede: "Capturas reales de Akhet abriendo muestras DICOM públicas. Reconstrucción multiplanar (MPR), renderizado 3D del volumen y las herramientas de medición — todo en la misma interfaz oscura, con la información clínica en las esquinas.",
     tablistLabel: "Funciones del visor",

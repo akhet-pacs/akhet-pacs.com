@@ -1,7 +1,7 @@
 export const features = {
   capabilities: {
     eyebrow: "Fase 1 · funcionando hoje",
-    titleLines: ["Isto não é mockup.", "Já roda."],
+    titleLines: ["Tudo isto já roda", "sobre exame real."],
     lede: "Cada item abaixo existe no código, coberto por testes que rodam contra exames DICOM reais a cada commit. Tudo o que vem depois — mini PACS, servidor, integrações — nasce sobre esta base.",
     items: [
       {
@@ -70,7 +70,7 @@ export const features = {
       },
       {
         title: "Reprodutível por padrão",
-        body: "Cada sessão pode ser gravada e reexecutada evento a evento contra o build atual. Bug reportado é bug reproduzível.",
+        body: "Cada sessão pode ser gravada e reexecutada evento a evento contra o build atual. Nada depende de lembrar o que aconteceu.",
       },
     ],
   },

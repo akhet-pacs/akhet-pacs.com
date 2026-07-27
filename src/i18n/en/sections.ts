@@ -15,13 +15,13 @@ export const sections = {
   },
   status: {
     eyebrow: "Where the project stands",
-    titleLines: ["No makeup:", "the real state."],
+    titleLines: ["What already runs,", "and what comes next."],
     lede: "Akhet started as a DICOM viewer and is halfway through phase 1: the clinical core — window/level, measurements, multi-viewport, MPR — already works on real CT, MR, US, mammography and angiography studies.",
     honest:
       "What's missing is what shows up least in screenshots: the study browser, so a session doesn't start from zero, and the Windows and macOS installers, so a clinic can simply download and open it. This is the phase the first clinics join — and their practice sets the order of what comes next.",
   },
   demo: {
-    eyebrow: "Straight from the viewer · no mockup",
+    eyebrow: "Straight from the viewer · real captures",
     title: "This is how it looks today.",
     lede: "Real captures of Akhet opening public DICOM samples. Multiplanar reconstruction (MPR), 3D volume rendering and the measurement tools — all in the same dark interface, with clinical information in the corners.",
     tablistLabel: "Viewer features",
