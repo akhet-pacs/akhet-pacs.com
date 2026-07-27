@@ -1,10 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
 import HorizonBackdrop from "../components/HorizonBackdrop.astro";
+import { deriveTiers, pricing } from "../data/pricing";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).hero;
-const seats = Array.from({ length: 10 });
+const view = deriveTiers(pricing);
+const seats = Array.from({ length: view.tierSize });
+// Uma única fonte de verdade com a régua de preços: sem isto o hero segue
+// anunciando "10 vagas" depois da primeira venda.
+const badge = t.badge.replace("{count}", String(view.slotsRemaining));
+const seatsNote = t.seatsNote.replace("{count}", String(view.slotsRemaining));
 ---
 
 <section class="hero">
@@ -13,7 +19,7 @@ const seats = Array.from({ length: 10 });
   <div class="shell hero__inner">
     <a class="hero__pill" href="#planos">
       <span class="hero__pulse" aria-hidden="true"></span>
-      {t.badge}
+      {badge}
     </a>
     <h1 class="hero__title">
       <span class="hero__line">{t.lines[0]}</span>
@@ -32,7 +38,7 @@ const seats = Array.from({ length: 10 });
       <span class="hero__dots" aria-hidden="true">
         {seats.map(() => <i></i>)}
       </span>
-      {t.seatsNote}
+      {seatsNote}
     </p>
   </div>
 

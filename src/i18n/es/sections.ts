@@ -1,11 +1,11 @@
 export const sections = {
   hero: {
-    badge: "Fundadores · 10 plazas abiertas",
+    badge: "Fundadores · {count} plazas abiertas",
     lines: ["Las 10 primeras", "clínicas", "nunca pagan."],
     lede: "Un visor DICOM nativo, funcionando sobre estudios reales, en camino a un PACS completo. Quien llega con la primera luz lo usa gratis — para siempre.",
     ctaPrimary: "Quiero una de las 10",
     ctaSecondary: "Ver el visor",
-    seatsNote: "10 de 10 plazas · gratis de por vida",
+    seatsNote: "{count} plazas · gratis de por vida",
     stats: [
       { value: "727", label: "commits" },
       { value: "1312", label: "tests" },
@@ -26,12 +26,12 @@ export const sections = {
     lede: "Capturas reales de Akhet abriendo muestras DICOM públicas. Reconstrucción multiplanar (MPR), renderizado 3D del volumen y las herramientas de medición — todo en la misma interfaz oscura, con la información clínica en las esquinas.",
     tablistLabel: "Funciones del visor",
     altPrefix: "Akhet PACS con",
-    panHint: "Arrastrá la imagen hacia el costado para ver toda la interfaz.",
+    panHint: "Arrastra la imagen hacia el costado para ver toda la interfaz.",
     shots: [
       {
         key: "mpr",
         label: "MPR",
-        caption: "Reconstrucción multiplanar: los tres planos ligados por la cruz — movés uno y los demás acompañan.",
+        caption: "Reconstrucción multiplanar: los tres planos ligados por la cruz — mueves uno y los demás acompañan.",
       },
       {
         key: "volume3d",
@@ -67,8 +67,8 @@ export const sections = {
   },
   clinics: {
     eyebrow: "Para clínicas",
-    title: "¿Trabajás con imágenes médicas?",
-    lede: "Si sos de una clínica o centro de diagnóstico, escribinos contando qué modalidades usás. Nos pondremos en contacto en cuanto haya un build para tu sistema — y tu rutina entra en la fila de lo que se construye a continuación.",
+    title: "¿Trabajas con imágenes médicas?",
+    lede: "Si eres de una clínica o centro de diagnóstico, escríbenos contando qué modalidades usas. Nos pondremos en contacto en cuanto haya un build para tu sistema — y tu rutina entra en la fila de lo que se construye a continuación.",
     whatsappMessage: "¡Hola, Jônatas! Soy de una clínica y quiero conocer Akhet PACS.",
     btnWhatsapp: "Hablar por WhatsApp",
   },

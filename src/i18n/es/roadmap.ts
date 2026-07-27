@@ -78,7 +78,7 @@ export const roadmap = {
   contribute: {
     eyebrow: "Construir juntos",
     title: "Un PACS no se construye solo.",
-    lede: "Busco gente que quiera construir software médico de verdad — en Rust, con arquitectura limpia y tests sobre estudios reales. Ayudás a moldear una aplicación de la que vas a estar orgulloso, desde los cimientos.",
+    lede: "Busco gente que quiera construir software médico de verdad — en Rust, con arquitectura limpia y tests sobre estudios reales. Ayudas a moldear una aplicación de la que vas a estar orgulloso, desde los cimientos.",
     areas: [
       {
         icon: "lucide:package",
@@ -93,7 +93,7 @@ export const roadmap = {
       {
         icon: "lucide:file-code-2",
         title: "Dominio DICOM",
-        body: "Transfer syntaxes comprimidas, nuevas modalidades, SUV/PET, anonimización. Si conocés el estándar, hay terreno fértil aquí.",
+        body: "Transfer syntaxes comprimidas, nuevas modalidades, SUV/PET, anonimización. Si conoces el estándar, hay terreno fértil aquí.",
       },
       {
         icon: "lucide:stethoscope",
@@ -102,7 +102,7 @@ export const roadmap = {
       },
     ],
     ctaText:
-      "¿Te interesa? Escribí contando qué hacés bien — Rust, DICOM o rutina de clínica — y por dónde te gustaría empezar. El acceso al proyecto se acuerda en esa conversación.",
+      "¿Te interesa? Escríbenos contando qué haces bien — Rust, DICOM o rutina de clínica — y por dónde te gustaría empezar. El acceso al proyecto se acuerda en esa conversación.",
     whatsappMessage: "¡Hola, Jônatas! Vi el sitio de Akhet PACS y quiero construir juntos.",
     btnWhatsapp: "Escribir por WhatsApp",
     btnEmail: "Escribir por correo",

@@ -32,7 +32,7 @@ export const features = {
       {
         icon: "lucide:keyboard",
         title: "~48 atajos de teclado",
-        body: "Modelo de atajos inspirado en RadiAnt. Quien ya informa en otro visor no empieza de cero.",
+        body: "Modelo de atajos inspirado en RadiAnt. Quien ya informa estudios en otro visor no empieza de cero.",
       },
       {
         icon: "lucide:cpu",
