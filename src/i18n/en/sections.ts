@@ -1,11 +1,11 @@
 export const sections = {
   hero: {
-    badge: "Founders · 10 seats open",
+    badge: "Founders · {count} seats open",
     lines: ["The first 10", "clinics", "never pay."],
     lede: "A native DICOM viewer running on real studies, on its way to a complete PACS. Those who arrive at first light use it free — forever.",
     ctaPrimary: "Claim a founder seat",
     ctaSecondary: "See the viewer",
-    seatsNote: "10 of 10 seats · free for life",
+    seatsNote: "{count} seats · free for life",
     stats: [
       { value: "727", label: "commits" },
       { value: "1312", label: "tests" },

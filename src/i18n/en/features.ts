@@ -32,7 +32,7 @@ export const features = {
       {
         icon: "lucide:keyboard",
         title: "~48 keyboard shortcuts",
-        body: "Shortcut model inspired by RadiAnt. If you already report on another viewer, you don't start from scratch.",
+        body: "Shortcut model inspired by RadiAnt. If you already read studies on another viewer, you don't start from scratch.",
       },
       {
         icon: "lucide:cpu",

@@ -1,11 +1,11 @@
 export const sections = {
   hero: {
-    badge: "Fundadores · 10 vagas abertas",
+    badge: "Fundadores · {count} vagas abertas",
     lines: ["As 10 primeiras", "clínicas", "nunca pagam."],
     lede: "Um visualizador DICOM nativo, rodando sobre exames reais, a caminho de um PACS completo. Quem chega no primeiro raio de luz usa de graça — para sempre.",
     ctaPrimary: "Quero ser uma das 10",
     ctaSecondary: "Ver o visualizador",
-    seatsNote: "10 de 10 vagas · grátis vitalício",
+    seatsNote: "{count} vagas · grátis vitalício",
     stats: [
       { value: "727", label: "commits" },
       { value: "1312", label: "testes" },
@@ -21,7 +21,7 @@ export const sections = {
       "O que falta é o que menos aparece em screenshot: o study browser, para a sessão não começar do zero, e os instaladores de Windows e macOS, para uma clínica conseguir simplesmente baixar e abrir. É a fase em que as primeiras clínicas entram — e é a rotina delas que define a ordem do que vem depois.",
   },
   demo: {
-    eyebrow: "Direto do viewer · sem mockup",
+    eyebrow: "Direto do visualizador · sem mockup",
     title: "É assim que ele está hoje.",
     lede: "Capturas reais do Akhet abrindo amostras DICOM públicas. Reconstrução multiplanar (MPR), renderização 3D do volume e as ferramentas de medição — tudo na mesma interface escura, com as informações clínicas nos cantos.",
     tablistLabel: "Recursos do visualizador",
