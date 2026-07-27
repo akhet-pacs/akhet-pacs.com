@@ -88,6 +88,38 @@ O resto do parágrafo (study browser, instaladores) permanece.
 
 Não anunciar incompletude na primeira linha da página.
 
+## Addendum (2026-07-27, após varredura do código)
+
+A busca por vocabulário achou a mesma frase em três superfícies que o spec original não
+listava. Todas entram no escopo:
+
+### 7. `src/i18n/*/sections.ts` — `clinics.lede`
+
+Repete "o seu feedback vira prioridade no roadmap". Mesma substituição da mudança 5:
+"e a sua rotina entra na fila do que é construído em seguida".
+
+### 8. `public/llms.txt`
+
+É o arquivo que agentes de IA leem sobre o produto — precisa contar a mesma história.
+
+- **Antes:** "To claim a seat, a clinic reaches out and tells us which modalities it uses;
+  its feedback then becomes a roadmap priority."
+- **Depois:** "To claim a seat, a clinic reaches out and tells us which modalities it
+  uses; what its practice needs then goes to the front of the roadmap."
+
+### 9. `src/i18n/*/roadmap.ts` — seção de colaboradores
+
+Público diferente (voluntários, não clientes), mas o texto contradiz o novo
+posicionamento na mesma página:
+
+- `contribute.lede`: remover o "Em troca," da chamada de desenvolvedores. A frase segue
+  igual, só deixa de ser transação.
+- `contribute.areas` card "Olhar clínico": "Radiologistas e técnicos que testem o viewer
+  com exames reais e digam onde a ferramenta atrapalha em vez de ajudar" → "Radiologistas
+  e técnicos que queiram desenhar, sobre exames reais, a ferramenta que eles próprios
+  usariam todo dia." O card continua convidando radiologistas — como quem desenha, não
+  como quem caça defeito.
+
 ## Fora de escopo (não muda)
 
 - "Fundadores · 10 vagas" e "As 10 primeiras clínicas nunca pagam"
