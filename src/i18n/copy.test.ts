@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { pt } from "./pt/index";
 import { en } from "./en/index";
@@ -39,5 +40,15 @@ describe("copy das fundadoras", () => {
         expect(hits).toEqual([]);
       });
     }
+  }
+});
+
+describe("llms.txt conta a mesma história", () => {
+  const llms = readFileSync(new URL("../../public/llms.txt", import.meta.url), "utf8");
+
+  for (const term of banned.en) {
+    it(`não usa "${term}"`, () => {
+      expect(llms.toLowerCase()).not.toContain(term);
+    });
   }
 });
