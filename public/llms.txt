@@ -20,7 +20,7 @@ Spanish.
 - After the 10 founding seats are filled, pricing climbs in small steps and
   stops at a ceiling that stays below the cost of an imported viewer.
 - To claim a seat, a clinic reaches out and tells us which modalities it uses;
-  its feedback then becomes a roadmap priority.
+  what its practice needs then goes to the front of the roadmap.
 
 ## Key facts
 
