@@ -25,8 +25,8 @@ export const faq = {
       a: "É um aplicativo desktop nativo para Windows, macOS e Linux. Os instaladores de Windows e macOS ainda estão em desenvolvimento.",
     },
     {
-      q: "Sou de uma clínica. Como faço para participar?",
-      a: "Fale no WhatsApp contando quais modalidades você usa. Entramos em contato assim que houver uma build para o seu sistema, e o seu feedback vira prioridade no roadmap.",
+      q: "Sou de uma clínica. Como entro?",
+      a: "Fale no WhatsApp contando quais modalidades você usa. Entramos em contato assim que houver uma build para o seu sistema, e a sua rotina entra na fila do que é construído em seguida.",
     },
     {
       q: "Como posso contribuir com o projeto?",

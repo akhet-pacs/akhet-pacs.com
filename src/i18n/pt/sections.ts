@@ -2,7 +2,7 @@ export const sections = {
   hero: {
     badge: "Fundadores · 10 vagas abertas",
     lines: ["As 10 primeiras", "clínicas", "nunca pagam."],
-    lede: "Um visualizador DICOM nativo virando um PACS completo. Quem chega no primeiro raio de luz usa de graça — para sempre.",
+    lede: "Um visualizador DICOM nativo, rodando sobre exames reais, a caminho de um PACS completo. Quem chega no primeiro raio de luz usa de graça — para sempre.",
     ctaPrimary: "Quero ser uma das 10",
     ctaSecondary: "Ver o visualizador",
     seatsNote: "10 de 10 vagas · grátis vitalício",
@@ -18,7 +18,7 @@ export const sections = {
     titleLines: ["Sem maquiagem:", "o estado real."],
     lede: "O Akhet nasceu como um visualizador DICOM e está no meio da fase 1: o núcleo clínico — window/level, medições, multi-viewport, MPR — já funciona sobre exames reais de CT, MR, US, mamografia e angiografia.",
     honest:
-      "O que falta é o que menos aparece em screenshot: o study browser, para a sessão não começar do zero, e os instaladores de Windows e macOS, para uma clínica conseguir simplesmente baixar e abrir. É exatamente aí que o projeto precisa de gente.",
+      "O que falta é o que menos aparece em screenshot: o study browser, para a sessão não começar do zero, e os instaladores de Windows e macOS, para uma clínica conseguir simplesmente baixar e abrir. É a fase em que as primeiras clínicas entram — e é a rotina delas que define a ordem do que vem depois.",
   },
   demo: {
     eyebrow: "Direto do viewer · sem mockup",
@@ -68,7 +68,7 @@ export const sections = {
   clinics: {
     eyebrow: "Para clínicas",
     title: "Trabalha com imagem médica?",
-    lede: "Se você é de uma clínica ou centro de diagnóstico, escreva contando quais modalidades usa. Entramos em contato assim que houver uma build para o seu sistema — e o seu feedback vira prioridade no roadmap.",
+    lede: "Se você é de uma clínica ou centro de diagnóstico, escreva contando quais modalidades usa. Entramos em contato assim que houver uma build para o seu sistema — e a sua rotina entra na fila do que é construído em seguida.",
     whatsappMessage: "Olá, Jônatas! Sou de uma clínica e quero conhecer o Akhet PACS.",
     btnWhatsapp: "Falar no WhatsApp",
   },
