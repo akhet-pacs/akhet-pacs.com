@@ -78,7 +78,7 @@ export const roadmap = {
   contribute: {
     eyebrow: "Build with us",
     title: "A PACS is not built alone.",
-    lede: "I'm looking for people who want to build real medical software — in Rust, with clean architecture and tests over real studies. In return, you help shape an application you'll be proud of, from the foundation up.",
+    lede: "I'm looking for people who want to build real medical software — in Rust, with clean architecture and tests over real studies. You help shape an application you'll be proud of, from the foundation up.",
     areas: [
       {
         icon: "lucide:package",
@@ -98,7 +98,7 @@ export const roadmap = {
       {
         icon: "lucide:stethoscope",
         title: "Clinical eye",
-        body: "Radiologists and technologists who test the viewer with real studies and say where the tool gets in the way instead of helping.",
+        body: "Radiologists and technologists who want to shape, over real studies, the tool they'd want to use every day.",
       },
     ],
     ctaText:

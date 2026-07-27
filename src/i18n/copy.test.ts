@@ -19,7 +19,7 @@ const banned: Record<Guarded, readonly string[]> = {
 };
 
 /** Locales já limpos. Cada tarefa do plano acrescenta um. */
-const guarded: readonly Guarded[] = ["pt"];
+const guarded: readonly Guarded[] = ["pt", "en"];
 
 function allStrings(value: unknown, out: string[] = []): string[] {
   if (typeof value === "string") out.push(value);

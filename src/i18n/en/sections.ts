@@ -2,7 +2,7 @@ export const sections = {
   hero: {
     badge: "Founders · 10 seats open",
     lines: ["The first 10", "clinics", "never pay."],
-    lede: "A native DICOM viewer on its way to a complete PACS. Those who arrive at first light use it free — forever.",
+    lede: "A native DICOM viewer running on real studies, on its way to a complete PACS. Those who arrive at first light use it free — forever.",
     ctaPrimary: "Claim a founder seat",
     ctaSecondary: "See the viewer",
     seatsNote: "10 of 10 seats · free for life",
@@ -18,7 +18,7 @@ export const sections = {
     titleLines: ["No makeup:", "the real state."],
     lede: "Akhet started as a DICOM viewer and is halfway through phase 1: the clinical core — window/level, measurements, multi-viewport, MPR — already works on real CT, MR, US, mammography and angiography studies.",
     honest:
-      "What's missing is what shows up least in screenshots: the study browser, so a session doesn't start from zero, and the Windows and macOS installers, so a clinic can simply download and open it. That is exactly where this project needs people.",
+      "What's missing is what shows up least in screenshots: the study browser, so a session doesn't start from zero, and the Windows and macOS installers, so a clinic can simply download and open it. This is the phase the first clinics join — and their practice sets the order of what comes next.",
   },
   demo: {
     eyebrow: "Straight from the viewer · no mockup",
@@ -68,7 +68,7 @@ export const sections = {
   clinics: {
     eyebrow: "For clinics",
     title: "Do you work with medical imaging?",
-    lede: "If you're from a clinic or diagnostic center, write telling us which modalities you use. We'll get in touch as soon as there's a build for your system — and your feedback becomes a roadmap priority.",
+    lede: "If you're from a clinic or diagnostic center, write telling us which modalities you use. We'll get in touch as soon as there's a build for your system — and your practice goes into the queue of what gets built next.",
     whatsappMessage: "Hi Jônatas! I'm from a clinic and I'd like to know Akhet PACS.",
     btnWhatsapp: "Talk on WhatsApp",
   },
