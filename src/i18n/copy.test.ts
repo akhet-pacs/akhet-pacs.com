@@ -82,3 +82,65 @@ describe("llms.txt conta a mesma história", () => {
     });
   }
 });
+
+describe("cabeçalho da seção de FAQ", () => {
+  for (const locale of locales) {
+    it(`${locale} tem eyebrow e título da seção`, () => {
+      const { eyebrow, title } = dicts[locale].faqSection;
+      expect(eyebrow.length).toBeGreaterThan(0);
+      expect(title.length).toBeGreaterThan(0);
+    });
+
+    it(`${locale} tem rótulo de navegação para o FAQ`, () => {
+      expect(dicts[locale].nav.faq.length).toBeGreaterThan(0);
+    });
+  }
+});
+
+/**
+ * O H1 é o sinal on-page mais forte depois do <title>. Antes desta regra ele
+ * dizia só "As 10 primeiras clínicas nunca pagam" — promessa comercial sem
+ * nenhuma palavra da categoria do produto. A terceira linha recebe o destaque
+ * visual (hero__line--accent em src/sections/Hero.astro:27), então é crítico
+ * que o clímax comercial fique nela — não pode migrar para outras posições.
+ */
+describe("H1 carrega a categoria do produto", () => {
+  const climax = { pt: "nunca pagam.", en: "never pay.", es: "nunca pagan." } as const;
+
+  for (const locale of locales) {
+    it(`${locale} cita DICOM na primeira linha do hero`, () => {
+      expect(dicts[locale].hero.lines[0]).toMatch(/DICOM/i);
+    });
+
+    it(`${locale} mantém o clímax comercial na terceira linha`, () => {
+      expect(dicts[locale].hero.lines[2]).toBe(climax[locale]);
+    });
+
+    it(`${locale} mantém as três linhas do hero`, () => {
+      expect(dicts[locale].hero.lines).toHaveLength(3);
+    });
+  }
+});
+
+/**
+ * Termos que a clínica digita e que a página não usava em lugar nenhum.
+ * Não é densidade: é uma ocorrência natural de cada forma buscada.
+ */
+const exigidos: Record<Guarded, readonly string[]> = {
+  pt: ["sistema pacs", "laudo", "estação de trabalho"],
+  en: ["pacs system", "workstation"],
+  es: ["sistema pacs", "informe", "estación de trabajo"],
+};
+
+describe("vocabulário de busca", () => {
+  for (const locale of guarded) {
+    for (const term of exigidos[locale]) {
+      it(`${locale} usa "${term}"`, () => {
+        const hits = allStrings(dicts[locale]).filter((text) =>
+          text.toLowerCase().includes(term),
+        );
+        expect(hits.length).toBeGreaterThan(0);
+      });
+    }
+  }
+});

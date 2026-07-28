@@ -16,8 +16,16 @@ export type Faq = { q: string; a: string };
 export type Dict = {
   meta: { title: string; description: string };
   faq: readonly Faq[];
+  faqSection: { eyebrow: string; title: string };
   skipLink: string;
-  nav: { agora: string; visualizador: string; roadmap: string; planos: string; construir: string };
+  nav: {
+    agora: string;
+    visualizador: string;
+    roadmap: string;
+    planos: string;
+    construir: string;
+    faq: string;
+  };
   hero: {
     badge: string;
     lines: readonly [string, string, string];

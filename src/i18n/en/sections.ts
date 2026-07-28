@@ -1,7 +1,7 @@
 export const sections = {
   hero: {
     badge: "Founders · {count} seats open",
-    lines: ["The first 10", "clinics", "never pay."],
+    lines: ["DICOM viewer for clinics.", "The first 10", "never pay."],
     lede: "A native DICOM viewer running on real studies, on its way to a complete PACS. Those who arrive at first light use it free — forever.",
     ctaPrimary: "Claim a founder seat",
     ctaSecondary: "See the viewer",
@@ -22,7 +22,7 @@ export const sections = {
   },
   demo: {
     eyebrow: "Straight from the viewer · real captures",
-    title: "This is how it looks today.",
+    title: "This is how the DICOM viewer looks today.",
     lede: "Real captures of Akhet opening public DICOM samples. Multiplanar reconstruction (MPR), 3D volume rendering and the measurement tools — all in the same dark interface, with clinical information in the corners.",
     tablistLabel: "Viewer features",
     altPrefix: "Akhet PACS with",

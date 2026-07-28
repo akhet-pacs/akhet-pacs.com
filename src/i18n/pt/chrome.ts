@@ -11,6 +11,7 @@ export const chrome = {
     roadmap: "Roadmap",
     planos: "Planos",
     construir: "Construir junto",
+    faq: "Perguntas",
   },
   menu: {
     open: "Abrir menu",

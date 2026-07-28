@@ -13,7 +13,7 @@ export const plans = {
   perksLabel: "Lo que es tuyo como fundadora",
   perks: [
     "Gratis de por vida, sin tarjeta y sin plazo",
-    "Todas las máquinas y todo el equipo, sin cobro por estación",
+    "Todas las máquinas y todo el equipo, sin cobro por estación de trabajo",
     "Línea directa conmigo — sin tickets, sin cola de soporte",
     "Lo que tu rutina exige entra primero en el roadmap",
     "Akhet se ajusta a tu rutina — no tu rutina a Akhet",
