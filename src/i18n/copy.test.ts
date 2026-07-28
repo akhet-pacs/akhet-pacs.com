@@ -82,3 +82,17 @@ describe("llms.txt conta a mesma história", () => {
     });
   }
 });
+
+describe("cabeçalho da seção de FAQ", () => {
+  for (const locale of locales) {
+    it(`${locale} tem eyebrow e título da seção`, () => {
+      const { eyebrow, title } = dicts[locale].faqSection;
+      expect(eyebrow.length).toBeGreaterThan(0);
+      expect(title.length).toBeGreaterThan(0);
+    });
+
+    it(`${locale} tem rótulo de navegação para o FAQ`, () => {
+      expect(dicts[locale].nav.faq.length).toBeGreaterThan(0);
+    });
+  }
+});

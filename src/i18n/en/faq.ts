@@ -1,4 +1,8 @@
 export const faq = {
+  faqSection: {
+    eyebrow: "Frequently asked questions",
+    title: "What clinics ask before joining.",
+  },
   faq: [
     {
       q: "What is Akhet PACS?",
