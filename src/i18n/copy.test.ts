@@ -100,12 +100,20 @@ describe("cabeçalho da seção de FAQ", () => {
 /**
  * O H1 é o sinal on-page mais forte depois do <title>. Antes desta regra ele
  * dizia só "As 10 primeiras clínicas nunca pagam" — promessa comercial sem
- * nenhuma palavra da categoria do produto.
+ * nenhuma palavra da categoria do produto. A terceira linha recebe o destaque
+ * visual (hero__line--accent em src/sections/Hero.astro:27), então é crítico
+ * que o clímax comercial fique nela — não pode migrar para outras posições.
  */
 describe("H1 carrega a categoria do produto", () => {
+  const climax = { pt: "nunca pagam.", en: "never pay.", es: "nunca pagan." } as const;
+
   for (const locale of locales) {
-    it(`${locale} cita DICOM no hero`, () => {
-      expect(dicts[locale].hero.lines.join(" ")).toMatch(/DICOM/i);
+    it(`${locale} cita DICOM na primeira linha do hero`, () => {
+      expect(dicts[locale].hero.lines[0]).toMatch(/DICOM/i);
+    });
+
+    it(`${locale} mantém o clímax comercial na terceira linha`, () => {
+      expect(dicts[locale].hero.lines[2]).toBe(climax[locale]);
     });
 
     it(`${locale} mantém as três linhas do hero`, () => {
