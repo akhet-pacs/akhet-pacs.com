@@ -6,7 +6,7 @@ export const faq = {
   faq: [
     {
       q: "O que é o Akhet PACS?",
-      a: "O Akhet é um visualizador DICOM nativo, de alto desempenho, que está evoluindo para um PACS completo para clínicas, hospitais e centros de diagnóstico por imagem.",
+      a: "O Akhet é um visualizador DICOM nativo, de alto desempenho, que está evoluindo para um sistema PACS completo para clínicas, hospitais e centros de diagnóstico por imagem.",
     },
     {
       q: "O Akhet PACS é gratuito?",

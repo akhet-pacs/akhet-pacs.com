@@ -22,7 +22,7 @@ export const sections = {
   },
   demo: {
     eyebrow: "Direto do visualizador · capturas reais",
-    title: "É assim que ele está hoje.",
+    title: "É assim que o visualizador DICOM está hoje.",
     lede: "Capturas reais do Akhet abrindo amostras DICOM públicas. Reconstrução multiplanar (MPR), renderização 3D do volume e as ferramentas de medição — tudo na mesma interface escura, com as informações clínicas nos cantos.",
     tablistLabel: "Recursos do visualizador",
     altPrefix: "Akhet PACS com",
@@ -68,7 +68,7 @@ export const sections = {
   clinics: {
     eyebrow: "Para clínicas",
     title: "Trabalha com imagem médica?",
-    lede: "Se você é de uma clínica ou centro de diagnóstico, escreva contando quais modalidades usa. Entramos em contato assim que houver uma build para o seu sistema — e a sua rotina entra na fila do que é construído em seguida.",
+    lede: "Se você é de uma clínica ou centro de diagnóstico, escreva contando quais modalidades usa. Entramos em contato assim que houver uma build para o seu sistema — e a sua rotina de laudo entra na fila do que é construído em seguida.",
     whatsappMessage: "Olá, Jônatas! Sou de uma clínica e quero conhecer o Akhet PACS.",
     btnWhatsapp: "Falar no WhatsApp",
   },

@@ -6,7 +6,7 @@ export const faq = {
   faq: [
     {
       q: "What is Akhet PACS?",
-      a: "Akhet is a native, high-performance DICOM viewer that is evolving into a complete PACS for clinics, hospitals and diagnostic imaging centers.",
+      a: "Akhet is a native, high-performance DICOM viewer that is evolving into a complete PACS system for clinics, hospitals and diagnostic imaging centers.",
     },
     {
       q: "Is Akhet PACS free?",

@@ -121,3 +121,26 @@ describe("H1 carrega a categoria do produto", () => {
     });
   }
 });
+
+/**
+ * Termos que a clínica digita e que a página não usava em lugar nenhum.
+ * Não é densidade: é uma ocorrência natural de cada forma buscada.
+ */
+const exigidos: Record<Guarded, readonly string[]> = {
+  pt: ["sistema pacs", "laudo", "estação de trabalho"],
+  en: ["pacs system", "workstation"],
+  es: ["sistema pacs", "informe", "estación de trabajo"],
+};
+
+describe("vocabulário de busca", () => {
+  for (const locale of guarded) {
+    for (const term of exigidos[locale]) {
+      it(`${locale} usa "${term}"`, () => {
+        const hits = allStrings(dicts[locale]).filter((text) =>
+          text.toLowerCase().includes(term),
+        );
+        expect(hits.length).toBeGreaterThan(0);
+      });
+    }
+  }
+});

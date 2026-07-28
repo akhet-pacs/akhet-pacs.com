@@ -6,7 +6,7 @@ export const faq = {
   faq: [
     {
       q: "¿Qué es Akhet PACS?",
-      a: "Akhet es un visor DICOM nativo y de alto rendimiento que está evolucionando hacia un PACS completo para clínicas, hospitales y centros de diagnóstico por imágenes.",
+      a: "Akhet es un visor DICOM nativo y de alto rendimiento que está evolucionando hacia un sistema PACS completo para clínicas, hospitales y centros de diagnóstico por imágenes.",
     },
     {
       q: "¿Akhet PACS es gratis?",
