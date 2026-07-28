@@ -1,7 +1,7 @@
 export const sections = {
   hero: {
     badge: "Fundadores · {count} vagas abertas",
-    lines: ["Visualizador DICOM.", "As 10 primeiras", "nunca pagam."],
+    lines: ["Visualizador DICOM para clínicas.", "As 10 primeiras", "nunca pagam."],
     lede: "Um visualizador DICOM nativo, rodando sobre exames reais, a caminho de um PACS completo. Quem chega no primeiro raio de luz usa de graça — para sempre.",
     ctaPrimary: "Quero ser uma das 10",
     ctaSecondary: "Ver o visualizador",
