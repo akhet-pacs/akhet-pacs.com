@@ -1,7 +1,7 @@
 export const sections = {
   hero: {
     badge: "Founders · {count} seats open",
-    lines: ["DICOM viewer for clinics.", "The first 10", "never pay."],
+    lines: ["DICOM viewer.", "The first 10", "never pay."],
     lede: "A native DICOM viewer running on real studies, on its way to a complete PACS. Those who arrive at first light use it free — forever.",
     ctaPrimary: "Claim a founder seat",
     ctaSecondary: "See the viewer",
