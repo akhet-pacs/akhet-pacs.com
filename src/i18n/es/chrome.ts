@@ -1,8 +1,8 @@
 export const chrome = {
   meta: {
-    title: "Akhet PACS — Revealing What Matters.",
+    title: "Visor DICOM y software PACS para clínicas | Akhet PACS",
     description:
-      "Visor DICOM nativo, evolucionando hacia un PACS completo para clínicas, hospitales y centros de diagnóstico por imágenes.",
+      "Visor DICOM nativo que evoluciona hacia un PACS completo para clínicas y centros de diagnóstico por imágenes. Las 10 primeras clínicas lo usan gratis.",
   },
   skipLink: "Ir al contenido",
   nav: {

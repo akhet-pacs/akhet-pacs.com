@@ -9,9 +9,11 @@
   --color-horizon: #f0c069;
   --color-ember: #ff9d5c;
 
-  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Source Serif 4", ui-serif, Georgia, serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  /* As famílias vêm da config `fonts` do Astro (self-hosted); cada cssVariable
+     já traz a família e os fallbacks métricos gerados no build. */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
 
   --text-eyebrow: 0.75rem;
   --text-meta: 0.8125rem;

@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { pt } from "./pt/index";
 import { en } from "./en/index";
 import { es } from "./es/index";
+import { locales } from "./index";
 
 const dicts = { pt, en, es } as const;
 
@@ -40,6 +41,35 @@ describe("copy das fundadoras", () => {
         expect(hits).toEqual([]);
       });
     }
+  }
+});
+
+/**
+ * O title e a description são a única superfície do site que aparece na SERP.
+ * Sem "DICOM" e "PACS" nelas o site só é encontrado por quem já sabe o nome
+ * da marca — que é justamente quem ainda não existe num domínio novo.
+ */
+describe("meta title e description carregam as palavras-chave", () => {
+  for (const locale of locales) {
+    const { title, description } = dicts[locale].meta;
+
+    it(`${locale}: title cita DICOM e PACS`, () => {
+      expect(title).toMatch(/DICOM/i);
+      expect(title).toMatch(/PACS/i);
+    });
+
+    it(`${locale}: title cabe na SERP (<= 60 caracteres)`, () => {
+      expect(title.length).toBeLessThanOrEqual(60);
+    });
+
+    it(`${locale}: description cita DICOM e PACS`, () => {
+      expect(description).toMatch(/DICOM/i);
+      expect(description).toMatch(/PACS/i);
+    });
+
+    it(`${locale}: description cabe na SERP (<= 160 caracteres)`, () => {
+      expect(description.length).toBeLessThanOrEqual(160);
+    });
   }
 });
 
