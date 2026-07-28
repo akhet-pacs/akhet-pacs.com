@@ -12,5 +12,6 @@ export function buildNavigation(locale: Locale): NavItem[] {
     { label: t.nav.roadmap, href: `${base}#roadmap` },
     { label: t.nav.planos, href: `${base}#planos` },
     { label: t.nav.construir, href: `${base}#construir` },
+    { label: t.nav.faq, href: `${base}#faq` },
   ];
 }
