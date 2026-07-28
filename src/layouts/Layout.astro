@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import "../styles/global.css";
 import { localePath, locales, resolveLocale, useDict } from "../i18n";
 
@@ -151,12 +152,9 @@ const structuredData = {
       is:inline
       set:html={JSON.stringify(structuredData)}
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
-    />
+    <Font cssVariable="--font-archivo" preload />
+    <Font cssVariable="--font-source-serif" preload />
+    <Font cssVariable="--font-ibm-plex-mono" />
   </head>
   <body>
     <slot />
