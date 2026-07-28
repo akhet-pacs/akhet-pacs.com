@@ -96,3 +96,20 @@ describe("cabeçalho da seção de FAQ", () => {
     });
   }
 });
+
+/**
+ * O H1 é o sinal on-page mais forte depois do <title>. Antes desta regra ele
+ * dizia só "As 10 primeiras clínicas nunca pagam" — promessa comercial sem
+ * nenhuma palavra da categoria do produto.
+ */
+describe("H1 carrega a categoria do produto", () => {
+  for (const locale of locales) {
+    it(`${locale} cita DICOM no hero`, () => {
+      expect(dicts[locale].hero.lines.join(" ")).toMatch(/DICOM/i);
+    });
+
+    it(`${locale} mantém as três linhas do hero`, () => {
+      expect(dicts[locale].hero.lines).toHaveLength(3);
+    });
+  }
+});
