@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import SectionHeader from "../components/SectionHeader.astro";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).status;
@@ -7,10 +8,9 @@ const t = useDict(Astro.currentLocale).status;
 
 <section class="section" id="agora">
   <div class="shell status">
-    <header class="section-header">
-      <p class="eyebrow">{t.eyebrow}</p>
-      <h2>{t.titleLines[0]}<br />{t.titleLines[1]}</h2>
-    </header>
+    <SectionHeader eyebrow={t.eyebrow}>
+      {t.titleLines[0]}<br />{t.titleLines[1]}
+    </SectionHeader>
 
     <div class="status__body">
       <p class="lede">{t.lede}</p>

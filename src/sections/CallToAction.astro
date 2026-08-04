@@ -1,6 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
-import { site } from "../data/site";
+import ContactActions from "../components/ContactActions.astro";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).clinics;
@@ -11,21 +10,7 @@ const t = useDict(Astro.currentLocale).clinics;
     <p class="eyebrow">{t.eyebrow}</p>
     <h2>{t.title}</h2>
     <p class="lede">{t.lede}</p>
-    <div class="cluster">
-      <a
-        class="btn btn--solid"
-        href={`${site.whatsapp}?text=${encodeURIComponent(t.whatsappMessage)}`}
-        rel="noreferrer noopener"
-        target="_blank"
-      >
-        <Icon name="simple-icons:whatsapp" />
-        {t.btnWhatsapp}
-      </a>
-      <a class="btn btn--ghost" href={`mailto:${site.contact}`}>
-        <Icon name="lucide:mail" />
-        {site.contact}
-      </a>
-    </div>
+    <ContactActions message={t.whatsappMessage} whatsappLabel={t.btnWhatsapp} />
   </div>
 </section>
 

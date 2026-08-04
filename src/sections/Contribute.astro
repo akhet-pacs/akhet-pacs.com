@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
-import { site } from "../data/site";
+import ContactActions from "../components/ContactActions.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).contribute;
@@ -8,11 +9,7 @@ const t = useDict(Astro.currentLocale).contribute;
 
 <section class="section section-raised" id="construir">
   <div class="shell contribute">
-    <header class="section-header section-header--wide">
-      <p class="eyebrow">{t.eyebrow}</p>
-      <h2>{t.title}</h2>
-      <p class="lede">{t.lede}</p>
-    </header>
+    <SectionHeader eyebrow={t.eyebrow} lede={t.lede} wide>{t.title}</SectionHeader>
 
     <ul class="contribute__grid">
       {
@@ -28,21 +25,11 @@ const t = useDict(Astro.currentLocale).contribute;
 
     <div class="contribute__cta">
       <p>{t.ctaText}</p>
-      <div class="cluster">
-        <a
-          class="btn btn--solid"
-          href={`${site.whatsapp}?text=${encodeURIComponent(t.whatsappMessage)}`}
-          rel="noreferrer noopener"
-          target="_blank"
-        >
-          <Icon name="simple-icons:whatsapp" />
-          {t.btnWhatsapp}
-        </a>
-        <a class="btn btn--ghost" href={`mailto:${site.contact}`}>
-          <Icon name="lucide:mail" />
-          {t.btnEmail}
-        </a>
-      </div>
+      <ContactActions
+        message={t.whatsappMessage}
+        whatsappLabel={t.btnWhatsapp}
+        emailLabel={t.btnEmail}
+      />
     </div>
   </div>
 </section>
@@ -99,14 +86,12 @@ const t = useDict(Astro.currentLocale).contribute;
   }
 
   @media (max-width: 52rem) {
-    .contribute__grid {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  @media (max-width: 52rem) {
     .contribute {
       gap: 2rem;
+    }
+
+    .contribute__grid {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .contribute__card {

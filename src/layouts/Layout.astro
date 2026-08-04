@@ -1,7 +1,15 @@
 ---
 import { Font } from "astro:assets";
 import "../styles/global.css";
-import { localePath, locales, resolveLocale, useDict } from "../i18n";
+import {
+  localePath,
+  localePaths,
+  localeTags,
+  locales,
+  ogLocales,
+  resolveLocale,
+  useDict,
+} from "../i18n";
 
 interface Props {
   title: string;
@@ -10,8 +18,6 @@ interface Props {
 
 const { title, description } = Astro.props;
 const locale = resolveLocale(Astro.currentLocale);
-const langTags = { pt: "pt-BR", en: "en", es: "es" } as const;
-const ogLocales = { pt: "pt_BR", en: "en_US", es: "es_ES" } as const;
 const siteUrl = Astro.site ?? new URL("https://akhetpacs.com");
 const canonical = new URL(localePath(locale), siteUrl);
 const ogImage = new URL("/og.png", siteUrl);
@@ -56,17 +62,16 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang={langTags[locale]}>
+<html lang={localeTags[locale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline define:vars={{ current: locale, defaultLocale: "pt" }}>
+    <script is:inline define:vars={{ current: locale, defaultLocale: "pt", paths: localePaths() }}>
       // Redireciona o visitante para o idioma dele apenas a partir da raiz "/"
       // (nunca de /en/ ou /es/, que já são escolhas explícitas de URL).
       // A escolha manual no seletor tem prioridade e é guardada em localStorage.
       (function () {
         var KEY = "akhet-locale";
-        var PATHS = { pt: "/", en: "/en/", es: "/es/" };
         if (current !== defaultLocale) return;
 
         // Nunca redireciona crawlers: cada bot indexa a URL que buscou (/, /en/,
@@ -87,17 +92,18 @@ const structuredData = {
 
         var target = stored;
         if (!target) {
-          var langs = navigator.languages || [navigator.language || "pt"];
+          var langs = navigator.languages || [navigator.language || defaultLocale];
+          var codes = Object.keys(paths);
           for (var i = 0; i < langs.length && !target; i++) {
             var l = (langs[i] || "").toLowerCase();
-            if (l.indexOf("es") === 0) target = "es";
-            else if (l.indexOf("en") === 0) target = "en";
-            else if (l.indexOf("pt") === 0) target = "pt";
+            for (var j = 0; j < codes.length && !target; j++) {
+              if (l.indexOf(codes[j]) === 0) target = codes[j];
+            }
           }
         }
 
-        if (target && target !== current && PATHS[target]) {
-          location.replace(PATHS[target] + location.search + location.hash);
+        if (target && target !== current && paths[target]) {
+          location.replace(paths[target] + location.search + location.hash);
         }
       })();
 
@@ -143,7 +149,7 @@ const structuredData = {
     <link rel="canonical" href={canonical} />
     {
       locales.map((code) => (
-        <link rel="alternate" hreflang={langTags[code]} href={new URL(localePath(code), siteUrl)} />
+        <link rel="alternate" hreflang={localeTags[code]} href={new URL(localePath(code), siteUrl)} />
       ))
     }
     <link rel="alternate" hreflang="x-default" href={siteUrl} />

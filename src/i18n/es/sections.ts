@@ -6,12 +6,6 @@ export const sections = {
     ctaPrimary: "Quiero una de las 10",
     ctaSecondary: "Ver el visor",
     seatsNote: "{count} plazas · gratis de por vida",
-    stats: [
-      { value: "727", label: "commits" },
-      { value: "1312", label: "tests" },
-      { value: "8", label: "módulos" },
-      { value: "1/5", label: "fase del roadmap" },
-    ],
   },
   status: {
     eyebrow: "Dónde está el proyecto",

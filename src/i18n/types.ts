@@ -1,4 +1,3 @@
-export type Stat = { value: string; label: string };
 export type IconItem = { icon: string; title: string; body: string };
 export type TitledItem = { title: string; body: string };
 export type Shot = { key: string; label: string; caption: string };
@@ -33,7 +32,6 @@ export type Dict = {
     ctaPrimary: string;
     ctaSecondary: string;
     seatsNote: string;
-    stats: readonly Stat[];
   };
   status: {
     eyebrow: string;

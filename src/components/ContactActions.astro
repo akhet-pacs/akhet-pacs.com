@@ -1,0 +1,27 @@
+---
+import { Icon } from "astro-icon/components";
+import { mailtoHref, site, whatsappHref } from "../data/site";
+
+/**
+ * O par de contatos do site — WhatsApp com mensagem pronta e e-mail. Um só
+ * lugar decide como o link é montado; as seções escolhem apenas os rótulos.
+ */
+interface Props {
+  message: string;
+  whatsappLabel: string;
+  emailLabel?: string;
+}
+
+const { message, whatsappLabel, emailLabel = site.contact } = Astro.props;
+---
+
+<div class="cluster">
+  <a class="btn btn--solid" href={whatsappHref(message)} rel="noreferrer noopener" target="_blank">
+    <Icon name="simple-icons:whatsapp" />
+    {whatsappLabel}
+  </a>
+  <a class="btn btn--ghost" href={mailtoHref}>
+    <Icon name="lucide:mail" />
+    {emailLabel}
+  </a>
+</div>

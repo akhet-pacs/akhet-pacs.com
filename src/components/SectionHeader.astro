@@ -1,0 +1,26 @@
+---
+/**
+ * Cabeçalho padrão das seções: eyebrow, título e lede. O título vem por slot
+ * porque cada seção quebra as linhas do próprio jeito (<br>, <span> mudo).
+ */
+interface Props {
+  eyebrow: string;
+  lede?: string;
+  spaced?: boolean;
+  wide?: boolean;
+}
+
+const { eyebrow, lede, spaced = false, wide = false } = Astro.props;
+---
+
+<header
+  class:list={[
+    "section-header",
+    spaced && "section-header--spaced",
+    wide && "section-header--wide",
+  ]}
+>
+  <p class="eyebrow">{eyebrow}</p>
+  <h2><slot /></h2>
+  {lede && <p class="lede">{lede}</p>}
+</header>

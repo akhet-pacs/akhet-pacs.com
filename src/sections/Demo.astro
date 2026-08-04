@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import SectionHeader from "../components/SectionHeader.astro";
 import { useDict } from "../i18n";
 import { screenshots } from "../data/screenshots";
 
@@ -9,11 +10,7 @@ const shots = t.shots.map((shot) => ({ ...shot, image: screenshots[shot.key] }))
 
 <section class="section section-deep" id="visualizador">
   <div class="shell demo">
-    <header class="section-header">
-      <p class="eyebrow">{t.eyebrow}</p>
-      <h2>{t.title}</h2>
-      <p class="lede">{t.lede}</p>
-    </header>
+    <SectionHeader eyebrow={t.eyebrow} lede={t.lede}>{t.title}</SectionHeader>
 
     <div class="demo__stage" data-demo>
       <div class="demo__frame">

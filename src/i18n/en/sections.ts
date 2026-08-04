@@ -6,12 +6,6 @@ export const sections = {
     ctaPrimary: "Claim a founder seat",
     ctaSecondary: "See the viewer",
     seatsNote: "{count} seats · free for life",
-    stats: [
-      { value: "727", label: "commits" },
-      { value: "1312", label: "tests" },
-      { value: "8", label: "modules" },
-      { value: "1/5", label: "roadmap phase" },
-    ],
   },
   status: {
     eyebrow: "Where the project stands",

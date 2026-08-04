@@ -2,15 +2,15 @@
 import { Icon } from "astro-icon/components";
 import HorizonBackdrop from "../components/HorizonBackdrop.astro";
 import { deriveTiers, pricing } from "../data/pricing";
-import { useDict } from "../i18n";
+import { interpolate, useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).hero;
 const view = deriveTiers(pricing);
 const seats = Array.from({ length: view.tierSize });
 // Uma única fonte de verdade com a régua de preços: sem isto o hero segue
 // anunciando "10 vagas" depois da primeira venda.
-const badge = t.badge.replace("{count}", String(view.slotsRemaining));
-const seatsNote = t.seatsNote.replace("{count}", String(view.slotsRemaining));
+const badge = interpolate(t.badge, { count: view.slotsRemaining });
+const seatsNote = interpolate(t.seatsNote, { count: view.slotsRemaining });
 ---
 
 <section class="hero">

@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 import LocaleSwitcher from "./LocaleSwitcher.astro";
 import { buildNavigation } from "../data/navigation";
-import { site } from "../data/site";
+import { whatsappHref } from "../data/site";
 import { useDict, type Locale } from "../i18n";
 
 interface Props {
@@ -32,7 +32,7 @@ const navigation = buildNavigation(locale);
 
     <a
       class="btn btn--solid menu__cta"
-      href={`${site.whatsapp}?text=${encodeURIComponent(t.contribute.whatsappMessage)}`}
+      href={whatsappHref(t.contribute.whatsappMessage)}
       rel="noreferrer noopener"
       target="_blank"
     >

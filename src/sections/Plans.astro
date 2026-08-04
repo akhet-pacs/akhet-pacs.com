@@ -1,32 +1,30 @@
 ---
 import PriceRuler from "../components/PriceRuler.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import { deriveTiers, formatPrice, pricing } from "../data/pricing";
-import { site } from "../data/site";
-import { useDict } from "../i18n";
+import { whatsappHref } from "../data/site";
+import { formatDate, interpolate, localeTags, resolveLocale, useDict } from "../i18n";
 
-const t = useDict(Astro.currentLocale).plans;
+const locale = resolveLocale(Astro.currentLocale);
+const t = useDict(locale).plans;
 const view = deriveTiers(pricing);
 
 const currentTier = view.tiers[0];
 const nextTier = view.tiers[1];
 const isFree = currentTier.price === 0;
 
-const nextTierNote = t.nextTierNote.replace("{price}", formatPrice(nextTier.price));
-const ceilingNote = t.ceilingNote.replace("{price}", formatPrice(view.ceilingPrice));
-const updatedAt = t.updatedAtLabel.replace(
-  "{date}",
-  new Date(`${view.updatedAt}T00:00:00`).toLocaleDateString("pt-BR"),
-);
-const whatsappHref = `${site.whatsapp}?text=${encodeURIComponent(t.ctaText)}`;
+const nextTierNote = interpolate(t.nextTierNote, { price: formatPrice(nextTier.price) });
+const ceilingNote = interpolate(t.ceilingNote, { price: formatPrice(view.ceilingPrice) });
+const updatedAt = interpolate(t.updatedAtLabel, {
+  date: formatDate(view.updatedAt, localeTags[locale]),
+});
 ---
 
 <section class="section" id="planos">
   <div class="shell">
-    <header class="section-header section-header--spaced">
-      <p class="eyebrow">{t.eyebrow}</p>
-      <h2>{t.titleLines[0]}<span class="plans__muted">{t.titleLines[1]}</span></h2>
-      <p class="lede">{t.lede}</p>
-    </header>
+    <SectionHeader eyebrow={t.eyebrow} lede={t.lede} spaced>
+      {t.titleLines[0]}<span class="plans__muted">{t.titleLines[1]}</span>
+    </SectionHeader>
 
     <PriceRuler view={view} t={t} />
 
@@ -42,7 +40,7 @@ const whatsappHref = `${site.whatsapp}?text=${encodeURIComponent(t.ctaText)}`;
           {t.perks.map((perk) => <li>{perk}</li>)}
         </ul>
         <p class="plans__return">{t.inReturn}</p>
-        <a class="btn btn--solid" href={whatsappHref} rel="noopener noreferrer" target="_blank">
+        <a class="btn btn--solid" href={whatsappHref(t.ctaText)} rel="noopener noreferrer" target="_blank">
           {t.ctaText}
         </a>
       </div>

@@ -1,6 +1,7 @@
 ---
 import PriceMarks from "./PriceMarks.astro";
 import { buildTicks, cursorAlign, cursorPercent, type PricingView } from "../data/pricing";
+import { interpolate } from "../i18n";
 import type { Dict } from "../i18n/types";
 
 interface Props {
@@ -13,10 +14,8 @@ const { view, t } = Astro.props;
 const ticks = buildTicks(view);
 const pinLeft = cursorPercent(view);
 const pinAlign = cursorAlign(view);
-const ariaLabel = t.rulerAria
-  .replace("{taken}", String(view.takenInTier))
-  .replace("{size}", String(view.tierSize));
-const cursorLabel = t.cursorLabel.replace("{count}", String(view.slotsRemaining));
+const ariaLabel = interpolate(t.rulerAria, { taken: view.takenInTier, size: view.tierSize });
+const cursorLabel = interpolate(t.cursorLabel, { count: view.slotsRemaining });
 ---
 
 <div class="ruler">
@@ -27,7 +26,7 @@ const cursorLabel = t.cursorLabel.replace("{count}", String(view.slotsRemaining)
 
   <PriceMarks tiers={view.tiers} freeLabel={t.freeLabel} />
 
-  <div class="ruler__track" role="img" aria-label={ariaLabel}>
+  <div class="ruler__track" role="img" aria-label={ariaLabel} style={`--tick-count: ${ticks.length}`}>
     {
       ticks.map((tick) => (
         <span
@@ -56,7 +55,7 @@ const cursorLabel = t.cursorLabel.replace("{count}", String(view.slotsRemaining)
 
   .ruler__track {
     display: grid;
-    grid-template-columns: repeat(50, 1fr);
+    grid-template-columns: repeat(var(--tick-count), 1fr);
     gap: 2px;
     height: 5rem;
     padding-block: 0.75rem;

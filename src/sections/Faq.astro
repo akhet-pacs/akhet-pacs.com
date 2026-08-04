@@ -1,4 +1,5 @@
 ---
+import SectionHeader from "../components/SectionHeader.astro";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale);
@@ -6,10 +7,7 @@ const t = useDict(Astro.currentLocale);
 
 <section class="section" id="faq">
   <div class="shell faq">
-    <header class="section-header">
-      <p class="eyebrow">{t.faqSection.eyebrow}</p>
-      <h2>{t.faqSection.title}</h2>
-    </header>
+    <SectionHeader eyebrow={t.faqSection.eyebrow}>{t.faqSection.title}</SectionHeader>
 
     <div class="faq__list">
       {

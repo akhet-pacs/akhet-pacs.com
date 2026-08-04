@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import AkhetGlyph from "../assets/akhet-glyph.svg";
-import { site } from "../data/site";
+import { mailtoHref, site } from "../data/site";
 import { useDict } from "../i18n";
 
 const t = useDict(Astro.currentLocale).footer;
@@ -20,7 +20,7 @@ const year = new Date().getFullYear();
         <Icon name="simple-icons:whatsapp" />
         {site.whatsappLabel}
       </a>
-      <a href={`mailto:${site.contact}`}>
+      <a href={mailtoHref}>
         <Icon name="lucide:mail" />
         {site.contact}
       </a>
@@ -101,11 +101,6 @@ const year = new Date().getFullYear();
   @media (max-width: 48rem) {
     .footer__inner {
       grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
-  @media (max-width: 48rem) {
-    .footer__inner {
       gap: 2rem;
       padding-bottom: 2rem;
     }
